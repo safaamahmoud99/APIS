@@ -41,6 +41,27 @@ namespace BL.Bases
                 return cart;
             }
         }
+        public WishListRepository wishlist;
+        public WishListRepository Wishlist
+        {
+            get
+            {
+                if (wishlist == null)
+                    wishlist = new WishListRepository(EC_DbContext);
+                return wishlist;
+            }
+        }
+        public AccountRepository account;
+        public AccountRepository Account
+        {
+            get
+            {
+                if (account == null)
+                    account = new AccountRepository(EC_DbContext, _userManager, _roleManager);
+                return account;
+            }
+        }
+        WishListRepository IUnitOfWork.wishList => throw new NotImplementedException();
     }
 }
 

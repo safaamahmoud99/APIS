@@ -16,7 +16,7 @@ namespace DAL.Models
             public Product product { get; set; }
 
             [ForeignKey("cart")]
-            public int CartID { get; set; }
+            public string CartID { get; set; }
             public Cart cart { get; set; }
         }
  }

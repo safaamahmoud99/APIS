@@ -11,39 +11,38 @@ using System.Threading.Tasks;
 
 namespace BL.AppService
 {
-    public class CartAppService:BaseAppService
+    public class BrandAppService : BaseAppService
     {
-
-        public CartAppService(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
+        public BrandAppService(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
         {
 
         }
-        public List<CartViewModel> GetAllCarts()
+        public List<BrandViewModel> GetAllBrands()
         {
-            return Mapper.Map<List<CartViewModel>>(TheUnitOfWork.Cart.GetAllCart());
+            return Mapper.Map<List<BrandViewModel>>(TheUnitOfWork.Brand.GetAllBrand());
         }
-        public CartViewModel GetCart(int id)
+        public BrandViewModel GetBrand(int id)
         {
             if (id < 0)
                 throw new ArgumentNullException();
-            return Mapper.Map<CartViewModel>(TheUnitOfWork.Cart.GetById(id));
+            return Mapper.Map<BrandViewModel>(TheUnitOfWork.Brand.GetById(id)); 
         }
-        public bool CreateUserCart(string userId)
+        public bool CreateUser(int userId)
         {
             bool result = false;
-            Cart userCart = new Cart() { ID = userId };
-            if (TheUnitOfWork.Cart.Insert(userCart))
+            Brands userBrand = new Brands() { ID = userId };
+            if (TheUnitOfWork.Brand.Insert(userBrand))
             {
                 result = TheUnitOfWork.Commit() > new int();
             }
             return result;
         }
-        public bool DeleteCart(int id)
+        public bool DeleteBrand(int id)
         {
             if (id < 0)
                 throw new ArgumentNullException();
             bool result = false;
-            TheUnitOfWork.Cart.Delete(id);
+            TheUnitOfWork.Brand.Delete(id);
             result = TheUnitOfWork.Commit() > new int();
             return result;
         }

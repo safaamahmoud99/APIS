@@ -17,6 +17,9 @@ namespace BL.Configuration
             CreateMap<WishList, WishListViewModel>().ReverseMap();
             CreateMap<User, LoginViewModel>().ReverseMap();
             CreateMap<User, RegisterationViewModel>().ReverseMap();
+            CreateMap<Brands, BrandViewModel>().ReverseMap();
+            CreateMap<Suppliers, SupplierViewModel>().ReverseMap();
+            CreateMap<Images, ImageViewModel>().ReverseMap();
         }
     }
 }

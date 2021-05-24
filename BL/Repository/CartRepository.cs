@@ -37,7 +37,7 @@ namespace BL.Repository
         {
             return GetAny(l => l.ID == cart.ID);
         }
-        public Cart GetOCartById(int id)
+        public Cart GetOCartById(string id)
         {
             return GetFirstOrDefault(l => l.ID == id);
         }

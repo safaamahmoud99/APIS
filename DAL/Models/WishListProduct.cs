@@ -15,7 +15,7 @@ namespace DAL.Models
             public Product product { get; set; }
 
             [ForeignKey("Wishlist")]
-            public int WishlistID { get; set; }
+            public string WishlistID { get; set; }
             public WishList Wishlist { get; set; }
         }
 }

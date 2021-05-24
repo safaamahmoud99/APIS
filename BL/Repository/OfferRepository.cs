@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BL.Repository
 {
-    class OfferRepository : BaseRepository<Offer>
+   public class OfferRepository : BaseRepository<Offer>
     {
         private DbContext EC_DbContext;
         public OfferRepository(DbContext EC_DbContext) : base(EC_DbContext)
@@ -33,10 +33,10 @@ namespace BL.Repository
         {
             Delete(id);
         }
-        public bool CheckOfferExists(Offer offer)
-        {
-            return GetAny(l => l.ID == offer.ID);
-        }
+        //public bool CheckOfferExists(Offer offer)
+        //{
+        //    return GetAny(l => l.ID == offer.ID);
+        //}
 
     }
     }

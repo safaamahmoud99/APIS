@@ -16,5 +16,8 @@ namespace BL.interfaces
         SupplierRepository Supplier { get;}
         WishListRepository WishList { get; }
         AccountRepository Account { get; }
+        OrderRepository Order { get; }
+        OfferRepository Offer { get; }
+        OrderDetailsRepository Orderdetails { get; }
     }
 }

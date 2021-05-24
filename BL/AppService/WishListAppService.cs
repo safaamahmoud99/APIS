@@ -19,19 +19,19 @@ namespace BL.AppService
         }
         public List<WishListViewModel> GetAllWishlists()
         {
-            return Mapper.Map<List<WishListViewModel>>(TheUnitOfWork.wishList.GetAllWishlist());
+            return Mapper.Map<List<WishListViewModel>>(TheUnitOfWork.WishList.GetAllWishlist());
         }
         public WishListViewModel GetWishlist(int id)
         {
             if (id < 0)
                 throw new ArgumentNullException();
-            return Mapper.Map<WishListViewModel>(TheUnitOfWork.wishList.GetById(id));
+            return Mapper.Map<WishListViewModel>(TheUnitOfWork.WishList.GetById(id));
         }
         public bool CreateUserWishlist(string userId)
         {
             bool result = false;
             WishList userWishlist = new WishList() { ID = userId };
-            if (TheUnitOfWork.wishList.Insert(userWishlist))
+            if (TheUnitOfWork.WishList.Insert(userWishlist))
             {
                 result = TheUnitOfWork.Commit() > new int();
             }
@@ -43,7 +43,7 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             bool result = false;
 
-            TheUnitOfWork.wishList.Delete(id);
+            TheUnitOfWork.WishList.Delete(id);
             result = TheUnitOfWork.Commit() > new int();
 
             return result;

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace BL.Repository
 {
-    class OrderDetailsRepository : BaseRepository<OrderDetails>
+   public class OrderDetailsRepository : BaseRepository<OrderDetails>
     {
         private DbContext EC_DbContext;
 

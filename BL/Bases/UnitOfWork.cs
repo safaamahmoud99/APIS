@@ -92,6 +92,39 @@ namespace BL.Bases
                 return image;
             }
         }
+        public OrderRepository order;
+        public OrderRepository Order
+        {
+            get
+            {
+                if (order == null)
+                   order = new OrderRepository(EC_DbContext);
+                return order;
+            }
+        }
+        public OfferRepository offer;
+        public  OfferRepository Offer
+        {
+            get
+            {
+                if (offer == null)
+                    offer = new OfferRepository(EC_DbContext);
+                return offer;
+            }
+        }
+        public OrderDetailsRepository orderdetails;
+        public OrderDetailsRepository Orderdetails
+        {
+            get
+            {
+                if (orderdetails == null)
+                    orderdetails = new OrderDetailsRepository(EC_DbContext);
+                return orderdetails;
+            }
+        }
+
+
+
 
 
     }

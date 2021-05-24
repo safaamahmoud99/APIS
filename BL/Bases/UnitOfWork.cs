@@ -61,7 +61,6 @@ namespace BL.Bases
                 return account;
             }
         }
-
         WishListRepository IUnitOfWork.wishList => throw new NotImplementedException();
     }
 }

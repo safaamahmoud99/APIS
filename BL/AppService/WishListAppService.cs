@@ -11,42 +11,42 @@ using System.Threading.Tasks;
 
 namespace BL.AppService
 {
-    public class CartAppService:BaseAppService
+    public class WishListAppService:BaseAppService
     {
-
-        public CartAppService(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
+        public WishListAppService(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
         {
 
         }
-        public List<CartViewModel> GetAllCarts()
+        public List<WishListViewModel> GetAllWishlists()
         {
-            return Mapper.Map<List<CartViewModel>>(TheUnitOfWork.Cart.GetAllCart());
+            return Mapper.Map<List<WishListViewModel>>(TheUnitOfWork.wishList.GetAllWishlist());
         }
-        public CartViewModel GetCart(int id)
+        public WishListViewModel GetWishlist(int id)
         {
             if (id < 0)
                 throw new ArgumentNullException();
-            return Mapper.Map<CartViewModel>(TheUnitOfWork.Cart.GetById(id));
+            return Mapper.Map<WishListViewModel>(TheUnitOfWork.wishList.GetById(id));
         }
-        public bool CreateUserCart(string userId)
+        public bool CreateUserWishlist(string userId)
         {
             bool result = false;
-            Cart userCart = new Cart() { ID = userId };
-            if (TheUnitOfWork.Cart.Insert(userCart))
+            WishList userWishlist = new WishList() { ID = userId };
+            if (TheUnitOfWork.wishList.Insert(userWishlist))
             {
                 result = TheUnitOfWork.Commit() > new int();
             }
             return result;
         }
-        public bool DeleteCart(int id)
+        public bool DeleteWishlist(int id)
         {
             if (id < 0)
                 throw new ArgumentNullException();
             bool result = false;
-            TheUnitOfWork.Cart.Delete(id);
+
+            TheUnitOfWork.wishList.Delete(id);
             result = TheUnitOfWork.Commit() > new int();
+
             return result;
         }
-
     }
 }

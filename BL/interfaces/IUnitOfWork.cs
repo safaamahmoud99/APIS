@@ -11,5 +11,7 @@ namespace BL.interfaces
     {
         int Commit();
         CartRepository Cart { get; }
+        WishListRepository wishList { get; }
+        AccountRepository Account { get; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BL.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,6 @@ namespace BL.interfaces
    public interface IUnitOfWork:IDisposable
     {
         int Commit();
+        CartRepository Cart { get; }
     }
 }

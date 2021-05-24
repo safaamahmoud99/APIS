@@ -1,4 +1,5 @@
 ﻿using BL.interfaces;
+using BL.Repository;
 using DAL;
 using DAL.Models;
 using Microsoft.AspNetCore.Identity;
@@ -21,17 +22,24 @@ namespace BL.Bases
             this._userManager = userManager;
             this._roleManager = roleManager;
             this.EC_DbContext = EC_DbContext;
-            // Avoid load navigation properties
-            //EC_DbContext.Configuration.LazyLoadingEnabled = false;
         }
         public int Commit()
         {
             return EC_DbContext.SaveChanges();
         }
-
         public void Dispose()
         {
             EC_DbContext.Dispose();
+        }
+        public CartRepository cart;
+        public CartRepository Cart
+        {
+            get
+            {
+                if (cart == null)
+                    cart = new CartRepository(EC_DbContext);
+                return cart;
+            }
         }
     }
 }

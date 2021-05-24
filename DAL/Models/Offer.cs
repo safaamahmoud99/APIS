@@ -8,6 +8,9 @@ namespace DAL.Models
 {
    public class Offer
     {
- 
+        public int ID { get; set; }
+        public double Discount { get; set; }
+        public string Coupon { get; set; }
+
     }
 }

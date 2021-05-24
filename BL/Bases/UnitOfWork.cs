@@ -1,5 +1,7 @@
 ﻿using BL.interfaces;
-using Microsoft.AspNet.Identity;
+using DAL;
+using DAL.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,7 +16,7 @@ namespace BL.Bases
         private DbContext EC_DbContext { get; set; }
         private UserManager<User> _userManager;
         private RoleManager<IdentityRole> _roleManager;
-        public UnitOfWork(ApplicationDBContext EC_DbContext, UserManager<ApplicationUserIdentity> userManager, RoleManager<IdentityRole> roleManager)
+        public UnitOfWork(ApplicationDbContext EC_DbContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             this._userManager = userManager;
             this._roleManager = roleManager;

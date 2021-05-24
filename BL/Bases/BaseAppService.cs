@@ -1,4 +1,5 @@
-﻿using BL.interfaces;
+﻿using AutoMapper;
+using BL.interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

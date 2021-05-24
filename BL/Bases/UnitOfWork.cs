@@ -31,6 +31,7 @@ namespace BL.Bases
         {
             EC_DbContext.Dispose();
         }
+
         public CartRepository cart;
         public CartRepository Cart
         {
@@ -42,7 +43,7 @@ namespace BL.Bases
             }
         }
         public WishListRepository wishlist;
-        public WishListRepository Wishlist
+        public WishListRepository WishList
         {
             get
             {
@@ -61,7 +62,38 @@ namespace BL.Bases
                 return account;
             }
         }
-        WishListRepository IUnitOfWork.wishList => throw new NotImplementedException();
+        public BrandRepository brand;
+        public BrandRepository Brand
+        {
+            get
+            {
+                if (brand == null)
+                    brand = new BrandRepository(EC_DbContext);
+                return brand;
+            }
+        }
+        public SupplierRepository supplier;
+        public SupplierRepository Supplier
+        {
+            get
+            {
+                if (supplier == null)
+                    supplier = new SupplierRepository(EC_DbContext);
+                return supplier;
+            }
+        }
+        public ImageRepository image;
+        public ImageRepository Image
+        {
+            get
+            {
+                if (image == null)
+                    image = new ImageRepository(EC_DbContext);
+                return image;
+            }
+        }
+
+
     }
 }
 

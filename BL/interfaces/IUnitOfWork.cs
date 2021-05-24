@@ -11,10 +11,10 @@ namespace BL.interfaces
     {
         int Commit();
         CartRepository Cart { get; }
-        BrandRepository Brand { get; set; }
-        ImageRepository Image { get; set; }
-        SupplierRepository Supplier { get; set; }
-        WishListRepository wishList { get; }
+        BrandRepository Brand { get;  }
+        ImageRepository Image { get; }
+        SupplierRepository Supplier { get;}
+        WishListRepository WishList { get; }
         AccountRepository Account { get; }
     }
 }

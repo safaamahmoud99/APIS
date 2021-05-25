@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-   public class Order
+    [Table("Order")]
+    public class Order
     {
             public Order()
             {

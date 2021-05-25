@@ -20,6 +20,11 @@ namespace BL.Configuration
             CreateMap<Brands, BrandViewModel>().ReverseMap();
             CreateMap<Suppliers, SupplierViewModel>().ReverseMap();
             CreateMap<Images, ImageViewModel>().ReverseMap();
+            CreateMap<CartProduct, CartProductViewModel>().ReverseMap();
+            CreateMap<WishListProduct, WishListProductViewModel>().ReverseMap();
+            CreateMap<Review, ReviewViewModel>().ReverseMap();
+
+
         }
     }
 }

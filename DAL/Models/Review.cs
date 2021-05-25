@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-   public class Review
+    [Table("Review")]
+    public class Review
     {
         public int ID { get; set; }
         public string Comment { get; set; }

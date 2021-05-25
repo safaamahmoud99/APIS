@@ -11,41 +11,40 @@ using System.Threading.Tasks;
 
 namespace BL.AppService
 {
-    public class BrandAppService : BaseAppService
+   public  class ReviewAppService : BaseAppService
     {
-        public BrandAppService(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
+        public ReviewAppService(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
         {
 
         }
-        public List<BrandViewModel> GetAllBrands()
+        public List<ReviewViewModel> GetAllReviews()
         {
-            return Mapper.Map<List<BrandViewModel>>(TheUnitOfWork.Brand.GetAllBrand());
+            return Mapper.Map<List<ReviewViewModel>>(TheUnitOfWork.Review.GetAll());
         }
-        public BrandViewModel GetBrand(int id)
+        public ReviewViewModel GetReview(int id)
         {
             if (id < 0)
                 throw new ArgumentNullException();
-            return Mapper.Map<BrandViewModel>(TheUnitOfWork.Brand.GetById(id)); 
+            return Mapper.Map<ReviewViewModel>(TheUnitOfWork.Review.GetReviewById(id));
         }
-        public bool CreateBrand(int userId)
+        public bool CreateReview(int id)
         {
             bool result = false;
-            Brands userBrand = new Brands() { ID = userId };
-            if (TheUnitOfWork.Brand.Insert(userBrand))
+            Review Review = new Review() { ID = id };
+            if (TheUnitOfWork.Review.InsertReview(Review))
             {
                 result = TheUnitOfWork.Commit() > new int();
             }
             return result;
         }
-        public bool DeleteBrand(int id)
+        public bool DeletReview(int id)
         {
             if (id < 0)
                 throw new ArgumentNullException();
             bool result = false;
-            TheUnitOfWork.Brand.Delete(id);
+            TheUnitOfWork.Review.DeleteReview(id);
             result = TheUnitOfWork.Commit() > new int();
             return result;
         }
-
     }
 }

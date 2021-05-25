@@ -92,6 +92,70 @@ namespace BL.Bases
                 return image;
             }
         }
+        public OrderRepository order;
+        public OrderRepository Order
+        {
+            get
+            {
+                if (order == null)
+                   order = new OrderRepository(EC_DbContext);
+                return order;
+            }
+        }
+        public OfferRepository offer;
+        public  OfferRepository Offer
+        {
+            get
+            {
+                if (offer == null)
+                    offer = new OfferRepository(EC_DbContext);
+                return offer;
+            }
+        }
+        public OrderDetailsRepository orderdetails;
+        public OrderDetailsRepository Orderdetails
+        {
+            get
+            {
+                if (orderdetails == null)
+                    orderdetails = new OrderDetailsRepository(EC_DbContext);
+                return orderdetails;
+            }
+        }
+
+        public CardProductRepository cardProduct;
+        public CardProductRepository CardProduct
+        {
+            get
+            {
+                if (cardProduct == null)
+                    cardProduct = new CardProductRepository(EC_DbContext);
+                return cardProduct;
+            }
+        }
+
+        public WishListProductRepository wishListProduct;
+        public WishListProductRepository WishListProduct
+        {
+            get
+            {
+                if (wishListProduct == null)
+                    wishListProduct = new WishListProductRepository(EC_DbContext);
+                return wishListProduct;
+            }
+        }
+
+
+        public ReviewRepository review;
+        public ReviewRepository Review
+        {
+            get
+            {
+                if (review == null)
+                    review = new ReviewRepository(EC_DbContext);
+                return review;
+            }
+        }
 
 
     }

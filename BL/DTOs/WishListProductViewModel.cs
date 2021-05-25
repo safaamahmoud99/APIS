@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Models
+namespace BL.DTOs
 {
-    [Table("Images")]
-    public class Images
+   public  class WishListProductViewModel
     {
         public int ID { get; set; }
-        public string Image { get; set; }
+
+        public int productId { get; set; }
+     
+        public string WishlistID { get; set; }
+     
     }
 }

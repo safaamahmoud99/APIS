@@ -33,9 +33,7 @@ namespace DAL.Models
         public int BrandID { get; set; }
         [ForeignKey("BrandID")]
         public virtual Brands Brands { get; set; }
-        public int OfferID { get; set; }
-        [ForeignKey("OfferID")]
-        public virtual Offer Offer {get;set;}
+        public List<Offer> Offers {get;set;}
         public List<Review> Reviews { get; set; } = new List<Review>();
         public List<CartProduct> Carts { get; set; } = new List<CartProduct>();
         public List<WishListProduct> Wishlists { get; set; } = new List<WishListProduct>();

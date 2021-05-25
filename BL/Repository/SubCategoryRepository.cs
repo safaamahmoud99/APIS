@@ -17,7 +17,7 @@ namespace BL.Repository
         {
             this.EC_DbContext = EC_DbContext;
         }
-        public List<SubCategory> GetAllBrand()
+        public List<SubCategory> GetAllSubCategory()
         {
             return GetAll().ToList();
         }

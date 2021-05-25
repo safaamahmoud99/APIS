@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BL.AppService
 {
-    class OrderDetailsAppservice : BaseAppService
+    public class OrderDetailsAppservice : BaseAppService
     {
         public OrderDetailsAppservice(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
         {

@@ -134,6 +134,17 @@ namespace BL.Bases
             }
         }
 
+        public WishListProductRepository wishListProduct;
+        public WishListProductRepository WishListProduct
+        {
+            get
+            {
+                if (wishListProduct == null)
+                    wishListProduct = new WishListProductRepository(EC_DbContext);
+                return wishListProduct;
+            }
+        }
+
 
 
 

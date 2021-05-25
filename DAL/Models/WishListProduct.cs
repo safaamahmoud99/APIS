@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace DAL.Models
 {
    public class WishListProduct
-    { public int ID { get; set; }
+    {      
+            public int ID { get; set; }
 
             [ForeignKey("product")]
             public int productId { get; set; }

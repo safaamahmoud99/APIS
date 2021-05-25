@@ -123,6 +123,17 @@ namespace BL.Bases
             }
         }
 
+        public CardProductRepository cardProduct;
+        public CardProductRepository CardProduct
+        {
+            get
+            {
+                if (cardProduct == null)
+                    cardProduct = new CardProductRepository(EC_DbContext);
+                return cardProduct;
+            }
+        }
+
 
 
 

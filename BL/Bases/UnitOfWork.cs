@@ -146,7 +146,16 @@ namespace BL.Bases
         }
 
 
-
+        public ReviewRepository review;
+        public ReviewRepository Review
+        {
+            get
+            {
+                if (review == null)
+                    review = new ReviewRepository(EC_DbContext);
+                return review;
+            }
+        }
 
 
     }

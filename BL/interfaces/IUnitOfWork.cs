@@ -21,5 +21,6 @@ namespace BL.interfaces
         OrderDetailsRepository Orderdetails { get; }
         CardProductRepository CardProduct { get; }
         WishListProductRepository WishListProduct { get; }
+        ReviewRepository Review { get; }
     }
 }

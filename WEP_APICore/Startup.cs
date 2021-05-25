@@ -25,7 +25,8 @@ namespace WEP_APICore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddCors(CorsOptions => CorsOptions.AddPolicy("MyPolicy",
+              builder => builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin()));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -43,6 +44,7 @@ namespace WEP_APICore
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WEP_APICore v1"));
             }
 
+            app.UseCors("MyPolicy");
             app.UseRouting();
 
             app.UseAuthorization();

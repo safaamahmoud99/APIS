@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
+    [Table("Product")]
     public class Product
     {
         public int ID { get; set; }

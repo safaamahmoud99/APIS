@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-   public class WishListProduct
+    [Table("WishListProduct")]
+    public class WishListProduct
     {      
             public int ID { get; set; }
 

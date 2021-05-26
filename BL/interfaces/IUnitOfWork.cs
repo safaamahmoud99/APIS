@@ -22,5 +22,9 @@ namespace BL.interfaces
         CardProductRepository CardProduct { get; }
         WishListProductRepository WishListProduct { get; }
         ReviewRepository Review { get; }
+        ProductRepository Product { get; }
+        MainCategoryRepository MainCategory { get;}
+        CategoryRepository Category { get; }
+        SubCategoryRepository SubCategory { get; }
     }
 }

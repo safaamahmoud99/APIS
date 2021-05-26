@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BL.AppService
 {
-    class OrderAppService : BaseAppService
+    public class OrderAppService : BaseAppService
     {
         public OrderAppService(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
         {

@@ -27,7 +27,7 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             return Mapper.Map<BrandViewModel>(TheUnitOfWork.Brand.GetById(id)); 
         }
-        public bool CreateUser(int userId)
+        public bool CreateBrand(int userId)
         {
             bool result = false;
             Brands userBrand = new Brands() { ID = userId };

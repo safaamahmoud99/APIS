@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-   public class Cart
+    [Table("Cart")]
+    public class Cart
     {
         public string ID { get; set; }
         public string UserID { get; set; }

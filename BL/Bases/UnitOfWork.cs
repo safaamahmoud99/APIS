@@ -157,7 +157,50 @@ namespace BL.Bases
             }
         }
 
+        ProductRepository product;
+        public ProductRepository Product
+        {
+            get
+            {
+                if (product == null)
+                    product = new ProductRepository(EC_DbContext);
+                return product;
+            }
+        }
 
+        MainCategoryRepository mainCategory;
+        public MainCategoryRepository MainCategory
+        {
+            get
+            {
+                if (mainCategory == null)
+                    mainCategory = new MainCategoryRepository(EC_DbContext);
+                return mainCategory;
+            }
+        }
+
+        CategoryRepository category;
+        public CategoryRepository Category
+        {
+            get
+            {
+                if (category == null)
+                    category = new CategoryRepository(EC_DbContext);
+                return category;
+            }
+        }
+
+
+        SubCategoryRepository subCategory;
+        public SubCategoryRepository SubCategory
+        {
+            get
+            {
+                if (subCategory == null)
+                    subCategory = new SubCategoryRepository(EC_DbContext);
+                return subCategory;
+            }
+        }
     }
 }
 

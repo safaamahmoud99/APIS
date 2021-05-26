@@ -18,6 +18,7 @@ namespace BL.AppService
         {
 
         }
+       
         public List<WishListProductViewModel> GetAllWishListProducts()
         {
             return Mapper.Map<List<WishListProductViewModel>>(TheUnitOfWork.WishListProduct.GetAll());

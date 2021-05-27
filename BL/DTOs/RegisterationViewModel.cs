@@ -12,7 +12,7 @@ namespace BL.DTOs
     
         [Required]
         [Display(Name = "User Name")]
-        public string FullName { get; set; }
+        public string UserName { get; set; }
         [Required]
         [MinLength(6)]
         [DataType(DataType.Password)]
@@ -22,6 +22,5 @@ namespace BL.DTOs
         public string confirmPassword { get; set; }
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        public string RoleName { get; set; }
     }
 }

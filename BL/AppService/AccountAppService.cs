@@ -57,9 +57,9 @@ namespace BL.AppService
 
             return result;
         }
-        public async Task<User> Find(string name, string password)
+        public async Task<User> Find(string email, string password)
         {
-           User user = await TheUnitOfWork.Account.Find(name, password);
+           User user = await TheUnitOfWork.Account.Find(email, password);
            if (user != null )
                return user;
            return null;
@@ -103,20 +103,20 @@ namespace BL.AppService
         }
         public async Task<dynamic> CreateToken(User user)
         {
-            var userRoles = await GetUserRoles(user);
+            //var userRoles = await GetUserRoles(user);
 
             var authClaims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.NameIdentifier, user.Id),
-                    new Claim("role",userRoles.FirstOrDefault()),
+                    //new Claim("role",userRoles.FirstOrDefault()),
                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 
-            foreach (var userRole in userRoles)
-            {
-                authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-            }
+            //foreach (var userRole in userRoles)
+            //{
+            //    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+            //}
 
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
@@ -134,15 +134,13 @@ namespace BL.AppService
                 expiration = token.ValidTo
             };
 
-
         }
         public async Task<IdentityResult> Register(RegisterationViewModel user)
         {
-            bool isExist = await checkUserNameExist(user.FullName);
+            bool isExist = await checkUserNameExist(user.UserName);
             if (isExist)
                 return IdentityResult.Failed(new IdentityError
                 { Code = "error", Description = "user name already exist" });
-
            User identityUser = Mapper.Map<RegisterationViewModel, User>(user);
             var result = await TheUnitOfWork.Account.Register(identityUser);
             // create user cart and wishlist 

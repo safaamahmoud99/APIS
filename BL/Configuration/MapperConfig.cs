@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace BL.Configuration
 {
-    public class AutoMapperProfile : Profile
+    public class AutoMapperProfile
     {
         public static IMapper mapp { get; set; }
-        public AutoMapperProfile()
+         static AutoMapperProfile()
         {
 
             var config = new MapperConfiguration(
             cfg =>
             {
-
                 cfg.CreateMap<Cart, CartViewModel>().ReverseMap();
                 cfg.CreateMap<WishList, WishListViewModel>().ReverseMap();
                 cfg.CreateMap<User, LoginViewModel>().ReverseMap();
                 cfg.CreateMap<User, RegisterationViewModel>().ReverseMap();
+                //.ForMember(u => u.Email, v => v.MapFrom(c => c.Email));
                 cfg.CreateMap<Brands, BrandViewModel>().ReverseMap();
                 cfg.CreateMap<Suppliers, SupplierViewModel>().ReverseMap();
                 cfg.CreateMap<Images, ImageViewModel>().ReverseMap();

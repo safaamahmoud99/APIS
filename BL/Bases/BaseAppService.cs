@@ -12,12 +12,10 @@ namespace BL.Bases
     public class BaseAppService : IDisposable
     {
         protected IUnitOfWork TheUnitOfWork { get; set; }
-        protected IMapper Mapper; //MapperConfig.Mapper;
+        protected readonly IMapper Mapper = AutoMapperProfile.mapp;
         public BaseAppService(IUnitOfWork theUnitOfWork)
         {
             TheUnitOfWork = theUnitOfWork;
-            Mapper = AutoMapperProfile.mapp;
-            
         }
         public void Dispose()
         {

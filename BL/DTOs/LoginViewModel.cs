@@ -15,6 +15,6 @@ namespace BL.DTOs
         public string Email { get; set; }
         [DataType(DataType.Password)]
         [Required]
-        public string PasswordHash { get; set; }
+        public string Password { get; set; }
     }
 }

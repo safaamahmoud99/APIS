@@ -44,10 +44,10 @@ namespace BL.Repository
             User result = await manager.FindByIdAsync(id);
             return result;
         }
-        public async Task<User> Find(string username, string password)
+        public async Task<User> Find(string email, string password)
         {
 
-            var user = await manager.FindByNameAsync(username);
+            var user = await manager.FindByEmailAsync(email);
             if (user != null && await manager.CheckPasswordAsync(user, password))
             {
                 return user;
@@ -58,7 +58,7 @@ namespace BL.Repository
         {
             user.Id = Guid.NewGuid().ToString();
             IdentityResult result;
-            result = await manager.CreateAsync(user, user.PasswordHash);
+            result = await manager.CreateAsync(user, user.Password);
             return result;
         }
         public async Task<IdentityResult> AssignToRole(string userid, string rolename)

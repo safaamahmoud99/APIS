@@ -13,7 +13,7 @@ namespace DAL.Models
     public class User:IdentityUser
     {
         [Required]
-        public string FullName { get; set; }
+        public override string UserName { get; set; }
         [Required]
         public string Password { get; set; }
         [Required]

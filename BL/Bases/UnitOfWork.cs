@@ -184,43 +184,7 @@ namespace BL.Bases
       
 
        
-        public ProductRepository product;
-        public ProductRepository Product
-        {
-            get
-            {
-                if (product == null)
-                    product = new ProductRepository(EC_DbContext);
-                return product;
-            }
-        }
-
-        public MainCategoryRepository mainCategory;
-        public MainCategoryRepository MainCategory
-        {
-            get
-            {
-                if (mainCategory == null)
-                    mainCategory = new MainCategoryRepository(EC_DbContext);
-                return mainCategory;
-            }
-        }
-
-      
-
-
-        SubCategoryRepository subCategory;
-        public SubCategoryRepository SubCategory
-        {
-            get
-            {
-                if (subCategory == null)
-                    subCategory = new SubCategoryRepository(EC_DbContext);
-                return subCategory;
-            }
-        }
-        
-
+       
        
        
         public SubCategoryRepository subCategory;

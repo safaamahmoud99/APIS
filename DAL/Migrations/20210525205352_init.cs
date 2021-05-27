@@ -50,7 +50,7 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "brands",
+                name: "Brand",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -59,11 +59,11 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_brands", x => x.ID);
+                    table.PrimaryKey("PK_Brand", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "mainCategories",
+                name: "MainCategory",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -72,25 +72,11 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_mainCategories", x => x.ID);
+                    table.PrimaryKey("PK_MainCategory", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "offers",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Discount = table.Column<double>(type: "float", nullable: false),
-                    Coupon = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_offers", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "suppliers",
+                name: "Supplier",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -101,7 +87,7 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_suppliers", x => x.ID);
+                    table.PrimaryKey("PK_Supplier", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -211,7 +197,7 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "carts",
+                name: "Cart",
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -219,9 +205,9 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_carts", x => x.ID);
+                    table.PrimaryKey("PK_Cart", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_carts_AspNetUsers_UserID",
+                        name: "FK_Cart_AspNetUsers_UserID",
                         column: x => x.UserID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -229,7 +215,7 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "orders",
+                name: "Order",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -242,9 +228,9 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_orders", x => x.ID);
+                    table.PrimaryKey("PK_Order", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_orders_AspNetUsers_UserID",
+                        name: "FK_Order_AspNetUsers_UserID",
                         column: x => x.UserID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -252,7 +238,7 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "wishLists",
+                name: "WishList",
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -260,9 +246,9 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_wishLists", x => x.ID);
+                    table.PrimaryKey("PK_WishList", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_wishLists_AspNetUsers_UserID",
+                        name: "FK_WishList_AspNetUsers_UserID",
                         column: x => x.UserID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -270,7 +256,7 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "categories",
+                name: "Category",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -281,17 +267,17 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_categories", x => x.ID);
+                    table.PrimaryKey("PK_Category", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_categories_mainCategories_MainCategoryID",
+                        name: "FK_Category_MainCategory_MainCategoryID",
                         column: x => x.MainCategoryID,
-                        principalTable: "mainCategories",
+                        principalTable: "MainCategory",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "subCategories",
+                name: "SubCategory",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -302,17 +288,17 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_subCategories", x => x.ID);
+                    table.PrimaryKey("PK_SubCategory", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_subCategories_categories_CategoryID",
+                        name: "FK_SubCategory_Category_CategoryID",
                         column: x => x.CategoryID,
-                        principalTable: "categories",
+                        principalTable: "Category",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "products",
+                name: "Product",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -325,40 +311,33 @@ namespace DAL.Migrations
                     Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SubCategoryID = table.Column<int>(type: "int", nullable: false),
                     BrandID = table.Column<int>(type: "int", nullable: false),
-                    OfferID = table.Column<int>(type: "int", nullable: false),
                     SuppliersID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_products", x => x.ID);
+                    table.PrimaryKey("PK_Product", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_products_brands_BrandID",
+                        name: "FK_Product_Brand_BrandID",
                         column: x => x.BrandID,
-                        principalTable: "brands",
+                        principalTable: "Brand",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_products_offers_OfferID",
-                        column: x => x.OfferID,
-                        principalTable: "offers",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_products_subCategories_SubCategoryID",
+                        name: "FK_Product_SubCategory_SubCategoryID",
                         column: x => x.SubCategoryID,
-                        principalTable: "subCategories",
+                        principalTable: "SubCategory",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_products_suppliers_SuppliersID",
+                        name: "FK_Product_Supplier_SuppliersID",
                         column: x => x.SuppliersID,
-                        principalTable: "suppliers",
+                        principalTable: "Supplier",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "cartProducts",
+                name: "CartProduct",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -368,23 +347,23 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cartProducts", x => x.ID);
+                    table.PrimaryKey("PK_CartProduct", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_cartProducts_carts_CartID",
+                        name: "FK_CartProduct_Cart_CartID",
                         column: x => x.CartID,
-                        principalTable: "carts",
+                        principalTable: "Cart",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_cartProducts_products_productId",
+                        name: "FK_CartProduct_Product_productId",
                         column: x => x.productId,
-                        principalTable: "products",
+                        principalTable: "Product",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "images",
+                name: "Images",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -394,17 +373,39 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_images", x => x.ID);
+                    table.PrimaryKey("PK_Images", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_images_products_ProductID",
+                        name: "FK_Images_Product_ProductID",
                         column: x => x.ProductID,
-                        principalTable: "products",
+                        principalTable: "Product",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "orderDetails",
+                name: "Offer",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OfferValue = table.Column<double>(type: "float", nullable: false),
+                    ProductID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Offer", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Offer_Product_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Product",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderDetails",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -418,23 +419,23 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_orderDetails", x => x.ID);
+                    table.PrimaryKey("PK_OrderDetails", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_orderDetails_orders_OrderID",
+                        name: "FK_OrderDetails_Order_OrderID",
                         column: x => x.OrderID,
-                        principalTable: "orders",
+                        principalTable: "Order",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_orderDetails_products_ProductID",
+                        name: "FK_OrderDetails_Product_ProductID",
                         column: x => x.ProductID,
-                        principalTable: "products",
+                        principalTable: "Product",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "reviews",
+                name: "Review",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -446,23 +447,23 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_reviews", x => x.ID);
+                    table.PrimaryKey("PK_Review", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_reviews_AspNetUsers_UserID",
+                        name: "FK_Review_AspNetUsers_UserID",
                         column: x => x.UserID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_reviews_products_ProductID",
+                        name: "FK_Review_Product_ProductID",
                         column: x => x.ProductID,
-                        principalTable: "products",
+                        principalTable: "Product",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "wishListProducts",
+                name: "WishListProduct",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -472,17 +473,17 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_wishListProducts", x => x.ID);
+                    table.PrimaryKey("PK_WishListProduct", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_wishListProducts_products_productId",
+                        name: "FK_WishListProduct_Product_productId",
                         column: x => x.productId,
-                        principalTable: "products",
+                        principalTable: "Product",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_wishListProducts_wishLists_WishlistID",
+                        name: "FK_WishListProduct_WishList_WishlistID",
                         column: x => x.WishlistID,
-                        principalTable: "wishLists",
+                        principalTable: "WishList",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -527,94 +528,94 @@ namespace DAL.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_cartProducts_CartID",
-                table: "cartProducts",
+                name: "IX_Cart_UserID",
+                table: "Cart",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartProduct_CartID",
+                table: "CartProduct",
                 column: "CartID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_cartProducts_productId",
-                table: "cartProducts",
+                name: "IX_CartProduct_productId",
+                table: "CartProduct",
                 column: "productId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_carts_UserID",
-                table: "carts",
-                column: "UserID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_categories_MainCategoryID",
-                table: "categories",
+                name: "IX_Category_MainCategoryID",
+                table: "Category",
                 column: "MainCategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_images_ProductID",
-                table: "images",
+                name: "IX_Images_ProductID",
+                table: "Images",
                 column: "ProductID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_orderDetails_OrderID",
-                table: "orderDetails",
+                name: "IX_Offer_ProductID",
+                table: "Offer",
+                column: "ProductID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_UserID",
+                table: "Order",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDetails_OrderID",
+                table: "OrderDetails",
                 column: "OrderID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_orderDetails_ProductID",
-                table: "orderDetails",
+                name: "IX_OrderDetails_ProductID",
+                table: "OrderDetails",
                 column: "ProductID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_orders_UserID",
-                table: "orders",
-                column: "UserID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_products_BrandID",
-                table: "products",
+                name: "IX_Product_BrandID",
+                table: "Product",
                 column: "BrandID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_products_OfferID",
-                table: "products",
-                column: "OfferID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_products_SubCategoryID",
-                table: "products",
+                name: "IX_Product_SubCategoryID",
+                table: "Product",
                 column: "SubCategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_products_SuppliersID",
-                table: "products",
+                name: "IX_Product_SuppliersID",
+                table: "Product",
                 column: "SuppliersID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_reviews_ProductID",
-                table: "reviews",
+                name: "IX_Review_ProductID",
+                table: "Review",
                 column: "ProductID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_reviews_UserID",
-                table: "reviews",
+                name: "IX_Review_UserID",
+                table: "Review",
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_subCategories_CategoryID",
-                table: "subCategories",
+                name: "IX_SubCategory_CategoryID",
+                table: "SubCategory",
                 column: "CategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_wishListProducts_productId",
-                table: "wishListProducts",
+                name: "IX_WishList_UserID",
+                table: "WishList",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WishListProduct_productId",
+                table: "WishListProduct",
                 column: "productId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_wishListProducts_WishlistID",
-                table: "wishListProducts",
+                name: "IX_WishListProduct_WishlistID",
+                table: "WishListProduct",
                 column: "WishlistID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_wishLists_UserID",
-                table: "wishLists",
-                column: "UserID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -635,55 +636,55 @@ namespace DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "cartProducts");
+                name: "CartProduct");
 
             migrationBuilder.DropTable(
-                name: "images");
+                name: "Images");
 
             migrationBuilder.DropTable(
-                name: "orderDetails");
+                name: "Offer");
 
             migrationBuilder.DropTable(
-                name: "reviews");
+                name: "OrderDetails");
 
             migrationBuilder.DropTable(
-                name: "wishListProducts");
+                name: "Review");
+
+            migrationBuilder.DropTable(
+                name: "WishListProduct");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "carts");
+                name: "Cart");
 
             migrationBuilder.DropTable(
-                name: "orders");
+                name: "Order");
 
             migrationBuilder.DropTable(
-                name: "products");
+                name: "Product");
 
             migrationBuilder.DropTable(
-                name: "wishLists");
+                name: "WishList");
 
             migrationBuilder.DropTable(
-                name: "brands");
+                name: "Brand");
 
             migrationBuilder.DropTable(
-                name: "offers");
+                name: "SubCategory");
 
             migrationBuilder.DropTable(
-                name: "subCategories");
-
-            migrationBuilder.DropTable(
-                name: "suppliers");
+                name: "Supplier");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "categories");
+                name: "Category");
 
             migrationBuilder.DropTable(
-                name: "mainCategories");
+                name: "MainCategory");
         }
     }
 }

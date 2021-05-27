@@ -21,6 +21,9 @@ using BL.AppService;
 using AutoMapper;
 using BL.interfaces;
 using DAL.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace WEP_APICore
 {
@@ -39,6 +42,10 @@ namespace WEP_APICore
             services.AddCors(CorsOptions => CorsOptions.AddPolicy("MyPolicy",
               builder => builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin()));
             services.AddControllers();
+            services.AddDbContext<ApplicationDbContext>(option => {
+                option.UseSqlServer(Configuration.GetConnectionString("CS"),
+                    options => options.EnableRetryOnFailure());
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WEP_APICore", Version = "v1" });
@@ -62,7 +69,25 @@ namespace WEP_APICore
             services.AddTransient<MainCategoryAppService>();
             services.AddTransient<SubCategoryAppService>();
             services.AddHttpContextAccessor();//allow me to get user information such as id
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(typeof(Startup));
+
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+           .AddJwtBearer(options =>
+           {
+               options.SaveToken = true;
+               options.RequireHttpsMetadata = false;
+               options.TokenValidationParameters = new TokenValidationParameters
+               {
+                   ValidateIssuer = true,
+                   ValidateAudience = true,
+                   ValidateLifetime = true,
+                   ValidateIssuerSigningKey = true,
+                   ValidIssuer = Configuration["Jwt:Issuer"],
+                   ValidAudience = Configuration["Jwt:Issuer"],
+                   //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+               };
+           });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +99,13 @@ namespace WEP_APICore
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WEP_APICore v1"));
             }
+            app.UseAuthentication();
+            app.UseCors(
+                options => options
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials());
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

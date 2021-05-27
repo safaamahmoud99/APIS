@@ -11,20 +11,30 @@ namespace BL.Configuration
 {
     public class AutoMapperProfile : Profile
     {
+        public static IMapper mapp { get; set; }
         public AutoMapperProfile()
         {
-            CreateMap<Cart, CartViewModel>().ReverseMap();
-            CreateMap<WishList, WishListViewModel>().ReverseMap();
-            CreateMap<User, LoginViewModel>().ReverseMap();
-            CreateMap<User, RegisterationViewModel>().ReverseMap();
-            CreateMap<Brands, BrandViewModel>().ReverseMap();
-            CreateMap<Suppliers, SupplierViewModel>().ReverseMap();
-            CreateMap<Images, ImageViewModel>().ReverseMap();
-            CreateMap<CartProduct, CartProductViewModel>().ReverseMap();
-            CreateMap<WishListProduct, WishListProductViewModel>().ReverseMap();
-            CreateMap<Review, ReviewViewModel>().ReverseMap();
 
+            var config = new MapperConfiguration(
+            cfg =>
+            {
+
+                cfg.CreateMap<Cart, CartViewModel>().ReverseMap();
+                cfg.CreateMap<WishList, WishListViewModel>().ReverseMap();
+                cfg.CreateMap<User, LoginViewModel>().ReverseMap();
+                cfg.CreateMap<User, RegisterationViewModel>().ReverseMap();
+                cfg.CreateMap<Brands, BrandViewModel>().ReverseMap();
+                cfg.CreateMap<Suppliers, SupplierViewModel>().ReverseMap();
+                cfg.CreateMap<Images, ImageViewModel>().ReverseMap();
+                cfg.CreateMap<CartProduct, CartProductViewModel>().ReverseMap();
+                cfg.CreateMap<WishListProduct, WishListProductViewModel>().ReverseMap();
+                cfg.CreateMap<Review, ReviewViewModel>().ReverseMap();
+
+
+            });
+            mapp = config.CreateMapper();
 
         }
     }
 }
+

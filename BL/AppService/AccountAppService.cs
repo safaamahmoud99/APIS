@@ -15,6 +15,7 @@ using AutoMapper;
 using BL.interfaces;
 using BL.DTOs;
 using BL.StaticClasses;
+using BL.Configuration;
 
 namespace BL.AppService
 {
@@ -29,6 +30,7 @@ namespace BL.AppService
             this._configuration = configuration;
             this._cartAppService = cartAppService;
             this._wishlistAppService = wishlistAppService;
+            mapper = AutoMapperProfile.mapp;
         }
         private void CreateUserCartAndWishlist(string userId)
         {

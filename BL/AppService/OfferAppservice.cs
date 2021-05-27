@@ -13,7 +13,7 @@ namespace BL.AppService
 {
     class OfferAppservice : BaseAppService
     {
-        public OfferAppservice(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
+        public OfferAppservice(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
         {
 
         }

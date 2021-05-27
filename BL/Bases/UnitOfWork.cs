@@ -181,17 +181,32 @@ namespace BL.Bases
        
 
     
+      
 
-        CategoryRepository category;
-        public CategoryRepository Category
+       
+        public ProductRepository product;
+        public ProductRepository Product
         {
             get
             {
-                if (category == null)
-                    category = new CategoryRepository(EC_DbContext);
-                return category;
+                if (product == null)
+                    product = new ProductRepository(EC_DbContext);
+                return product;
             }
         }
+
+        public MainCategoryRepository mainCategory;
+        public MainCategoryRepository MainCategory
+        {
+            get
+            {
+                if (mainCategory == null)
+                    mainCategory = new MainCategoryRepository(EC_DbContext);
+                return mainCategory;
+            }
+        }
+
+      
 
 
         SubCategoryRepository subCategory;
@@ -207,6 +222,28 @@ namespace BL.Bases
         
 
        
+       
+        public SubCategoryRepository subCategory;
+        public SubCategoryRepository SubCategory
+        {
+            get
+            {
+                if (subCategory == null)
+                    subCategory = new SubCategoryRepository(EC_DbContext);
+                return subCategory;
+            }
+        }
+
+        public CategoryRepository category;
+        public CategoryRepository Category
+        {
+            get
+            {
+                if (category == null)
+                    category = new CategoryRepository(EC_DbContext);
+                return category;
+            }
+        }
     }
 }
 

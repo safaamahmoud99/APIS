@@ -12,7 +12,7 @@ namespace BL.AppService
 {
    public class ImageAppService : BaseAppService
     {
-        public ImageAppService(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
+        public ImageAppService(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
         {
 
         }

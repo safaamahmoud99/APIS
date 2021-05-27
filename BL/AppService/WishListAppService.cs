@@ -13,7 +13,7 @@ namespace BL.AppService
 {
     public class WishListAppService:BaseAppService
     {
-        public WishListAppService(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
+        public WishListAppService(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
         {
 
         }

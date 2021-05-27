@@ -14,7 +14,7 @@ namespace BL.AppService
 {
     public class OrderDetailsAppservice : BaseAppService
     {
-        public OrderDetailsAppservice(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
+        public OrderDetailsAppservice(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
         {
 
         }

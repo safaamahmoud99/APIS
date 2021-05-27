@@ -9,7 +9,7 @@ namespace BL.DTOs
 {
     public class RegisterationViewModel
     {
-        public string id { get; set; }
+    
         [Required]
         [Display(Name = "User Name")]
         public string FullName { get; set; }

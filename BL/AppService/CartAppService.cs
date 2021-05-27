@@ -14,7 +14,7 @@ namespace BL.AppService
     public class CartAppService:BaseAppService
     {
 
-        public CartAppService(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
+        public CartAppService(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
         {
 
         }

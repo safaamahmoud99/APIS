@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BL.Configuration;
 using BL.interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,12 @@ namespace BL.Bases
     public class BaseAppService : IDisposable
     {
         protected IUnitOfWork TheUnitOfWork { get; set; }
-        protected readonly IMapper Mapper; //MapperConfig.Mapper;
-        public BaseAppService(IUnitOfWork theUnitOfWork, IMapper mapper)
+        protected IMapper Mapper; //MapperConfig.Mapper;
+        public BaseAppService(IUnitOfWork theUnitOfWork)
         {
             TheUnitOfWork = theUnitOfWork;
-            Mapper = mapper;
+            Mapper = AutoMapperProfile.mapp;
+            
         }
         public void Dispose()
         {

@@ -14,7 +14,7 @@ namespace BL.AppService
 {
    public class ProductAppService:BaseAppService
     {
-        public ProductAppService(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
+        public ProductAppService(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
         {
         }
         public IEnumerable<ProductViewModel> GetAllProduct()

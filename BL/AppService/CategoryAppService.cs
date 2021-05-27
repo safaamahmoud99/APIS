@@ -13,7 +13,7 @@ namespace BL.AppService
 {
     public class CategoryAppService: BaseAppService
     {
-        public CategoryAppService(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
+        public CategoryAppService(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
         {
 
         }

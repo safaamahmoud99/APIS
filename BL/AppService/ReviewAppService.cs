@@ -13,7 +13,7 @@ namespace BL.AppService
 {
    public  class ReviewAppService : BaseAppService
     {
-        public ReviewAppService(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
+        public ReviewAppService(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
         {
 
         }

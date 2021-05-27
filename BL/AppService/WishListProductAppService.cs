@@ -14,7 +14,7 @@ namespace BL.AppService
    public  class WishListProductAppService : BaseAppService
     {
 
-        public WishListProductAppService(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
+        public WishListProductAppService(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
         {
 
         }

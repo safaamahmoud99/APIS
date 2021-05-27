@@ -25,12 +25,11 @@ namespace BL.AppService
         CartAppService _cartAppService;
         WishListAppService _wishlistAppService;
         public AccountAppService(IUnitOfWork theUnitOfWork, IConfiguration configuration,
-           CartAppService cartAppService, WishListAppService wishlistAppService, IMapper mapper) : base(theUnitOfWork, mapper)
+           CartAppService cartAppService, WishListAppService wishlistAppService) : base(theUnitOfWork)
         {
             this._configuration = configuration;
             this._cartAppService = cartAppService;
             this._wishlistAppService = wishlistAppService;
-            mapper = AutoMapperProfile.mapp;
         }
         private void CreateUserCartAndWishlist(string userId)
         {
@@ -84,14 +83,15 @@ namespace BL.AppService
             identityUser.PasswordHash = newPassword;
             return await TheUnitOfWork.Account.updatePassword(identityUser);
         }
-        public async Task<bool> Update(RegisterationViewModel user)
-        {
-            User identityUser = await TheUnitOfWork.Account.FindById(user.id);
-            var oldPassword = identityUser.PasswordHash;
-            Mapper.Map(user, identityUser);
-            identityUser.PasswordHash = oldPassword;
-            return await TheUnitOfWork.Account.UpdateAccount(identityUser);
-        }
+        //public async Task<bool> Update(RegisterationViewModel user)
+        //{
+           
+        //    User identityUser = await TheUnitOfWork.Account.FindById(user.FullName);
+        //    var oldPassword = identityUser.PasswordHash;
+        //    Mapper.Map(user, identityUser);
+        //    identityUser.PasswordHash = oldPassword;
+        //    return await TheUnitOfWork.Account.UpdateAccount(identityUser);
+        //}
         public async Task<bool> checkUserNameExist(string userName)
         {
             var user = await TheUnitOfWork.Account.FindByName(userName);
@@ -152,20 +152,20 @@ namespace BL.AppService
             }
             return result;
         }
-        public async Task CreateFirstAdmin()
-        {
-            var firstAdmin = new RegisterationViewModel()
-            {
-                id = null,
-                Email = "test@gmail.com",
-                FullName = "admin",
-                Password = "@Admin12345",
-            };
-            Register(firstAdmin).Wait();
-            User foundedAdmin = await FindByName(firstAdmin.FullName);
-            if (foundedAdmin != null)
-                AssignToRole(foundedAdmin.Id, UserRoles.Admin).Wait();
-        }
+        //public async Task CreateFirstAdmin()
+        //{
+        //    var firstAdmin = new RegisterationViewModel()
+        //    {
+        //        id = null,
+        //        Email = "test@gmail.com",
+        //        FullName = "admin",
+        //        Password = "@Admin12345",
+        //    };
+        //    Register(firstAdmin).Wait();
+        //    User foundedAdmin = await FindByName(firstAdmin.FullName);
+        //    if (foundedAdmin != null)
+        //        AssignToRole(foundedAdmin.Id, UserRoles.Admin).Wait();
+        //}
         public int CountEntity()
         {
             return TheUnitOfWork.Account.CountEntity();

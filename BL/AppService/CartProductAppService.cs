@@ -13,7 +13,7 @@ namespace BL.AppService
 {
    public  class CartProductAppService :BaseAppService
     {
-        public CartProductAppService(IUnitOfWork theUnitOfWork, IMapper mapper) : base(theUnitOfWork, mapper)
+        public CartProductAppService(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
         {
 
         }

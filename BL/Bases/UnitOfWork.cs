@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BL.Bases
 {
-   public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private DbContext EC_DbContext { get; set; }
         private UserManager<User> _userManager;
@@ -98,12 +98,12 @@ namespace BL.Bases
             get
             {
                 if (order == null)
-                   order = new OrderRepository(EC_DbContext);
+                    order = new OrderRepository(EC_DbContext);
                 return order;
             }
         }
         public OfferRepository offer;
-        public  OfferRepository Offer
+        public OfferRepository Offer
         {
             get
             {
@@ -178,27 +178,9 @@ namespace BL.Bases
                 return mainCategory;
             }
         }
-        public ProductRepository product;
-        public ProductRepository Product
-        {
-            get
-            {
-                if (product == null)
-                    product = new ProductRepository(EC_DbContext);
-                return product;
-            }
-        }
+       
 
-        public MainCategoryRepository mainCategory;
-        public MainCategoryRepository MainCategory
-        {
-            get
-            {
-                if (mainCategory == null)
-                    mainCategory = new MainCategoryRepository(EC_DbContext);
-                return mainCategory;
-            }
-        }
+    
 
         CategoryRepository category;
         public CategoryRepository Category
@@ -222,27 +204,9 @@ namespace BL.Bases
                 return subCategory;
             }
         }
-        public SubCategoryRepository subCategory;
-        public SubCategoryRepository SubCategory
-        {
-            get
-            {
-                if (subCategory == null)
-                    subCategory = new SubCategoryRepository(EC_DbContext);
-                return subCategory;
-            }
-        }
+        
 
-        public CategoryRepository category;
-        public CategoryRepository Category
-        {
-            get
-            {
-                if (category == null)
-                    category = new CategoryRepository(EC_DbContext);
-                return category;
-            }
-        }
+       
     }
 }
 

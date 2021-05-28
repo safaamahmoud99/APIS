@@ -34,9 +34,9 @@ namespace BL.Repository
         {
             Delete(id);
         }
-        public bool CheckWishListProductExists(WishListProduct WishListProduct)
+        public bool CheckWishListProductExists(int id)
         {
-            return GetAny(b => b.ID == WishListProduct.ID);
+            return GetAny(b => b.productId ==id);
         }
         public WishListProduct GetWishListProductById(int id)
         {

@@ -29,15 +29,29 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             return Mapper.Map<WishListProductViewModel>(TheUnitOfWork.WishListProduct.GetWishListProductById(id));
         }
-        public bool CreateWishListProduct(int id)
+        public bool CreateWishListProduct(string username,int id)
         {
             bool result = false;
-            WishListProduct WishListProduct = new WishListProduct() { ID = id };
+            var user = TheUnitOfWork.Account.FindByName(username);
+            string userid =  user.Result.Id;
+            WishListProduct WishListProduct = new WishListProduct() {productId= id, };
             if (TheUnitOfWork.WishListProduct.InsertWishListProduct(WishListProduct))
             {
                 result = TheUnitOfWork.Commit() > new int();
             }
             return result;
+        }
+        public bool CheckWishListProductExists(int Prodectid)
+        {
+            var result = TheUnitOfWork.WishListProduct.CheckWishListProductExists(Prodectid);
+            if(result)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public bool DeletWishListProduct(int id)
         {

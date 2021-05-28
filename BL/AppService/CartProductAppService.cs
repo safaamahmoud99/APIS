@@ -27,10 +27,12 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             return Mapper.Map<CartProductViewModel>(TheUnitOfWork.CardProduct.GetCartProductById(id));
         }
-        public bool CreateCartProduct(int id)
+        public bool CreateCartProduct(string username, int id)
         {
             bool result = false;
-            CartProduct cartProduct = new CartProduct() { ID = id };
+            var user = TheUnitOfWork.Account.FindByName(username);
+            string userid = user.Result.Id;
+            CartProduct cartProduct = new CartProduct() { productId=id,CartID= userid};
             if (TheUnitOfWork.CardProduct.InsertCartProduct(cartProduct))
             {
                 result = TheUnitOfWork.Commit() > new int();
@@ -41,10 +43,27 @@ namespace BL.AppService
         {
             if (id < 0)
                 throw new ArgumentNullException();
+            CartProductViewModel cartProductViewModel = GetCartProduct(id);
             bool result = false;
-            TheUnitOfWork.CardProduct.DeleteCartProduct(id);
+            TheUnitOfWork.CardProduct.DeleteCartProduct(cartProductViewModel.ID);
             result = TheUnitOfWork.Commit() > new int();
             return result;
+        }
+        public bool CheckCartProductExists(int Prodectid)
+        {
+            var result = TheUnitOfWork.CardProduct.CheckCartProductExists(Prodectid);
+
+            if (result)
+            {
+                CartProductViewModel cartProductViewModel = GetCartProduct(Prodectid);
+                cartProductViewModel.quintity++;
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }
         }
     }
 }

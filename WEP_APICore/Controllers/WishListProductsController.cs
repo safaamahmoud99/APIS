@@ -54,10 +54,13 @@ namespace WEP_APICore.Controllers
 
             try
             {
-                _wishListProductAppService.CreateWishListProduct(username, id);
+                if(!_wishListProductAppService.CheckWishListProductExists(id))
+                {
+                    _wishListProductAppService.CreateWishListProduct(username, id);
 
+                    return Ok();
+                }
                 return Ok();
-
             }
             catch (Exception ex)
             {
@@ -75,7 +78,7 @@ namespace WEP_APICore.Controllers
             return NoContent();
         }
 
-        private bool WishListProductExists(int id)
+       public bool WishListProductExists(int id)
         {
             return _wishListProductAppService.CheckWishListProductExists(id);
         }

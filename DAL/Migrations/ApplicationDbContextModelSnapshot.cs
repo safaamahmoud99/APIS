@@ -36,15 +36,10 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Models.Cart", b =>
                 {
-                    b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ID");
-
-                    b.HasIndex("UserID");
+                    b.HasKey("UserID");
 
                     b.ToTable("Cart");
                 });
@@ -412,15 +407,10 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Models.WishList", b =>
                 {
-                    b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ID");
-
-                    b.HasIndex("UserID");
+                    b.HasKey("UserID");
 
                     b.ToTable("WishList");
                 });
@@ -582,7 +572,9 @@ namespace DAL.Migrations
                 {
                     b.HasOne("DAL.Models.User", "user")
                         .WithMany()
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("user");
                 });
@@ -700,7 +692,9 @@ namespace DAL.Migrations
                 {
                     b.HasOne("DAL.Models.User", "user")
                         .WithMany()
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("user");
                 });

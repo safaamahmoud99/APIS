@@ -83,15 +83,15 @@ namespace BL.AppService
             identityUser.PasswordHash = newPassword;
             return await TheUnitOfWork.Account.updatePassword(identityUser);
         }
-        //public async Task<bool> Update(RegisterationViewModel user)
-        //{
-           
-        //    User identityUser = await TheUnitOfWork.Account.FindById(user.FullName);
-        //    var oldPassword = identityUser.PasswordHash;
-        //    Mapper.Map(user, identityUser);
-        //    identityUser.PasswordHash = oldPassword;
-        //    return await TheUnitOfWork.Account.UpdateAccount(identityUser);
-        //}
+        public async Task<bool> Update(RegisterationViewModel user)
+        {
+
+            User identityUser = await TheUnitOfWork.Account.FindByName(user.UserName);
+            var oldPassword = identityUser.PasswordHash;
+            Mapper.Map(user, identityUser);
+            identityUser.PasswordHash = oldPassword;
+            return await TheUnitOfWork.Account.UpdateAccount(identityUser);
+        }
         public async Task<bool> checkUserNameExist(string userName)
         {
             var user = await TheUnitOfWork.Account.FindByName(userName);

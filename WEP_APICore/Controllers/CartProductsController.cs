@@ -76,7 +76,7 @@ namespace WEP_APICore.Controllers
             return NoContent();
         }
 
-        public bool CartProductExists(int id)
+        private bool CartProductExists(int id)
         {
             return _cartProductAppService.CheckCartProductExists(id);
         }

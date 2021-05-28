@@ -30,7 +30,7 @@ namespace BL.AppService
         public bool CreateUserWishlist(string userId)
         {
             bool result = false;
-            WishList userWishlist = new WishList() { ID = userId };
+            WishList userWishlist = new WishList() { UserID = userId };
             if (TheUnitOfWork.WishList.Insert(userWishlist))
             {
                 result = TheUnitOfWork.Commit() > new int();

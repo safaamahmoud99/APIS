@@ -8,7 +8,9 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using WEP_APICore.HelpClasses;
 
 namespace WEP_APICore.Controllers
 {
@@ -18,10 +20,15 @@ namespace WEP_APICore.Controllers
     {
         private IConfiguration _config;
         private AccountAppService _accountAppservice;
-        public AccountController(IConfiguration config, AccountAppService accountAppservice)
+        IHttpContextAccessor _httpContextAccessor;
+        public AccountController(IConfiguration config,
+            AccountAppService accountAppservice,
+              IHttpContextAccessor httpContextAccessor
+            )
         {
             _config = config;
             _accountAppservice = accountAppservice;
+            _httpContextAccessor = httpContextAccessor;
         }
         [HttpPost("/login")]
         public async Task<IActionResult>  Login(LoginViewModel login)
@@ -51,6 +58,58 @@ namespace WEP_APICore.Controllers
             else 
             return BadRequest(user.Errors.ToList()[0]);
         }
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var res = _accountAppservice.GetAllAccounts();
+            return Ok(res);
+        }
+        [HttpGet("{id}")]
+        public IActionResult GetUserById(string id)
+        {
+            var res = _accountAppservice.GetAccountById(id);
+            return Ok(res);
+        }
+        [HttpGet("current")]
+        public IActionResult GetCurrentUser()
+        {
+            var userID = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var res = _accountAppservice.GetAccountById(userID);
+            return Ok(res);
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit(string id, RegisterationViewModel registerViewodel)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            await _accountAppservice.Update(registerViewodel);
 
+            return Ok(new Response { Status = "Success", Message = "User updated successfully!" });
+
+        }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string id)
+        {
+            try
+            {
+                _accountAppservice.DeleteAccount(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("count")]
+        public IActionResult UsersCount()
+        {
+            return Ok(_accountAppservice.CountEntity());
+        }
+        [HttpGet("{pageSize}/{pageNumber}")]
+        public IActionResult GetUsersByPage(int pageSize, int pageNumber)
+        {
+            return Ok(_accountAppservice.GetPageRecords(pageSize, pageNumber));
+        }
     }
 }

@@ -35,11 +35,11 @@ namespace BL.Repository
         }
         public bool CheckCartExists(Cart cart)
         {
-            return GetAny(l => l.ID == cart.ID);
+            return GetAny(l => l.UserID == cart.UserID);
         }
         public Cart GetOCartById(string id)
         {
-            return GetFirstOrDefault(l => l.ID == id);
+            return GetFirstOrDefault(l => l.UserID == id);
         }
     }
 }

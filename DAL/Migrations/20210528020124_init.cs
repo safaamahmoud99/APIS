@@ -199,18 +199,17 @@ namespace DAL.Migrations
                 name: "Cart",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cart", x => x.ID);
+                    table.PrimaryKey("PK_Cart", x => x.UserID);
                     table.ForeignKey(
                         name: "FK_Cart_AspNetUsers_UserID",
                         column: x => x.UserID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -240,18 +239,17 @@ namespace DAL.Migrations
                 name: "WishList",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WishList", x => x.ID);
+                    table.PrimaryKey("PK_WishList", x => x.UserID);
                     table.ForeignKey(
                         name: "FK_WishList_AspNetUsers_UserID",
                         column: x => x.UserID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -351,7 +349,7 @@ namespace DAL.Migrations
                         name: "FK_CartProduct_Cart_CartID",
                         column: x => x.CartID,
                         principalTable: "Cart",
-                        principalColumn: "ID",
+                        principalColumn: "UserID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_CartProduct_Product_productId",
@@ -483,7 +481,7 @@ namespace DAL.Migrations
                         name: "FK_WishListProduct_WishList_WishlistID",
                         column: x => x.WishlistID,
                         principalTable: "WishList",
-                        principalColumn: "ID",
+                        principalColumn: "UserID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -525,11 +523,6 @@ namespace DAL.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Cart_UserID",
-                table: "Cart",
-                column: "UserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CartProduct_CartID",
@@ -600,11 +593,6 @@ namespace DAL.Migrations
                 name: "IX_SubCategory_CategoryID",
                 table: "SubCategory",
                 column: "CategoryID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WishList_UserID",
-                table: "WishList",
-                column: "UserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WishListProduct_productId",

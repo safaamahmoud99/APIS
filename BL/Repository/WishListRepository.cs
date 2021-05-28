@@ -35,11 +35,11 @@ namespace BL.Repository
         }
         public bool CheckWishlistExists(WishList wishlist)
         {
-            return GetAny(l => l.ID == wishlist.ID);
+            return GetAny(l => l.UserID == wishlist.UserID);
         }
         public WishList GetWishlistById(string id)
         {
-            return GetFirstOrDefault(l => l.ID == id);
+            return GetFirstOrDefault(l => l.UserID == id);
         }
     }
 }

@@ -57,6 +57,9 @@ namespace DAL.Migrations
                     b.Property<int>("productId")
                         .HasColumnType("int");
 
+                    b.Property<int>("quintity")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
                     b.HasIndex("CartID");

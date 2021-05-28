@@ -33,13 +33,13 @@ namespace BL.Repository
         {
             Delete(id);
         }
-        public bool CheckCartProductExists(CartProduct cartProduct)
+        public bool CheckCartProductExists(int id)
         {
-            return GetAny(b => b.ID == cartProduct.ID);
+            return GetAny(b => b.productId == id);
         }
         public CartProduct GetCartProductById(int id)
         {
-            return GetFirstOrDefault(b => b.ID == id);
+            return GetFirstOrDefault(b => b.productId == id);
         }
     }
 }

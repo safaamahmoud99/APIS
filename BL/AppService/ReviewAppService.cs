@@ -27,11 +27,21 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             return Mapper.Map<ReviewViewModel>(TheUnitOfWork.Review.GetReviewById(id));
         }
-        public bool CreateReview(int id)
+        public void UpdateReview(int id, ReviewViewModel newreview)
         {
-            bool result = false;
-            Review Review = new Review() { ID = id };
-            if (TheUnitOfWork.Review.InsertReview(Review))
+            var review = TheUnitOfWork.Review.GetReviewById(id);
+
+            review.Comment = newreview.Comment;
+            review.Rating = newreview.Rating;
+
+            TheUnitOfWork.Review.UpdateReview(review);
+
+        }
+        public bool CreateReview(ReviewViewModel reviewViewModel)
+        {
+            bool result=false;
+            Review review = Mapper.Map<Review>(reviewViewModel);
+            if (TheUnitOfWork.Review.InsertReview(review))
             {
                 result = TheUnitOfWork.Commit() > new int();
             }

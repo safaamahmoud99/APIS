@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210528020124_init")]
+    [Migration("20210528151347_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,6 +57,9 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("productId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("quintity")
                         .HasColumnType("int");
 
                     b.HasKey("ID");

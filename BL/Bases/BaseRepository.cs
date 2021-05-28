@@ -31,7 +31,7 @@ namespace BL.Bases
         {
             return DbSet.OrderBy<T, TKey>(sortingExpression);
         }
-        public IQueryable<T> GetWhere(System.Linq.Expressions.Expression<Func<T, bool>> filter = null, string includeProperties = "")
+        public IQueryable<T> GetWhere(Expression<Func<T, bool>> filter = null, string includeProperties = "")
         {
             IQueryable<T> query = DbSet;
 
@@ -44,7 +44,7 @@ namespace BL.Bases
 
             return query;
         }
-        public bool GetAny(System.Linq.Expressions.Expression<Func<T, bool>> filter = null)
+        public bool GetAny(Expression<Func<T, bool>> filter = null)
         {
             IQueryable<T> query = DbSet;
             bool result = false;
@@ -54,7 +54,7 @@ namespace BL.Bases
             }
             return result;
         }
-        public T GetFirstOrDefault(System.Linq.Expressions.Expression<Func<T, bool>> filter = null)
+        public T GetFirstOrDefault(Expression<Func<T, bool>> filter = null)
         {
             if (filter != null)
             {
@@ -95,10 +95,7 @@ namespace BL.Bases
         {
             EntityEntry<T> dbEntityEntry = DbContext.Entry(entity);
 
-            //if (dbEntityEntry.State == EntityState.Detached)
-            //{
-            //    DbSet.Attach(entity);
-            //}
+            
             dbEntityEntry.State = EntityState.Modified;
         }
 

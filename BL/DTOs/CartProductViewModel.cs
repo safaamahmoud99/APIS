@@ -13,6 +13,8 @@ namespace BL.DTOs
         public int productId { get; set; }
        
         public string CartID { get; set; }
-       
+        public int quintity { get; set; } = 1;
+
+
     }
 }

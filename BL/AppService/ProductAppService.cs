@@ -104,10 +104,15 @@ namespace BL.AppService
 
             return result;
         }
+        
         public bool CheckProductExists(ProductViewModel productViewModel)
         {
             Product product = Mapper.Map<Product>(productViewModel);
             return TheUnitOfWork.Product.CheckProductExists(product);
+        }
+        public int CountEntity(int categoryId = 0, int colorId = 0)
+        {
+            return TheUnitOfWork.Product.CountProducts(categoryId, colorId);
         }
         public IEnumerable<ProductViewModel> GetPageRecords(int pageSize, int pageNumber)
         {

@@ -41,7 +41,6 @@ namespace WEP_APICore.Controllers
                 var tokenString =  _accountAppservice.CreateToken(user);
                 response = Ok(new { token = tokenString });
             }
-
             return response;
         }
         [AllowAnonymous]

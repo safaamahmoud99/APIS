@@ -20,7 +20,7 @@ namespace BL.Repository
 
         public List<Order> GetAllOrder()
         {
-            return GetAll().Include(order => order.User).ToList();
+            return GetAll().Include(order => order.UserID).ToList();
         }
 
         public bool InsertOrder(Order order)

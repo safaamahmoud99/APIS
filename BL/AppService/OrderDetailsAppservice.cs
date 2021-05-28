@@ -28,7 +28,7 @@ namespace BL.AppService
         
 
 
-        public bool SaveNewOrder(OrderDetailsViewModel orderProductViewModel)
+        public bool SaveNewOrderDetail(OrderDetailsViewModel orderProductViewModel)
         {
 
             bool result = false;
@@ -40,9 +40,35 @@ namespace BL.AppService
             return result;
         }
 
+        public OrderDetailsViewModel GetOrderDetailsbyID(int id)
+        {
+            if (id < 0)
+                throw new ArgumentNullException();
+            return Mapper.Map<OrderDetailsViewModel>(TheUnitOfWork.Orderdetails.GetById(id));
+        }
+        public bool UpdateOrderDetails(OrderDetailsViewModel orderDetailViewModel)
+        {
+            if (orderDetailViewModel == null)
+                throw new ArgumentNullException();
+        
+            var orderDetails = Mapper.Map<OrderDetails>(orderDetailViewModel);
+            TheUnitOfWork.Orderdetails.Update(orderDetails);
+            TheUnitOfWork.Commit();
 
-         
- 
-    
+            return true;
+        }
+
+        public bool DeleteOrderDetails(int id)
+        {
+            if (id < 0)
+                throw new ArgumentNullException();
+            bool result = false;
+            TheUnitOfWork.Offer.Delete(id);
+            result = TheUnitOfWork.Commit() > new int();
+            return result;
+        }
+
+
+
     }
 }

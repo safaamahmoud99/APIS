@@ -58,7 +58,9 @@ namespace BL.AppService
             if (id < 0)
                 throw new ArgumentNullException();
             bool result = false;
-            TheUnitOfWork.WishListProduct.DeleteWishListProduct(id);
+            WishListProductViewModel wishListProduct = GetWishListProduct(id);
+
+            TheUnitOfWork.WishListProduct.DeleteWishListProduct(wishListProduct.ID);
             result = TheUnitOfWork.Commit() > new int();
             return result;
         }

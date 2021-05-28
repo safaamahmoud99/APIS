@@ -40,7 +40,7 @@ namespace BL.Repository
         }
         public WishListProduct GetWishListProductById(int id)
         {
-            return GetFirstOrDefault(b => b.ID == id);
+            return GetFirstOrDefault(b => b.productId == id);
         }
     }
 }

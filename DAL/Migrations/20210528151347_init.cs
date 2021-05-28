@@ -340,6 +340,7 @@ namespace DAL.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     productId = table.Column<int>(type: "int", nullable: false),
+                    quintity = table.Column<int>(type: "int", nullable: false),
                     CartID = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>

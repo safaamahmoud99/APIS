@@ -32,10 +32,10 @@
 
 //        // GET: api/CartProducts/5
 //        [HttpGet("{id}")]
-//        public async Task<ActionResult<CartProduct>> GetCartProduct(int id)
+//        public ActionResult<CartProductViewModel> GetCartProduct(int id)
 //        {
-            
 
+//            var cartProduct = _cartProductAppService.GetCartProduct(id);
 //            return cartProduct;
 //        }
 

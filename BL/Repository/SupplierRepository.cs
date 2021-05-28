@@ -16,7 +16,7 @@ namespace BL.Repository
         {
             this.EC_DbContext = EC_DbContext;
         }
-        public List<Suppliers> GetAllSuppliesr()
+        public List<Suppliers> GetAllSupplier()
         {
             return GetAll().ToList();
         }

@@ -27,11 +27,17 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             return Mapper.Map<BrandViewModel>(TheUnitOfWork.Brand.GetById(id)); 
         }
-        public bool CreateBrand(int userId)
+        public bool CreateBrand(BrandViewModel  brandViewModel)
         {
+            if (brandViewModel == null)
+
+                throw new ArgumentNullException();
+
+
+
             bool result = false;
-            Brands userBrand = new Brands() { ID = userId };
-            if (TheUnitOfWork.Brand.Insert(userBrand))
+            var brand = Mapper.Map<Brands>(brandViewModel);
+            if (TheUnitOfWork.Brand.Insert(brand))
             {
                 result = TheUnitOfWork.Commit() > new int();
             }
@@ -47,5 +53,24 @@ namespace BL.AppService
             return result;
         }
 
+        public bool CheckBrandExists(int brandId)
+        {
+            var result = TheUnitOfWork.Brand.CheckBrandExists(brandId);
+
+            if(result)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateBrand(BrandViewModel brandViewModel)
+        {
+            var brand = Mapper.Map<Brands>(brandViewModel);
+            TheUnitOfWork.Brand.Update(brand); 
+            TheUnitOfWork.Commit();
+
+            return true;
+        }
     }
 }

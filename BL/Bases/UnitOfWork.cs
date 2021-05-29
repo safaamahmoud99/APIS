@@ -178,15 +178,7 @@ namespace BL.Bases
                 return mainCategory;
             }
         }
-       
 
-    
-      
-
-       
-       
-       
-       
         public SubCategoryRepository subCategory;
         public SubCategoryRepository SubCategory
         {

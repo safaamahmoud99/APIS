@@ -35,13 +35,13 @@ namespace BL.AppService
 
         public bool SaveNewOrder(OrderViewModel orderViewModel)
         {
-            if (orderViewModel == null)
-                throw new ArgumentNullException();
-            if (orderViewModel == null || orderViewModel.User_Id == string.Empty)
-                throw new ArgumentException();
+            //if (orderViewModel == null)
+            //    throw new ArgumentNullException();
+            //if (orderViewModel == null || orderViewModel.User_Id == string.Empty)
+            //    throw new ArgumentException();
             bool result = false;
             var order = Mapper.Map<Order>(orderViewModel);
-            if (TheUnitOfWork.Order.Insert(order))
+            if (TheUnitOfWork.Order.InsertOrder(order))
             {
                 result = TheUnitOfWork.Commit() > new int();
             }
@@ -53,7 +53,7 @@ namespace BL.AppService
         {
             if (orderViewModel == null)
                 throw new ArgumentNullException();
-            if (orderViewModel.User_Id == null || orderViewModel.User_Id == string.Empty)
+            if (orderViewModel.UserID == null || orderViewModel.UserID == string.Empty)
                 throw new ArgumentException();
             var order = Mapper.Map<Order>(orderViewModel);
             TheUnitOfWork.Order.Update(order);
@@ -80,7 +80,7 @@ namespace BL.AppService
         {
             if (orderViewModel == null)
                 throw new ArgumentNullException();
-            if (orderViewModel.User_Id == null || orderViewModel.User_Id == string.Empty)
+            if (orderViewModel.UserID == null || orderViewModel.UserID == string.Empty)
                 throw new ArgumentException();
             Order order = Mapper.Map<Order>(orderViewModel);
             return TheUnitOfWork.Order.CheckOrderExists(order);

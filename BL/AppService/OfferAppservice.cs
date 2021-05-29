@@ -11,23 +11,44 @@ using System.Threading.Tasks;
 
 namespace BL.AppService
 {
-    class OfferAppservice : BaseAppService
+   public class OfferAppservice : BaseAppService
     {
         public OfferAppservice(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
         {
 
         }
-        public List<BrandViewModel> GetAllOffers()
+        public List<OfferViewModel> GetAllOffers()
         {
-            return Mapper.Map<List<BrandViewModel>>(TheUnitOfWork.Brand.GetAllBrand());
+            return Mapper.Map<List<OfferViewModel>>(TheUnitOfWork.Offer.GetAllOffer());
         }
-        public BrandViewModel GetOffer(int id)
+        public bool AddOffer(OfferViewModel offerViewModel )
+        {
+            if (offerViewModel == null)
+
+                throw new ArgumentNullException();
+
+            bool result = false;
+            var offer = Mapper.Map<Offer>(offerViewModel);
+            if (TheUnitOfWork.Offer.Insert(offer))
+            {
+                result = TheUnitOfWork.Commit() > new int();
+            }
+            return result;
+        }
+        public OfferViewModel GetOffer(int id)
         {
             if (id < 0)
                 throw new ArgumentNullException();
-            return Mapper.Map<BrandViewModel>(TheUnitOfWork.Brand.GetById(id));
+            return Mapper.Map<OfferViewModel>(TheUnitOfWork.Offer.GetById(id));
         }
-       
+        public bool UpdateOffer(OfferViewModel offerViewModel)
+        {
+            var offer = Mapper.Map<Offer>(offerViewModel);
+            TheUnitOfWork.Offer.Update(offer);
+            TheUnitOfWork.Commit();
+            return true;
+        }
+
         public bool DeleteOffer(int id)
         {
             if (id < 0)

@@ -140,15 +140,10 @@ namespace DAL.Migrations
                     b.Property<double>("OfferValue")
                         .HasColumnType("float");
 
-                    b.Property<int?>("ProductID")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("ProductID");
 
                     b.ToTable("Offer");
                 });
@@ -189,27 +184,16 @@ namespace DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("Discount")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("date");
-
-                    b.Property<int?>("OrderID")
+                    b.Property<int>("OrderID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductID")
+                    b.Property<int>("ProductID")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<double>("TotalPrice")
-                        .HasColumnType("float");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("OrderID");
 
                     b.HasIndex("ProductID");
 
@@ -613,35 +597,20 @@ namespace DAL.Migrations
                         .HasForeignKey("ProductID");
                 });
 
-            modelBuilder.Entity("DAL.Models.Offer", b =>
-                {
-                    b.HasOne("DAL.Models.Product", null)
-                        .WithMany("Offers")
-                        .HasForeignKey("ProductID");
-                });
-
             modelBuilder.Entity("DAL.Models.Order", b =>
                 {
-                    b.HasOne("DAL.Models.User", "User")
+                    b.HasOne("DAL.Models.User", null)
                         .WithMany("Orders")
                         .HasForeignKey("UserID");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DAL.Models.OrderDetails", b =>
                 {
-                    b.HasOne("DAL.Models.Order", "Order")
+                    b.HasOne("DAL.Models.Product", null)
                         .WithMany("OrderDetails")
-                        .HasForeignKey("OrderID");
-
-                    b.HasOne("DAL.Models.Product", "Product")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("ProductID");
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DAL.Models.Product", b =>
@@ -790,18 +759,11 @@ namespace DAL.Migrations
                     b.Navigation("Categories");
                 });
 
-            modelBuilder.Entity("DAL.Models.Order", b =>
-                {
-                    b.Navigation("OrderDetails");
-                });
-
             modelBuilder.Entity("DAL.Models.Product", b =>
                 {
                     b.Navigation("Carts");
 
                     b.Navigation("Images");
-
-                    b.Navigation("Offers");
 
                     b.Navigation("OrderDetails");
 

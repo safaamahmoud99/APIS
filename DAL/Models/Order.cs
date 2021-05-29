@@ -12,10 +12,10 @@ namespace DAL.Models
     {
             public Order()
             {
-                OrderDetails = new List<OrderDetails>();
+                //OrderDetails = new List<OrderDetails>();
             }
             public int ID { get; set; }
-            [ForeignKey("User")]
+            //[ForeignKey("User")]
             public string UserID { get; set; }
             [Column(TypeName = "date")]
             public DateTime OrderDate { get; set; }
@@ -29,8 +29,8 @@ namespace DAL.Models
             }
             public int ItemsCount { get; set; }
 
-            public virtual User User { get; set; }
-            public virtual ICollection<OrderDetails> OrderDetails { get; private set; }
+            //public virtual User User { get; set; }
+            //public virtual ICollection<OrderDetails> OrderDetails { get; private set; }
         }
     }
 

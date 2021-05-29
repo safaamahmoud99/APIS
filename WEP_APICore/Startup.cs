@@ -60,6 +60,9 @@ namespace WEP_APICore
             services.AddTransient<OrderAppService>();
             services.AddTransient<OrderDetailsAppservice>();
             services.AddTransient<ProductAppService>();
+
+            services.AddTransient<OfferAppservice>();
+            services.AddTransient<ProductAppService>();
             services.AddTransient<CartProductAppService>();
             services.AddTransient<WishListProductAppService>();
             services.AddTransient<WishListAppService>();

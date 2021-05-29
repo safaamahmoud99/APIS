@@ -16,7 +16,7 @@ namespace WEP_APICore.Controllers
     [ApiController]
     public class OfferController : ControllerBase
     {
-        private readonly OfferAppservice  _OfferAppService;
+        private readonly OfferAppservice _OfferAppService;
 
         public OfferController(OfferAppservice OfferOrderAppservice)
         {
@@ -52,37 +52,36 @@ namespace WEP_APICore.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult<OrderViewModel> PostOffer(OfferViewModel offer)
+        [HttpPost("CreateOffer")]
+        public ActionResult<OfferViewModel> PostOffer(OfferViewModel offer)
         {
-            if (ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            else
-            {
-                try
-                {
-                    _OfferAppService.AddOffer(offer);
-                    return CreatedAtAction("GetOffer", new { id = offer.ID}, offer);
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+            //else
+            //{
+            //    try
+            //    {
+            _OfferAppService.AddOffer(offer);
+            return Created("GetOffer",offer);
 
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
+            //}
+            //catch (Exception ex)
+            //{
+            //    return BadRequest(ex.Message);
 
-                }
-            }
-        }
-
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOffer(int id)
-        {
-            _OfferAppService.DeleteOffer(id);
-            return NoContent();
-        }
+            //}
         
+    }
+
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteOffer(int id)
+    {
+        _OfferAppService.DeleteOffer(id);
+        return NoContent();
+    }
 
     }
 }

@@ -18,7 +18,7 @@ namespace BL.AppService
         }
         public List<SupplierViewModel> GetAllSuppliers()
         {
-            return Mapper.Map<List<SupplierViewModel>>(TheUnitOfWork.Supplier.GetAllSuppliesr());
+            return Mapper.Map<List<SupplierViewModel>>(TheUnitOfWork.Supplier.GetAllSupplier());
         }
         public SupplierViewModel GetSupplier(int id)
         {

@@ -56,24 +56,24 @@ namespace WEP_APICore.Controllers
         [HttpPost]
         public ActionResult<OrderViewModel> PostOrder(OrderViewModel order)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            else
-            {
-                try
-                {
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+            //else
+            //{
+            //    try
+            //    {
                     _OrderAppService.SaveNewOrder(order);
-                    return CreatedAtAction("GetOrder", new { id = order.Id }, order);
+                    return Created("GetOrder" , order);
 
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
+                //}
+                //catch (Exception ex)
+                //{
+                //    return BadRequest(ex.Message);
 
-                }
-            }
+                //}
+            
         }
 
 

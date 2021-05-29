@@ -15,6 +15,6 @@ namespace BL.DTOs
         [Required]
         public double totalPrice { get; set; }
         public double CouponDiscount { get; set; }
-        public string User_Id { get; set; }
+        public string UserID { get; set; }
     }    
 }

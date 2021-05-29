@@ -19,8 +19,11 @@ namespace BL.Configuration
             cfg =>
             {
                 cfg.CreateMap<Cart, CartViewModel>().ReverseMap();
+                cfg.CreateMap<Offer, OfferViewModel>().ReverseMap();
                 cfg.CreateMap<WishList, WishListViewModel>().ReverseMap();
                 cfg.CreateMap<User, LoginViewModel>().ReverseMap();
+                cfg.CreateMap<OrderDetails, OrderDetailsViewModel>().ReverseMap();
+                cfg.CreateMap<Order, OrderViewModel>().ReverseMap();
                 cfg.CreateMap<User, RegisterationViewModel>().ReverseMap();
                 //.ForMember(u => u.Email, v => v.MapFrom(c => c.Email));
                 cfg.CreateMap<Brands, BrandViewModel>().ReverseMap();

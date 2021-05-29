@@ -57,24 +57,24 @@ namespace WEP_APICore.Controllers
         [HttpPost]
         public ActionResult<OrderDetailsViewModel> PostOrderDetails(OrderDetailsViewModel orderDetail)
         {
-            if (ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            else
-            {
-                try
-                {
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+            //else
+            //{
+            //    try
+            //    {
                     _OrderDetailsAppService.SaveNewOrderDetail(orderDetail);
-                    return CreatedAtAction("GetOrderDetails", new { id = orderDetail.ID }, orderDetail);
+                    return Created("GetOrderDetails", orderDetail);
 
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
+                //}
+                //catch (Exception ex)
+                //{
+                //    return BadRequest(ex.Message);
 
-                }
-            }
+                //}
+             
         }
 
          

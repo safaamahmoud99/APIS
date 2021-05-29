@@ -25,7 +25,7 @@ namespace BL.Bases
         }
         public int Commit()
         {
-            return EC_DbContext.SaveChanges();
+            return  EC_DbContext.SaveChanges();
         }
         public void Dispose()
         {

@@ -2,6 +2,7 @@
 using BL.Bases;
 using BL.DTOs;
 using BL.interfaces;
+using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,42 @@ namespace BL.AppService
             TheUnitOfWork.Supplier.Delete(id);
             result = TheUnitOfWork.Commit() > new int();
             return result;
+        }
+        public bool CreateSupplier(SupplierViewModel supplierViewModel)
+        {
+            if (supplierViewModel == null)
+
+                throw new ArgumentNullException();
+
+
+
+            bool result = false;
+            var supplier = Mapper.Map<Suppliers>(supplierViewModel);
+            if (TheUnitOfWork.Supplier.Insert(supplier))
+            {
+                result = TheUnitOfWork.Commit() > new int();
+            }
+            return result;
+        }
+
+        public bool CheckSupplierExists(int supplierId)
+        {
+            var result = TheUnitOfWork.Supplier.CheckSupplierExists(supplierId);
+
+            if (result)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateSupplier(SupplierViewModel supplierViewModel)
+        {
+            var supplier = Mapper.Map<Suppliers>(supplierViewModel);
+            TheUnitOfWork.Supplier.Update(supplier); 
+            TheUnitOfWork.Commit();
+
+            return true;
         }
     }
 }

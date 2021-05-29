@@ -46,34 +46,27 @@ namespace WEP_APICore.Controllers
 
         // PUT: api/Brands/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public IActionResult PutBrands(int id,BrandViewModel brandViewmodel)
-        //{
-        //    if (id != brandViewmodel.ID)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPut("{id}")]
+        public IActionResult PutBrands(int id, BrandViewModel brandViewModel)
+        {
+            if (id != brandViewModel.ID)
+            {
+                return BadRequest();
+            }
 
-        //    _context.Entry(brands).State = EntityState.Modified;
+            try
+            {
+                _brandAppService.UpdateBrand(brandViewModel);
+              
+                return Ok(brandViewModel);
+            }
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!BrandsExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
 
-        //    return NoContent();
-        //}
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         // POST: api/Brands
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -100,7 +93,7 @@ namespace WEP_APICore.Controllers
         private bool BrandsExists(int id)
         {
             return _brandAppService.CheckBrandExists(id);
-          
+           
         }
     }
 }

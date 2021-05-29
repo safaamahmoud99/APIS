@@ -64,5 +64,13 @@ namespace BL.AppService
             return false;
         }
 
+        public bool UpdateBrand(BrandViewModel brandViewModel)
+        {
+            var brand = Mapper.Map<Brands>(brandViewModel);
+            TheUnitOfWork.Brand.Update(brand); 
+            TheUnitOfWork.Commit();
+
+            return true;
+        }
     }
 }

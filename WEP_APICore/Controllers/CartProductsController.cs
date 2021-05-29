@@ -18,6 +18,7 @@ namespace WEP_APICore.Controllers
     {
         private readonly CartProductAppService _cartProductAppService;
 
+       
         public CartProductsController(CartProductAppService cartProductAppService)
         {
             _cartProductAppService = cartProductAppService;
@@ -46,13 +47,14 @@ namespace WEP_APICore.Controllers
         [HttpPost]
         public ActionResult<CartProduct> PostCartProduct(int productid)
         {
-            string username = User.Identity.Name;
+            // string username = User.Identity.Name;
 
-
+            string username = "Asd";
+            bool found = _cartProductAppService.CheckCartProductExists(productid);
 
             try
             {
-                if(!_cartProductAppService.CheckCartProductExists(productid))
+                if(found==false)
                 {
                     _cartProductAppService.CreateCartProduct(username, productid);
                     return Ok();
@@ -76,7 +78,7 @@ namespace WEP_APICore.Controllers
             return NoContent();
         }
 
-        public bool CartProductExists(int id)
+        private bool CartProductExists(int id)
         {
             return _cartProductAppService.CheckCartProductExists(id);
         }

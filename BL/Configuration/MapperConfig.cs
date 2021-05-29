@@ -32,7 +32,10 @@ namespace BL.Configuration
                 cfg.CreateMap<CartProduct, CartProductViewModel>().ReverseMap();
                 cfg.CreateMap<WishListProduct, WishListProductViewModel>().ReverseMap();
                 cfg.CreateMap<Review, ReviewViewModel>().ReverseMap();
-
+                cfg.CreateMap<MainCategory, MainCategoryViewModel>().ReverseMap();
+                cfg.CreateMap<Category, CategoryViewModel>().ReverseMap();
+                cfg.CreateMap<SubCategory, SubCategoryViewModel>().ReverseMap();
+                cfg.CreateMap<Product, ProductViewModel>().ReverseMap();
 
             });
             mapp = config.CreateMapper();

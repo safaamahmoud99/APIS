@@ -12,5 +12,8 @@ namespace DAL.Models
     {
         public int ID { get; set; }
         public string Image { get; set; }
+        [ForeignKey("product")]
+        public int ProductID { get; set; }
+        public virtual Product product { get; set; }
     }
 }

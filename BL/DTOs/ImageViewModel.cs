@@ -10,5 +10,6 @@ namespace BL.DTOs
     {
         public int ID { get; set; }
         public string Image { get; set; }
+        public int productID { get; set; }
     }
 }

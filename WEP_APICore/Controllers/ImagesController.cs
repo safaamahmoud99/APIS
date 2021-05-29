@@ -17,17 +17,20 @@ namespace WEP_APICore.Controllers
     public class ImagesController : ControllerBase
     {
         private readonly ImageAppService _imageAppService;
+       
 
         public ImagesController(ImageAppService imageAppService)
         {
             _imageAppService = imageAppService;
+           
         }
 
         // GET: api/Images
         [HttpGet]
-        public ActionResult<IEnumerable<ImageViewModel>> Getimages()
+        public ActionResult<IEnumerable<ImageViewModel>> Getimages(int productId)
         {
-            return _imageAppService.GetAllImages();
+
+            return _imageAppService.GetAllImages().Where(i=>i.productID==productId).ToList();
         }
 
         // GET: api/Images/5
@@ -74,8 +77,8 @@ namespace WEP_APICore.Controllers
         [HttpPost]
         public  ActionResult<ImageViewModel> PostImages(ImageViewModel imageViewModel)
         {
-            
 
+            _imageAppService.CreateImage(imageViewModel);
             return CreatedAtAction("GetImages", new { id = imageViewModel.ID }, imageViewModel);
         }
 

@@ -10,13 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<< HEAD:DAL/Migrations/20210528160621_init.Designer.cs
-    [Migration("20210528160621_init")]
-    partial class init
-=======
-    [Migration("20210528220224_smile")]
-    partial class smile
->>>>>>> 5943a942a9239182cf36bc0bef7683f2e1fa36d0:DAL/Migrations/20210528220224_smile.Designer.cs
+    [Migration("20210529191908_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -109,7 +104,7 @@ namespace DAL.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProductID")
+                    b.Property<int>("ProductID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -599,9 +594,13 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Models.Images", b =>
                 {
-                    b.HasOne("DAL.Models.Product", null)
+                    b.HasOne("DAL.Models.Product", "product")
                         .WithMany("Images")
-                        .HasForeignKey("ProductID");
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("product");
                 });
 
             modelBuilder.Entity("DAL.Models.Order", b =>

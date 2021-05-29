@@ -102,7 +102,7 @@ namespace DAL.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProductID")
+                    b.Property<int>("ProductID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -592,9 +592,13 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Models.Images", b =>
                 {
-                    b.HasOne("DAL.Models.Product", null)
+                    b.HasOne("DAL.Models.Product", "product")
                         .WithMany("Images")
-                        .HasForeignKey("ProductID");
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("product");
                 });
 
             modelBuilder.Entity("DAL.Models.Order", b =>

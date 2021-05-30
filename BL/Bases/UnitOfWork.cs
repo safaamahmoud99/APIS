@@ -200,6 +200,16 @@ namespace BL.Bases
                 return category;
             }
         }
+        public AdvertisementRepository advertisement;
+        public AdvertisementRepository Advertisement
+        {
+            get
+            {
+                if (advertisement == null)
+                    advertisement = new AdvertisementRepository(EC_DbContext);
+                return advertisement;
+            }
+        }
     }
 }
 

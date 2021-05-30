@@ -75,6 +75,7 @@ namespace WEP_APICore
             services.AddTransient<BrandAppService>();
             services.AddTransient<MainCategoryAppService>();
             services.AddTransient<SubCategoryAppService>();
+            services.AddTransient<AdvertisementAppService>();
             services.AddHttpContextAccessor();//allow me to get user information such as id
             services.AddAutoMapper(typeof(Startup));
 
@@ -116,12 +117,12 @@ namespace WEP_APICore
                 .AllowCredentials());
             app.UseRouting();
             app.UseAuthorization();
-            app.UseStaticFiles();
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
-                RequestPath = new PathString("/Resources")
-            });
+            //app.UseStaticFiles();
+            //app.UseStaticFiles(new StaticFileOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+            //    RequestPath = new PathString("/Resources")
+            //});
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

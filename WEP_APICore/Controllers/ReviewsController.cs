@@ -58,7 +58,7 @@ namespace WEP_APICore.Controllers
         [HttpPost]
         public ActionResult<ReviewViewModel> PostReview(ReviewViewModel review)
         {
-            if(ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }

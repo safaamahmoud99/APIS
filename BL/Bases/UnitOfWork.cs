@@ -200,6 +200,16 @@ namespace BL.Bases
                 return category;
             }
         }
+        public RoleRepository role;
+        public RoleRepository Role
+        {
+            get
+            {
+                if (role == null)
+                    role = new RoleRepository(EC_DbContext, _roleManager);
+                return role;
+            }
+        }
     }
 }
 

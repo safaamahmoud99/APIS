@@ -10,6 +10,7 @@ namespace BL.interfaces
    public interface IUnitOfWork:IDisposable
     {
         int Commit();
+        RoleRepository Role { get; }
         CartRepository Cart { get; }
         BrandRepository Brand { get;  }
         ImageRepository Image { get; }

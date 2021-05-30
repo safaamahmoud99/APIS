@@ -21,7 +21,7 @@ namespace BL.Repository
 
         public List<OrderDetails> GetAllOrderProduct()
         {
-            return GetAll().Include(op => op.Product).ToList();
+            return GetAll().Include(op => op.ProductID).ToList();
         }
 
         public bool InsertOrderDetails(OrderDetails orderDetails)

@@ -33,11 +33,11 @@ namespace BL.Repository
         {
             Delete(id);
         }
-        public bool CheckBrandExists(Brands brand)
+        public bool CheckBrandExists(int id)
         {
-            return GetAny(b=> b.ID == brand.ID);
+            return GetAny(b => b.ID == id);
         }
-        public Brands GetBrandById(int id)
+            public Brands GetBrandById(int id)
         {
             return GetFirstOrDefault(b => b.ID == id);
         }

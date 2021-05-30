@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace BL.DTOs
 {
-    public class ImageViewModel
+    public class AdvertisementViewModel
     {
-        public int ID { get; set; }
+        
         public string Image { get; set; }
-        public int productID { get; set; }
+       
+        public DateTime StartDate { get; set; }
+      
+        public DateTime EndDate { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace BL.Bases
         }
         public int Commit()
         {
-            return EC_DbContext.SaveChanges();
+            return  EC_DbContext.SaveChanges();
         }
         public void Dispose()
         {
@@ -200,14 +200,14 @@ namespace BL.Bases
                 return category;
             }
         }
-        public RoleRepository role;
-        public RoleRepository Role
+        public AdvertisementRepository advertisement;
+        public AdvertisementRepository Advertisement
         {
             get
             {
-                if (role == null)
-                    role = new RoleRepository(EC_DbContext, _roleManager);
-                return role;
+                if (advertisement == null)
+                    advertisement = new AdvertisementRepository(EC_DbContext);
+                return advertisement;
             }
         }
     }

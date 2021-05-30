@@ -19,8 +19,11 @@ namespace BL.Configuration
             cfg =>
             {
                 cfg.CreateMap<Cart, CartViewModel>().ReverseMap();
+                cfg.CreateMap<Offer, OfferViewModel>().ReverseMap();
                 cfg.CreateMap<WishList, WishListViewModel>().ReverseMap();
                 cfg.CreateMap<User, LoginViewModel>().ReverseMap();
+                cfg.CreateMap<OrderDetails, OrderDetailsViewModel>().ReverseMap();
+                cfg.CreateMap<Order, OrderViewModel>().ReverseMap();
                 cfg.CreateMap<User, RegisterationViewModel>().ReverseMap();
                 //.ForMember(u => u.Email, v => v.MapFrom(c => c.Email));
                 cfg.CreateMap<Brands, BrandViewModel>().ReverseMap();
@@ -29,7 +32,11 @@ namespace BL.Configuration
                 cfg.CreateMap<CartProduct, CartProductViewModel>().ReverseMap();
                 cfg.CreateMap<WishListProduct, WishListProductViewModel>().ReverseMap();
                 cfg.CreateMap<Review, ReviewViewModel>().ReverseMap();
-
+                cfg.CreateMap<MainCategory, MainCategoryViewModel>().ReverseMap();
+                cfg.CreateMap<Category, CategoryViewModel>().ReverseMap();
+                cfg.CreateMap<SubCategory, SubCategoryViewModel>().ReverseMap();
+                cfg.CreateMap<Product, ProductViewModel>().ReverseMap();
+                cfg.CreateMap<Advertisement, AdvertisementViewModel>().ReverseMap();
 
             });
             mapp = config.CreateMapper();

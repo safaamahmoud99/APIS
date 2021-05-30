@@ -9,15 +9,12 @@ namespace BL.DTOs
 {
     public class OrderViewModel
     {
-        public int Id { get; set; }
-
-        [Display(Name = "Date")]
-        public string date { get; set; }
-
-
-
-        [Display(Name = "Total Price")]
+        public int Id { get; set; } 
+        [Required]
+        public DateTime Orderdate { get; set; }
+        [Required]
         public double totalPrice { get; set; }
-        public string User_Id { get; set; }
+        public double CouponDiscount { get; set; }
+        public string UserID { get; set; }
     }    
 }

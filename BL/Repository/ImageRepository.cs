@@ -33,9 +33,9 @@ namespace BL.Repository
         {
             Delete(id);
         }
-        public bool CheckImageExists(Images image)
+        public bool CheckImageExists(int id)
         {
-            return GetAny(I=> I.ID == image.ID);
+            return GetAny(b => b.ID == id);
         }
         public Images GetImageById(int id)
         {

@@ -33,8 +33,9 @@ namespace BL.AppService
         {
             bool result = false;
             var user = TheUnitOfWork.Account.FindByName(username);
-            string userid =  user.Result.Id;
-            WishListProduct WishListProduct = new WishListProduct() {productId= id, };
+            ///string userid =  user.Result.Id;
+            string userid = "244b6487-45ad-419e-9c56-711aada535c4";
+            WishListProduct WishListProduct = new WishListProduct() {productId= id,WishlistID=userid };
             if (TheUnitOfWork.WishListProduct.InsertWishListProduct(WishListProduct))
             {
                 result = TheUnitOfWork.Commit() > new int();

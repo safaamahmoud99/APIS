@@ -58,7 +58,7 @@ namespace BL.Bases
         {
             if (filter != null)
             {
-                return DbSet.FirstOrDefault(filter);
+                return DbSet.AsNoTracking().FirstOrDefault(filter);
             }
             return null;
         }

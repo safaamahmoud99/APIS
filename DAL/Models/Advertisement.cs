@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    [Table("Images")]
-    public class Images
+    public class Advertisement
     {
         public int ID { get; set; }
+        [Required]
         public string Image { get; set; }
-        [ForeignKey("product")]
-        public int ProductID { get; set; }
-        public virtual Product product { get; set; }
+        [Required]
+        public DateTime StartDate { get; set; }
+        [Required]
+        public DateTime EndDate { get; set; }
+
     }
 }

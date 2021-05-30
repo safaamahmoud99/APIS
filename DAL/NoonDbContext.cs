@@ -45,6 +45,8 @@ namespace DAL
         public DbSet<Suppliers> suppliers { get; set; }
         public DbSet<WishList> wishLists { get; set; }
         public DbSet<WishListProduct> wishListProducts { get; set; }
+        public DbSet<Advertisement> Advertisements { get; set; }
+
     }
         public class ApplicationUserStore : UserStore<User>
         {

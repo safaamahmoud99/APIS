@@ -21,6 +21,9 @@ using DAL.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace WEP_APICore
 {
@@ -61,6 +64,9 @@ namespace WEP_APICore
             services.AddTransient<OrderAppService>();
             services.AddTransient<OrderDetailsAppservice>();
             services.AddTransient<ProductAppService>();
+
+            services.AddTransient<OfferAppservice>();
+            services.AddTransient<ProductAppService>();
             services.AddTransient<CartProductAppService>();
             services.AddTransient<WishListProductAppService>();
             services.AddTransient<WishListAppService>();
@@ -70,6 +76,7 @@ namespace WEP_APICore
             services.AddTransient<BrandAppService>();
             services.AddTransient<MainCategoryAppService>();
             services.AddTransient<SubCategoryAppService>();
+            services.AddTransient<AdvertisementAppService>();
             services.AddHttpContextAccessor();//allow me to get user information such as id
             services.AddAutoMapper(typeof(Startup));
 
@@ -111,6 +118,12 @@ namespace WEP_APICore
                 .AllowCredentials());
             app.UseRouting();
             app.UseAuthorization();
+            //app.UseStaticFiles();
+            //app.UseStaticFiles(new StaticFileOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+            //    RequestPath = new PathString("/Resources")
+            //});
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

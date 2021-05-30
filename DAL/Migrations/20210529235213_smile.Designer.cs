@@ -4,42 +4,22 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210529235213_smile")]
+    partial class smile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("DAL.Models.Advertisement", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Advertisements");
-                });
 
             modelBuilder.Entity("DAL.Models.Brands", b =>
                 {
@@ -162,15 +142,10 @@ namespace DAL.Migrations
                     b.Property<double>("OfferValue")
                         .HasColumnType("float");
 
-                    b.Property<int?>("ProductID")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("ProductID");
 
                     b.ToTable("Offer");
                 });
@@ -628,13 +603,6 @@ namespace DAL.Migrations
                     b.Navigation("product");
                 });
 
-            modelBuilder.Entity("DAL.Models.Offer", b =>
-                {
-                    b.HasOne("DAL.Models.Product", null)
-                        .WithMany("Offers")
-                        .HasForeignKey("ProductID");
-                });
-
             modelBuilder.Entity("DAL.Models.Order", b =>
                 {
                     b.HasOne("DAL.Models.User", null)
@@ -802,8 +770,6 @@ namespace DAL.Migrations
                     b.Navigation("Carts");
 
                     b.Navigation("Images");
-
-                    b.Navigation("Offers");
 
                     b.Navigation("OrderDetails");
 

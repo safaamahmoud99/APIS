@@ -27,5 +27,6 @@ namespace BL.interfaces
         MainCategoryRepository MainCategory { get;}
         CategoryRepository Category { get; }
         SubCategoryRepository SubCategory { get; }
+        AdvertisementRepository Advertisement { get; }
     }
 }

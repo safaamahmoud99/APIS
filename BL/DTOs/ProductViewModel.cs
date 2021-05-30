@@ -23,16 +23,15 @@ namespace BL.DTOs
         [MinLength(10)]
         public string Description { get; set; }
 
-        [Range(5, int.MaxValue, ErrorMessage = "Discout Must be more than 5")]
-        public string Image { get; set; }
+
         public string Color { get; set; }
         public string Size { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "Quantity Must be more than 1")]
         public int Quantity { get; set; }
-        public string subCategoryName { get; set; }
+       
         public int SubCategoryID { get; set; }
         public int BrandID { get; set; }
-        public string BrandName { get; set; }
+       
         public double? AverageRating { get; set; }
     }
 }

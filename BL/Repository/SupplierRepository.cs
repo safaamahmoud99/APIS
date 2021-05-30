@@ -11,12 +11,12 @@ namespace BL.Repository
 {
    public class SupplierRepository : BaseRepository<Suppliers>
     {
-        private DbContext EC_DbContext;
+        private  DbContext EC_DbContext;
         public SupplierRepository(DbContext EC_DbContext) : base(EC_DbContext)
         {
             this.EC_DbContext = EC_DbContext;
         }
-        public List<Suppliers> GetAllSuppliesr()
+        public List<Suppliers> GetAllSupplier()
         {
             return GetAll().ToList();
         }
@@ -33,10 +33,11 @@ namespace BL.Repository
         {
             Delete(id);
         }
-        public bool CheckSupplierExists(Suppliers supplier)
+        public bool CheckSupplierExists(int id)
         {
-            return GetAny(S => S.ID == supplier.ID);
+            return GetAny(S => S.ID == id);
         }
+
         public Suppliers GetSupplierById(int id)
         {
             return GetFirstOrDefault(S => S.ID == id);

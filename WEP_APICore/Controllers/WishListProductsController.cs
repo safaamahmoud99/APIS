@@ -38,10 +38,13 @@ namespace WEP_APICore.Controllers
          [HttpPost]
         public ActionResult<WishListProductViewModel> PostWishListProduct(int id)
         {
-            string username = User.Identity.Name;
+            //string username = User.Identity.Name;
+
+            string username = "Asd";
+            bool found = _wishListProductAppService.CheckWishListProductExists(id);
             try
             {
-                if(!_wishListProductAppService.CheckWishListProductExists(id))
+                if(found==false)
                 {
                     _wishListProductAppService.CreateWishListProduct(username, id);
 
@@ -62,6 +65,7 @@ namespace WEP_APICore.Controllers
 
             return NoContent();
         }
+
        private bool WishListProductExists(int id)
         {
             return _wishListProductAppService.CheckWishListProductExists(id);

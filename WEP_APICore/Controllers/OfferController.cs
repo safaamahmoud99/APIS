@@ -45,10 +45,25 @@ namespace WEP_APICore.Controllers
 
 
         [HttpPut("{id}")]
-        public IActionResult PutOffer(OfferViewModel offerViewModel)
+        public IActionResult PutOffer(int id, OfferViewModel offerviewModel)
         {
-            _OfferAppService.UpdateOffer(offerViewModel);
-            return Ok();
+            if (id != offerviewModel.ID)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                _OfferAppService.UpdateOffer(offerviewModel);
+
+                return Ok(offerviewModel);
+            }
+
+
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
 

@@ -44,14 +44,26 @@ namespace WEP_APICore.Controllers
             return advertisement;
         }
 
-        // PUT: api/Advertisements/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public IActionResult PutAdvertisement(int id, AdvertisementViewModel advertisement)
+        public IActionResult PutAdvertisement(int id, AdvertisementViewModel advertisementViewModel)
         {
-            _advertisementApp.UpdateAdvertisement(id,advertisement);
+            if (id != advertisementViewModel.ID)
+            {
+                return BadRequest();
+            }
 
-            return NoContent();
+            try
+            {
+                _advertisementApp.UpdateAdvertisement(advertisementViewModel);
+
+                return Ok(advertisementViewModel);
+            }
+
+
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: api/Advertisements

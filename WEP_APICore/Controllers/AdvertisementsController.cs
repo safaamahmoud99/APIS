@@ -9,6 +9,7 @@ using DAL;
 using DAL.Models;
 using BL.AppService;
 using BL.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WEP_APICore.Controllers
 {
@@ -22,14 +23,14 @@ namespace WEP_APICore.Controllers
         {
             _advertisementApp = advertisementApp;
         }
-
+        [AllowAnonymous]
         // GET: api/Advertisements
         [HttpGet]
         public ActionResult<IEnumerable<AdvertisementViewModel>>GetAdvertisements()
         {
             return _advertisementApp.GetAllAdvertisements();
         }
-
+        [AllowAnonymous]
         // GET: api/Advertisements/5
         [HttpGet("{id}")]
         public ActionResult<AdvertisementViewModel> GetAdvertisement(int id)
@@ -43,7 +44,7 @@ namespace WEP_APICore.Controllers
 
             return advertisement;
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult PutAdvertisement(int id, AdvertisementViewModel advertisementViewModel)
         {
@@ -65,7 +66,7 @@ namespace WEP_APICore.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [Authorize(Roles = "Admin")]
         // POST: api/Advertisements
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -92,7 +93,7 @@ namespace WEP_APICore.Controllers
                 }
             }
         }
-
+        [Authorize(Roles = "Admin")]
         // DELETE: api/Advertisements/5
         [HttpDelete("{id}")]
         public IActionResult DeleteAdvertisement(int id)

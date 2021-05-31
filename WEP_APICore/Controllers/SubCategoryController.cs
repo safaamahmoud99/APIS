@@ -1,5 +1,6 @@
 ﻿using BL.AppService;
 using BL.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -30,7 +31,7 @@ namespace WEP_APICore.Controllers
         {
             return Ok(_subcategoryAppService.GetSubCategory(id));
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Create(SubCategoryViewModel categoryViewModel)
         {
@@ -50,7 +51,7 @@ namespace WEP_APICore.Controllers
 
             }
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult Edit(int id, SubCategoryViewModel subcategoryViewModel)
         {
@@ -69,7 +70,7 @@ namespace WEP_APICore.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

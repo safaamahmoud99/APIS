@@ -55,7 +55,6 @@ namespace WEP_APICore.Controllers
             }
             return response;
         }
-        [AllowAnonymous]
         [HttpPost("/Register")]
         public async Task<IActionResult> Register(RegisterationViewModel User)
         {
@@ -70,6 +69,7 @@ namespace WEP_APICore.Controllers
                 return BadRequest(user.Errors.ToList()[0]);
         }
         [HttpGet]
+        [Authorize(Roles="Admin")]
         public IActionResult GetAll()
         {
             var res = _accountAppservice.GetAllAccounts();
@@ -81,6 +81,7 @@ namespace WEP_APICore.Controllers
             var res = _accountAppservice.GetAccountById(id);
             return Ok(res);
         }
+        [Authorize]
         [HttpGet("current")]
         public IActionResult GetCurrentUser()
         {
@@ -88,6 +89,7 @@ namespace WEP_APICore.Controllers
             var res = _accountAppservice.GetAccountById(userID);
             return Ok(res);
         }
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Edit(string id, RegisterationViewModel registerViewodel)
         {
@@ -98,6 +100,7 @@ namespace WEP_APICore.Controllers
             return Ok(new Response { Status = "Success", Message = "User updated successfully!" });
 
         }
+        [Authorize(Roles ="Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
@@ -111,12 +114,13 @@ namespace WEP_APICore.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpGet("count")]
         public IActionResult UsersCount()
         {
             return Ok(_accountAppservice.CountEntity());
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet("{pageSize}/{pageNumber}")]
         public IActionResult GetUsersByPage(int pageSize, int pageNumber)
         {

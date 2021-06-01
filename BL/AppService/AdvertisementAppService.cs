@@ -26,14 +26,21 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             return Mapper.Map<AdvertisementViewModel>(TheUnitOfWork.Advertisement.GetAdvertisementById(id));
         }
-        public void UpdateAdvertisement(int id, AdvertisementViewModel newadvertisement)
+        public bool UpdateSupplier(SupplierViewModel supplierViewModel)
         {
-            var advertisement = TheUnitOfWork.Advertisement.GetAdvertisementById(id);
+            var supplier = Mapper.Map<Suppliers>(supplierViewModel);
+            TheUnitOfWork.Supplier.Update(supplier);
+            TheUnitOfWork.Commit();
 
-            advertisement.StartDate = newadvertisement.StartDate;
-            advertisement.EndDate= newadvertisement.EndDate;
+            return true;
+        }
+        public bool UpdateAdvertisement(AdvertisementViewModel newadvertisement)
+        {
+            var advertisement = Mapper.Map<Advertisement>(newadvertisement);
+            TheUnitOfWork.Advertisement.Update(advertisement);
+            TheUnitOfWork.Commit();
 
-            TheUnitOfWork.Advertisement.UpdateAdvertisement(advertisement);
+            return true;
 
         }
         public bool CreateAdvertisement(AdvertisementViewModel advertisementViewModel)

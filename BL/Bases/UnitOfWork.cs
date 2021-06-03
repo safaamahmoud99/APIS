@@ -14,7 +14,7 @@ namespace BL.Bases
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private DbContext EC_DbContext { get; set; }
+        private ApplicationDbContext EC_DbContext { get; set; }
         private UserManager<User> _userManager;
         private RoleManager<IdentityRole> _roleManager;
         public UnitOfWork(ApplicationDbContext EC_DbContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)

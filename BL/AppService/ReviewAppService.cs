@@ -17,9 +17,9 @@ namespace BL.AppService
         {
 
         }
-        public List<ReviewViewModel> GetAllReviews()
+        public List<ReviewViewModel> GetAllReviews(int productid)
         {
-            return Mapper.Map<List<ReviewViewModel>>(TheUnitOfWork.Review.GetAll());
+            return Mapper.Map<List<ReviewViewModel>>(TheUnitOfWork.Review.GetAllReview(productid));
         }
         public ReviewViewModel GetReview(int id)
         {

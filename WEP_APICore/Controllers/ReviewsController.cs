@@ -25,9 +25,9 @@ namespace WEP_APICore.Controllers
 
         // GET: api/Reviews
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ReviewViewModel>>> Getreviews()
+        public ActionResult<IEnumerable<ReviewViewModel>> Getreviews(int productid)
         {
-            return _reviewAppService.GetAllReviews();
+            return _reviewAppService.GetAllReviews(productid);
         }
 
         // GET: api/Reviews/5
@@ -80,7 +80,7 @@ namespace WEP_APICore.Controllers
 
         // DELETE: api/Reviews/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteReview(int id)
+        public IActionResult DeleteReview(int id)
         {
            _reviewAppService.DeletReview(id);
             return NoContent();

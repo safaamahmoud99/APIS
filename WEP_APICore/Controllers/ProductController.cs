@@ -1,5 +1,6 @@
 ﻿using BL.AppService;
 using BL.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,7 +30,6 @@ namespace WEP_APICore.Controllers
         public IActionResult GetProductById(int id)
         {
 
-
             var res = _productAppService.GetProduct(id);
             return Ok(_productAppService.GetProduct(id));
         }
@@ -53,6 +53,7 @@ namespace WEP_APICore.Controllers
         {
             return Ok(_productAppService.GetProductsBySearch(searchKeyWord));
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Create(ProductViewModel productViewModel)
         {
@@ -73,7 +74,7 @@ namespace WEP_APICore.Controllers
 
             }
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

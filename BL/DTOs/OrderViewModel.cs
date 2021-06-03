@@ -9,7 +9,6 @@ namespace BL.DTOs
 {
     public class OrderViewModel
     {
-        public int Id { get; set; } 
         [Required]
         public DateTime Orderdate { get; set; }
         [Required]

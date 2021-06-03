@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BL.DTOs
 {
-    public class ImageViewModel
+    public class RoleViewModel
     {
-        public string Image { get; set; }
-        public int productID { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     }
 }

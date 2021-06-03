@@ -39,6 +39,7 @@ namespace WEP_APICore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //For Identity
             services.AddIdentity<User, IdentityRole>()
                .AddEntityFrameworkStores<ApplicationDbContext>()
                .AddDefaultTokenProviders();
@@ -63,7 +64,6 @@ namespace WEP_APICore
             services.AddTransient<OrderAppService>();
             services.AddTransient<OrderDetailsAppservice>();
             services.AddTransient<ProductAppService>();
-
             services.AddTransient<OfferAppservice>();
             services.AddTransient<ProductAppService>();
             services.AddTransient<CartProductAppService>();

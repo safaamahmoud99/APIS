@@ -9,7 +9,6 @@ namespace BL.DTOs
 {
    public class CategoryViewModel
     {
-        public int ID { get; set; }
         [Required]
         public string Name { get; set; }
         public string Image { get; set; }

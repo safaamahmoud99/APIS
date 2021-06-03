@@ -8,7 +8,6 @@ namespace BL.DTOs
 {
     public class OfferViewModel
     {
-        public int ID { get; set; }
         [Required]
         public DateTime StartDate { get;set;}
         [Required]

@@ -210,6 +210,14 @@ namespace BL.Bases
                 return advertisement;
             }
         }
+        public RoleRepository role;
+        public RoleRepository Role
+        {
+            get
+            {
+                return role;
+            }
+        }
     }
 }
 

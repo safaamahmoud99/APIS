@@ -10,7 +10,6 @@ namespace BL.DTOs
 {
     public class ProductViewModel
     {
-        public int ID { get; set; }
         [Required]
         [MinLength(5)]
         public string Name { get; set; }

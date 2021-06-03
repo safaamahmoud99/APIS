@@ -9,6 +9,7 @@ using DAL;
 using DAL.Models;
 using BL.AppService;
 using BL.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WEP_APICore.Controllers
 {
@@ -43,7 +44,7 @@ namespace WEP_APICore.Controllers
 
             return review;
         }
-
+        [Authorize]
         // PUT: api/Reviews/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -52,7 +53,7 @@ namespace WEP_APICore.Controllers
             _reviewAppService.UpdateReview(id, newreview);
             return Ok();
         }
-
+        [Authorize]
         // POST: api/Reviews
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -77,7 +78,7 @@ namespace WEP_APICore.Controllers
                 }
             }
         }
-
+        [Authorize]
         // DELETE: api/Reviews/5
         [HttpDelete("{id}")]
         public IActionResult DeleteReview(int id)

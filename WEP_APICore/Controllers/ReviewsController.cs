@@ -68,7 +68,7 @@ namespace WEP_APICore.Controllers
                 try 
                 {
                     _reviewAppService.CreateReview(review);
-                    return CreatedAtAction("GetReview", new { id = review.ID }, review);
+                    return CreatedAtAction("GetReview", review);
 
                 }
                catch(Exception ex)

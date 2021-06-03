@@ -48,10 +48,7 @@ namespace WEP_APICore.Controllers
         [HttpPut("{id}")]
         public IActionResult PutOffer(int id, OfferViewModel offerviewModel)
         {
-            if (id != offerviewModel.ID)
-            {
-                return BadRequest();
-            }
+           
 
             try
             {

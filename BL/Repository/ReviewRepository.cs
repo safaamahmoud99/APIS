@@ -1,4 +1,5 @@
 ﻿using BL.Bases;
+using DAL;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,14 +12,14 @@ namespace BL.Repository
 {
     public class ReviewRepository :BaseRepository<Review>
     {
-        private DbContext EC_DbContext;
-        public ReviewRepository(DbContext EC_DbContext) : base(EC_DbContext)
+        private ApplicationDbContext EC_DbContext;
+        public ReviewRepository(ApplicationDbContext EC_DbContext) : base(EC_DbContext)
         {
             this.EC_DbContext = EC_DbContext;
         }
-        public List<Review> GetAllReview()
+        public IEnumerable<Review> GetAllReview(int productid)
         {
-            return GetAll().ToList();
+            return EC_DbContext.reviews.Where(r=>r.ProductID== productid);
         }
 
         public bool InsertReview(Review Review)

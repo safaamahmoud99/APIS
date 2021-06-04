@@ -82,10 +82,7 @@ namespace WEP_APICore.Controllers
         [HttpPut("{id}")]
         public IActionResult PutOrderDetails(int id, OrderDetailsViewModel OrderDetail)
         {
-            if (id != OrderDetail.ID)
-            {
-                return BadRequest();
-            }
+            
 
             try
             {

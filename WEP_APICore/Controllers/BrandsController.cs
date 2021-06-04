@@ -51,10 +51,7 @@ namespace WEP_APICore.Controllers
         [HttpPut("{id}")]
         public IActionResult PutBrands(int id, BrandViewModel brandViewModel)
         {
-            if (id != brandViewModel.ID)
-            {
-                return BadRequest();
-            }
+           
 
             try
             {
@@ -78,7 +75,7 @@ namespace WEP_APICore.Controllers
             _brandAppService.CreateBrand(brandViewModel);
 
 
-            return CreatedAtAction("GetBrands", new { id = brandViewModel.ID }, brandViewModel);
+            return CreatedAtAction("GetBrands", brandViewModel);
 
         }
         //[Authorize(Roles = "Admin")]

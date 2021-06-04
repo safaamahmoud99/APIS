@@ -8,7 +8,8 @@ namespace BL.DTOs
 {
     public class AdvertisementViewModel
     {
-        public int ID { set; get; }
+        public int ID { get; set; }
+
         public string Image { get; set; }
        
         public DateTime StartDate { get; set; }

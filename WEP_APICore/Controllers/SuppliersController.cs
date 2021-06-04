@@ -51,10 +51,7 @@ namespace WEP_APICore.Controllers
         [HttpPut("{id}")]
         public IActionResult PutSuppliers(int id, SupplierViewModel supplierViewModel)
         {
-            if (id != supplierViewModel.ID)
-            {
-                return BadRequest();
-            }
+           
             try
             {
                 _supplierAppService.UpdateSupplier(supplierViewModel);
@@ -77,7 +74,7 @@ namespace WEP_APICore.Controllers
             _supplierAppService.CreateSupplier(supplierViewModel);
            
 
-            return CreatedAtAction("GetSuppliers", new { id = supplierViewModel.ID }, supplierViewModel);
+            return CreatedAtAction("GetSuppliers", supplierViewModel);
         }
         [Authorize(Roles = "Admin")]
         // DELETE: api/Suppliers/5

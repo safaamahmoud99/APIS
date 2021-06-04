@@ -23,15 +23,11 @@ namespace WEP_APICore.Controllers
         {
             _cartProductAppService = cartProductAppService;
         }
-
-        // GET: api/CartProducts
         [HttpGet]
         public ActionResult<IEnumerable<CartProductViewModel>> GetcartProducts()
         {
             return _cartProductAppService.GetAllCartProducts(); ;
         }
-
-        // GET: api/CartProducts/5
         [HttpGet("{id}")]
         public ActionResult<CartProductViewModel> GetCartProduct(int id)
         {
@@ -39,11 +35,6 @@ namespace WEP_APICore.Controllers
             var cartProduct = _cartProductAppService.GetCartProduct(id);
             return cartProduct;
         }
-
-       
-
-        // POST: api/CartProducts
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public ActionResult<CartProduct> PostCartProduct(int productid)
         {
@@ -69,7 +60,6 @@ namespace WEP_APICore.Controllers
             }
         }
 
-        // DELETE: api/CartProducts/5
         [HttpDelete("{id}")]
         public IActionResult DeleteCartProduct(int id)
         {

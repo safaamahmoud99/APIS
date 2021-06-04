@@ -44,7 +44,7 @@ namespace BL.AppService
         {
             if (id < 0)
                 throw new ArgumentNullException();
-            CartProductViewModel cartProductViewModel = GetCartProduct(id);
+            CartProduct cartProductViewModel =Mapper.Map<CartProduct>( GetCartProduct(id));
             bool result = false;
             TheUnitOfWork.CardProduct.DeleteCartProduct(cartProductViewModel.ID);
             result = TheUnitOfWork.Commit() > new int();

@@ -48,10 +48,7 @@ namespace WEP_APICore.Controllers
         [HttpPut("{id}")]
         public IActionResult PutAdvertisement(int id, AdvertisementViewModel advertisementViewModel)
         {
-            if (id != advertisementViewModel.ID)
-            {
-                return BadRequest();
-            }
+            
 
             try
             {

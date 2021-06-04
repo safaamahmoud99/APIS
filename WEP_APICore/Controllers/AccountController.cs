@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using BL.AppService;
 using BL.DTOs;
+using BL.StaticClasses;
+using DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -21,24 +24,33 @@ namespace WEP_APICore.Controllers
         private IConfiguration _config;
         private AccountAppService _accountAppservice;
         IHttpContextAccessor _httpContextAccessor;
+        //RoleAppService _roleAppService;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         public AccountController(IConfiguration config,
             AccountAppService accountAppservice,
-              IHttpContextAccessor httpContextAccessor
+              IHttpContextAccessor httpContextAccessor,
+              //RoleAppService roleAppService,
+               UserManager<User> userManager,
+               RoleManager<IdentityRole> roleManager
             )
         {
             _config = config;
             _accountAppservice = accountAppservice;
             _httpContextAccessor = httpContextAccessor;
+            //_roleAppService = roleAppService;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
         [HttpPost("/login")]
-        public async Task<IActionResult>  Login(LoginViewModel login)
+        public async Task<IActionResult> Login(LoginViewModel login)
         {
             IActionResult response = Unauthorized();
-            var user = await _accountAppservice.Find(login.Email,login.Password);
+            var user = await _accountAppservice.Find(login.Email, login.Password);
 
             if (user != null)
             {
-                var tokenString =  _accountAppservice.CreateToken(user);
+                var tokenString = _accountAppservice.CreateToken(user);
                 response = Ok(new { token = tokenString });
             }
             return response;
@@ -48,13 +60,13 @@ namespace WEP_APICore.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var user =await  _accountAppservice.Register(User);
+            var user = await _accountAppservice.Register(User);
             if (user.Succeeded)
             {
                 return Ok();
             }
-            else 
-            return BadRequest(user.Errors.ToList()[0]);
+            else
+                return BadRequest(user.Errors.ToList()[0]);
         }
         [HttpGet]
         [Authorize(Roles="Admin")]

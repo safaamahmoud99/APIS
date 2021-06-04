@@ -45,16 +45,13 @@ namespace WEP_APICore.Controllers
 
             return brands;
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         // PUT: api/Brands/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public IActionResult PutBrands(int id, BrandViewModel brandViewModel)
         {
-            if (id != brandViewModel.ID)
-            {
-                return BadRequest();
-            }
+           
 
             try
             {
@@ -69,7 +66,7 @@ namespace WEP_APICore.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         // POST: api/Brands
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -78,10 +75,10 @@ namespace WEP_APICore.Controllers
             _brandAppService.CreateBrand(brandViewModel);
 
 
-            return CreatedAtAction("GetBrands", new { id = brandViewModel.ID }, brandViewModel);
+            return CreatedAtAction("GetBrands", brandViewModel);
 
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         // DELETE: api/Brands/5
         [HttpDelete("{id}")]
         public IActionResult DeleteBrands(int id)

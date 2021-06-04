@@ -26,9 +26,9 @@ namespace WEP_APICore.Controllers
 
         // GET: api/Reviews
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ReviewViewModel>>> Getreviews()
+        public ActionResult<IEnumerable<ReviewViewModel>> Getreviews(int productid)
         {
-            return _reviewAppService.GetAllReviews();
+            return _reviewAppService.GetAllReviews(productid);
         }
 
         // GET: api/Reviews/5
@@ -68,7 +68,7 @@ namespace WEP_APICore.Controllers
                 try 
                 {
                     _reviewAppService.CreateReview(review);
-                    return CreatedAtAction("GetReview", new { id = review.ID }, review);
+                    return CreatedAtAction("GetReview", review);
 
                 }
                catch(Exception ex)

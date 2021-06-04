@@ -8,7 +8,7 @@ namespace BL.DTOs
 {
    public class CartProductViewModel
     {
-
+        public int ID { get; set; }
         public int productId { get; set; }
        
         public string CartID { get; set; }

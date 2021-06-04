@@ -50,16 +50,13 @@ namespace WEP_APICore.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public IActionResult PutBrands(int id, BrandViewModel brandViewModel)
-        {
-           
+        {           
             try
             {
-                _brandAppService.UpdateBrand(brandViewModel);
+                _brandAppService.UpdateBrand(brandViewModel,id);
               
                 return Ok(brandViewModel);
             }
-
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);

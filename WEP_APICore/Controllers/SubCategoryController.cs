@@ -31,8 +31,8 @@ namespace WEP_APICore.Controllers
         {
             return Ok(_subcategoryAppService.GetSubCategory(id));
         }
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(SubCategoryViewModel categoryViewModel)
         {
 
@@ -51,8 +51,8 @@ namespace WEP_APICore.Controllers
 
             }
         }
-        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id, SubCategoryViewModel subcategoryViewModel)
         {
 
@@ -70,8 +70,8 @@ namespace WEP_APICore.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             try
@@ -83,6 +83,16 @@ namespace WEP_APICore.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+        [HttpGet("count")]
+        public IActionResult CategoriesCount()
+        {
+            return Ok(_subcategoryAppService.CountEntity());
+        }
+        [HttpGet("{pageSize}/{pageNumber}")]
+        public IActionResult GetCategoriesByPage(int pageSize, int pageNumber)
+        {
+            return Ok(_subcategoryAppService.GetPageRecords(pageSize, pageNumber));
         }
     }
 }

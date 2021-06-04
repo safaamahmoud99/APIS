@@ -24,12 +24,14 @@ namespace BL.AppService
         IConfiguration _configuration;
         CartAppService _cartAppService;
         WishListAppService _wishlistAppService;
-        public AccountAppService(IUnitOfWork theUnitOfWork, IConfiguration configuration,
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public AccountAppService(IUnitOfWork theUnitOfWork, RoleManager<IdentityRole> roleManager, IConfiguration configuration,
            CartAppService cartAppService, WishListAppService wishlistAppService) : base(theUnitOfWork)
         {
             this._configuration = configuration;
             this._cartAppService = cartAppService;
             this._wishlistAppService = wishlistAppService;
+            this._roleManager = roleManager;
         }
         private void CreateUserCartAndWishlist(string userId)
         {
@@ -150,20 +152,11 @@ namespace BL.AppService
             }
             return result;
         }
-        //public async Task CreateFirstAdmin()
-        //{
-        //    var firstAdmin = new RegisterationViewModel()
-        //    {
-        //        id = null,
-        //        Email = "test@gmail.com",
-        //        FullName = "admin",
-        //        Password = "@Admin12345",
-        //    };
-        //    Register(firstAdmin).Wait();
-        //    User foundedAdmin = await FindByName(firstAdmin.FullName);
-        //    if (foundedAdmin != null)
-        //        AssignToRole(foundedAdmin.Id, UserRoles.Admin).Wait();
-        //}
+        public async Task CreateFirstAdmin()
+        {
+            IdentityRole role = new IdentityRole("Admin");
+            var roles = await _roleManager.CreateAsync(role);
+        }
         public int CountEntity()
         {
             return TheUnitOfWork.Account.CountEntity();

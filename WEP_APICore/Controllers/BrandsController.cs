@@ -52,7 +52,6 @@ namespace WEP_APICore.Controllers
         public IActionResult PutBrands(int id, BrandViewModel brandViewModel)
         {
            
-
             try
             {
                 _brandAppService.UpdateBrand(brandViewModel);

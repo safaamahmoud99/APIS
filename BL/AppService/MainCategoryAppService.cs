@@ -70,5 +70,13 @@ namespace BL.AppService
             MainCategory category = Mapper.Map<MainCategory>(categoryViewModel);
             return TheUnitOfWork.MainCategory.CheckMainCategoryExists(category);
         }
+        public int CountEntity()
+        {
+            return TheUnitOfWork.MainCategory.CountEntity();
+        }
+        public IEnumerable<MainCategoryViewModel> GetPageRecords(int pageSize, int pageNumber)
+        {
+            return Mapper.Map<List<MainCategoryViewModel>>(TheUnitOfWork.MainCategory.GetPageRecords(pageSize, pageNumber));
+        }
     }
 }

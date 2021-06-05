@@ -14,7 +14,7 @@ namespace BL.Bases
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private DbContext EC_DbContext { get; set; }
+        private ApplicationDbContext EC_DbContext { get; set; }
         private UserManager<User> _userManager;
         private RoleManager<IdentityRole> _roleManager;
         public UnitOfWork(ApplicationDbContext EC_DbContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
@@ -198,6 +198,24 @@ namespace BL.Bases
                 if (category == null)
                     category = new CategoryRepository(EC_DbContext);
                 return category;
+            }
+        }
+        public AdvertisementRepository advertisement;
+        public AdvertisementRepository Advertisement
+        {
+            get
+            {
+                if (advertisement == null)
+                    advertisement = new AdvertisementRepository(EC_DbContext);
+                return advertisement;
+            }
+        }
+        public RoleRepository role;
+        public RoleRepository Role
+        {
+            get
+            {
+                return role;
             }
         }
     }

@@ -9,6 +9,7 @@ using DAL;
 using DAL.Models;
 using BL.AppService;
 using BL.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WEP_APICore.Controllers
 {
@@ -25,11 +26,12 @@ namespace WEP_APICore.Controllers
 
         // GET: api/Brands
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult<IEnumerable<BrandViewModel>> Getbrands()
         {
             return _brandAppService.GetAllBrands();
         }
-
+        [AllowAnonymous]
         // GET: api/Brands/5
         [HttpGet("{id}")]
         public ActionResult<BrandViewModel> GetBrands(int id)
@@ -43,42 +45,36 @@ namespace WEP_APICore.Controllers
 
             return brands;
         }
-
+        //[Authorize(Roles = "Admin")]
         // PUT: api/Brands/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public IActionResult PutBrands(int id, BrandViewModel brandViewModel)
-        {
-            if (id != brandViewModel.ID)
-            {
-                return BadRequest();
-            }
-
+        {           
             try
             {
-                _brandAppService.UpdateBrand(brandViewModel);
+                _brandAppService.UpdateBrand(brandViewModel,id);
               
                 return Ok(brandViewModel);
             }
-
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
+        //[Authorize(Roles = "Admin")]
         // POST: api/Brands
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public ActionResult<BrandViewModel> PostBrands(BrandViewModel brandViewModel)
         {
             _brandAppService.CreateBrand(brandViewModel);
-           
 
-            return CreatedAtAction("GetBrands", new { id = brandViewModel.ID }, brandViewModel);
+
+            return CreatedAtAction("GetBrands", brandViewModel);
+
         }
-
+        //[Authorize(Roles = "Admin")]
         // DELETE: api/Brands/5
         [HttpDelete("{id}")]
         public IActionResult DeleteBrands(int id)

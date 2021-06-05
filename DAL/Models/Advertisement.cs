@@ -5,16 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL.DTOs
+namespace DAL.Models
 {
-   public class CategoryViewModel
+    public class Advertisement
     {
         public int ID { get; set; }
-
         [Required]
-        public string Name { get; set; }
         public string Image { get; set; }
-        public int MainCategoryID { get; set; }
-        public string MainCategoryName { get; set; }
+        [Required]
+        public DateTime StartDate { get; set; }
+        [Required]
+        public DateTime EndDate { get; set; }
+
     }
 }

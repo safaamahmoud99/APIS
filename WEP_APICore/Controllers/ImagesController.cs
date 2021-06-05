@@ -52,10 +52,7 @@ namespace WEP_APICore.Controllers
         [HttpPut("{id}")]
         public IActionResult PutImages(int id, ImageViewModel imageViewModel)
         {
-            if (id != imageViewModel.ID)
-            {
-                return BadRequest();
-            }
+           
 
 
 
@@ -79,7 +76,7 @@ namespace WEP_APICore.Controllers
         {
 
             _imageAppService.CreateImage(imageViewModel);
-            return CreatedAtAction("GetImages", new { id = imageViewModel.ID }, imageViewModel);
+            return CreatedAtAction("GetImages", imageViewModel);
         }
 
         // DELETE: api/Images/5

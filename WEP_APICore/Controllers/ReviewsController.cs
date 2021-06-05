@@ -9,6 +9,7 @@ using DAL;
 using DAL.Models;
 using BL.AppService;
 using BL.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WEP_APICore.Controllers
 {
@@ -25,9 +26,9 @@ namespace WEP_APICore.Controllers
 
         // GET: api/Reviews
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ReviewViewModel>>> Getreviews()
+        public ActionResult<IEnumerable<ReviewViewModel>> Getreviews(int productid)
         {
-            return _reviewAppService.GetAllReviews();
+            return _reviewAppService.GetAllReviews(productid);
         }
 
         // GET: api/Reviews/5
@@ -43,7 +44,7 @@ namespace WEP_APICore.Controllers
 
             return review;
         }
-
+        [Authorize]
         // PUT: api/Reviews/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -52,13 +53,13 @@ namespace WEP_APICore.Controllers
             _reviewAppService.UpdateReview(id, newreview);
             return Ok();
         }
-
+        [Authorize]
         // POST: api/Reviews
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public ActionResult<ReviewViewModel> PostReview(ReviewViewModel review)
         {
-            if(ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -67,7 +68,7 @@ namespace WEP_APICore.Controllers
                 try 
                 {
                     _reviewAppService.CreateReview(review);
-                    return CreatedAtAction("GetReview", new { id = review.ID }, review);
+                    return CreatedAtAction("GetReview", review);
 
                 }
                catch(Exception ex)
@@ -77,10 +78,10 @@ namespace WEP_APICore.Controllers
                 }
             }
         }
-
+        [Authorize]
         // DELETE: api/Reviews/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteReview(int id)
+        public IActionResult DeleteReview(int id)
         {
            _reviewAppService.DeletReview(id);
             return NoContent();

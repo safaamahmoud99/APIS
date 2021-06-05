@@ -44,17 +44,12 @@ namespace WEP_APICore.Controllers
             return OrderDetail;
         }
 
-         
-        [HttpPut("{id}")]
-        public IActionResult PutOrderDet(OrderDetailsViewModel newOderDetail)
-        {
-            _OrderDetailsAppService.UpdateOrderDetails(newOderDetail);
-            return Ok();
-        }
 
-        // POST: api/Reviews
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        
+
+       // POST: api/Reviews
+       // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+       [HttpPost]
         public ActionResult<OrderDetailsViewModel> PostOrderDetails(OrderDetailsViewModel orderDetail)
         {
             //if (!ModelState.IsValid)
@@ -84,7 +79,24 @@ namespace WEP_APICore.Controllers
             _OrderDetailsAppService.DeleteOrderDetails(id);
             return NoContent();
         }
+        [HttpPut("{id}")]
+        public IActionResult PutOrderDetails(int id, OrderDetailsViewModel OrderDetail)
+        {
+            
 
+            try
+            {
+                _OrderDetailsAppService.UpdateOrderDetails(OrderDetail);
+
+                return Ok(OrderDetail);
+            }
+
+
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
     }
 }

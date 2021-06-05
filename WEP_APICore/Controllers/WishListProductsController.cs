@@ -22,15 +22,11 @@ namespace WEP_APICore.Controllers
         {
             _wishListProductAppService= wishListProductAppService;
         }
-
-        // GET: api/WishListProducts
         [HttpGet]
         public ActionResult<IEnumerable<WishListProductViewModel>> GetwishListProducts()
         {
             return _wishListProductAppService.GetAllWishListProducts();
         }
-
-        // GET: api/WishListProducts/5
         [HttpGet("{id}")]
         public ActionResult<WishListProductViewModel> GetWishListProduct(int id)
         {
@@ -39,13 +35,7 @@ namespace WEP_APICore.Controllers
             return wishListProduct;
         }
 
-        // PUT: api/WishListProducts/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    
-
-        // POST: api/WishListProducts
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+         [HttpPost]
         public ActionResult<WishListProductViewModel> PostWishListProduct(int id)
         {
             //string username = User.Identity.Name;
@@ -68,8 +58,6 @@ namespace WEP_APICore.Controllers
 
             }
         }
-
-        // DELETE: api/WishListProducts/5
         [HttpDelete("{id}")]
         public IActionResult DeleteWishListProduct(int id)
         {

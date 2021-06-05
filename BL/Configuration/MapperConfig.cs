@@ -36,6 +36,7 @@ namespace BL.Configuration
                 cfg.CreateMap<Category, CategoryViewModel>().ReverseMap();
                 cfg.CreateMap<SubCategory, SubCategoryViewModel>().ReverseMap();
                 cfg.CreateMap<Product, ProductViewModel>().ReverseMap();
+                cfg.CreateMap<Advertisement, AdvertisementViewModel>().ReverseMap();
 
             });
             mapp = config.CreateMapper();

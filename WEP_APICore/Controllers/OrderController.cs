@@ -46,13 +46,31 @@ namespace WEP_APICore.Controllers
 
 
         [HttpPut("{id}")]
-        public IActionResult PutOrder(OrderViewModel newOder)
+        public IActionResult PutOrder(int id, OrderViewModel orderViewModel)
         {
-            _OrderAppService.UpdateOrder(newOder);
-            return Ok();
-        }
+           
 
-         
+            try
+            {
+                _OrderAppService.UpdateOrder(orderViewModel);
+
+                return Ok(orderViewModel);
+            }
+
+
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        //// GET: api/Orders for one User
+        //[HttpGet]
+        //public ActionResult<IEnumerable<OrderViewModel>> GetOrders(String UserID)
+        //{
+
+        //    return _OrderAppService.GetAllOrder().Where(i => i.UserID == UserID).ToList();
+        //}
+
         [HttpPost]
         public ActionResult<OrderViewModel> PostOrder(OrderViewModel order)
         {

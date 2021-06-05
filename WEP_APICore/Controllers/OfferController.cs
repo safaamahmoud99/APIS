@@ -9,6 +9,7 @@ using DAL.Models;
 using BL.AppService;
 using BL.DTOs;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WEP_APICore.Controllers
 {
@@ -43,15 +44,27 @@ namespace WEP_APICore.Controllers
             return Offer;
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
-        public IActionResult PutOffer(OfferViewModel offerViewModel)
+        public IActionResult PutOffer(int id, OfferViewModel offerviewModel)
         {
-            _OfferAppService.UpdateOffer(offerViewModel);
-            return Ok();
+           
+
+            try
+            {
+                _OfferAppService.UpdateOffer(offerviewModel);
+
+                return Ok(offerviewModel);
+            }
+
+
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost("CreateOffer")]
         public ActionResult<OfferViewModel> PostOffer(OfferViewModel offer)
         {
@@ -75,8 +88,8 @@ namespace WEP_APICore.Controllers
         
     }
 
-
-    [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteOffer(int id)
     {
         _OfferAppService.DeleteOffer(id);

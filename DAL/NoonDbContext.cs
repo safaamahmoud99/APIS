@@ -15,8 +15,9 @@ namespace DAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-            .UseSqlServer( "Data Source=.;Initial Catalog=NoonEcommerceWebsite;Integrated Security=True"
+            .UseSqlServer("Data Source=.;Initial Catalog=NoonEcommerceWebsite;Integrated Security=True"
             , options => options.EnableRetryOnFailure());
+            //@"Data Source=DESKTOP-TO7II5T\SQLEXPRESS
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -45,6 +46,8 @@ namespace DAL
         public DbSet<Suppliers> suppliers { get; set; }
         public DbSet<WishList> wishLists { get; set; }
         public DbSet<WishListProduct> wishListProducts { get; set; }
+        public DbSet<Advertisement> Advertisements { get; set; }
+
     }
         public class ApplicationUserStore : UserStore<User>
         {

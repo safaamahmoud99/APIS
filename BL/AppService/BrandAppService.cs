@@ -63,11 +63,11 @@ namespace BL.AppService
             }
             return false;
         }
-
-        public bool UpdateBrand(BrandViewModel brandViewModel)
+        public bool UpdateBrand(BrandViewModel brandViewModel,int id)
         {
-            var brand = Mapper.Map<Brands>(brandViewModel);
-            TheUnitOfWork.Brand.Update(brand); 
+            var brands = TheUnitOfWork.Brand.GetBrandById(id);
+            brands.Name = brandViewModel.Name;
+            TheUnitOfWork.Brand.UpdateBrand(brands); 
             TheUnitOfWork.Commit();
 
             return true;

@@ -53,7 +53,7 @@ namespace WEP_APICore.Controllers
         {
             return Ok(_productAppService.GetProductsBySearch(searchKeyWord));
         }
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Create(ProductViewModel productViewModel)
         {
@@ -74,7 +74,7 @@ namespace WEP_APICore.Controllers
 
             }
         }
-        [Authorize(Roles = "Admin")]
+      //  [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

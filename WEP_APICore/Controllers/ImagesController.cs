@@ -26,8 +26,15 @@ namespace WEP_APICore.Controllers
         }
 
         // GET: api/Images
+       // [HttpGet("{productId}")]
         [HttpGet]
-        public ActionResult<IEnumerable<ImageViewModel>> Getimages(int productId)
+        public ActionResult<IEnumerable<ImageViewModel>> Getimages()
+        {
+
+            return _imageAppService.GetAllImages();
+        }
+        [HttpGet("{productId}")]
+        public ActionResult<IEnumerable<ImageViewModel>> GetimagesAll(int productId)
         {
 
             return _imageAppService.GetAllImages().Where(i=>i.productID==productId).ToList();

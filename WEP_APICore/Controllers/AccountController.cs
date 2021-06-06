@@ -68,6 +68,24 @@ namespace WEP_APICore.Controllers
             else
                 return BadRequest(user.Errors.ToList()[0]);
         }
+        [Authorize(Roles = "Admin")]
+        [HttpPost("AdminRegister")]
+        public async Task<IActionResult> RegisterAdmin(RegisterationViewModel userAccount)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var user = await _accountAppservice.Register(userAccount);
+            if (user.Succeeded)
+            {
+                var userName = "Ahmed";//= User.Identity.Name;
+                var currentUser= _accountAppservice.FindByName(userName);
+                var userId = currentUser.Result.Id;
+                await _accountAppservice.AssignToRole(userId, "Admin");
+                return Ok();
+            }
+            else
+                return BadRequest(user.Errors.ToList()[0]);
+        }
         [HttpGet]
         [Authorize(Roles="Admin")]
         public IActionResult GetAll()
@@ -126,5 +144,6 @@ namespace WEP_APICore.Controllers
         {
             return Ok(_accountAppservice.GetPageRecords(pageSize, pageNumber));
         }
+
     }
 }

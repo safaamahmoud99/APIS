@@ -15,6 +15,9 @@ namespace DAL.Models
         [Required]
         public string Name { get; set; }
         public string Image { get; set; }
+        [ForeignKey("Category")]
+        public int CategoryID { get; set; }
+        public Category Category { get; set; }
         public virtual ICollection<Product> Products { get; set; }
     }
 }

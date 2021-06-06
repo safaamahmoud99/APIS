@@ -44,7 +44,7 @@ namespace WEP_APICore.Controllers
             return Offer;
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult PutOffer(int id, OfferViewModel offerviewModel)
         {
@@ -64,31 +64,15 @@ namespace WEP_APICore.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost("CreateOffer")]
         public ActionResult<OfferViewModel> PostOffer(OfferViewModel offer)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-            //else
-            //{
-            //    try
-            //    {
             _OfferAppService.AddOffer(offer);
-            return Created("GetOffer",offer);
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    return BadRequest(ex.Message);
-
-            //}
-        
+            return Created("GetOffer",offer);     
     }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteOffer(int id)
     {

@@ -30,7 +30,7 @@ namespace WEP_APICore.Controllers
             return Ok(_mainCategoryAppService.GetMainCategory(id));
         }
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult Create(MainCategoryViewModel maincategoryViewModel)
         {
 
@@ -52,7 +52,7 @@ namespace WEP_APICore.Controllers
         }
         
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id, MainCategoryViewModel maincategoryViewModel)
         {
 
@@ -71,7 +71,7 @@ namespace WEP_APICore.Controllers
             }
         }
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             try

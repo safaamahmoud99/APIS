@@ -59,10 +59,7 @@ namespace WEP_APICore.Controllers
         [HttpPut("{id}")]
         public IActionResult PutImages(int id, ImageViewModel imageViewModel)
         {
-           
-
-
-
+          
             try
             {
                 _imageAppService.UpdateImage(imageViewModel);

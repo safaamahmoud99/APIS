@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210605214935_init")]
+    [Migration("20210606210250_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -103,7 +103,7 @@ namespace DAL.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MainCategoryID")
+                    b.Property<int>("MainCategoryID")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -309,7 +309,7 @@ namespace DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CategoryID")
+                    b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
@@ -614,9 +614,13 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Models.Category", b =>
                 {
-                    b.HasOne("DAL.Models.MainCategory", null)
+                    b.HasOne("DAL.Models.MainCategory", "mainCategory")
                         .WithMany("Categories")
-                        .HasForeignKey("MainCategoryID");
+                        .HasForeignKey("MainCategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("mainCategory");
                 });
 
             modelBuilder.Entity("DAL.Models.Images", b =>
@@ -695,9 +699,13 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Models.SubCategory", b =>
                 {
-                    b.HasOne("DAL.Models.Category", null)
+                    b.HasOne("DAL.Models.Category", "Category")
                         .WithMany("SubCategories")
-                        .HasForeignKey("CategoryID");
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("DAL.Models.WishList", b =>

@@ -54,7 +54,7 @@ namespace WEP_APICore.Controllers
             return Ok(_productAppService.GetProductsBySearch(searchKeyWord));
         }
        // [Authorize(Roles = "Admin")]
-        [HttpPost]
+        [HttpPost("CreateProduct")]
         public IActionResult Create(ProductViewModel productViewModel)
         {
 

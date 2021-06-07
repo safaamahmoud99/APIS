@@ -30,7 +30,6 @@ namespace WEP_APICore.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ImageViewModel>> Getimages()
         {
-
             return _imageAppService.GetAllImages();
         }
         [HttpGet("{productId}")]

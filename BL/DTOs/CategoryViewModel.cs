@@ -15,6 +15,5 @@ namespace BL.DTOs
         public string Name { get; set; }
         public string Image { get; set; }
         public int MainCategoryID { get; set; }
-        public string MainCategoryName { get; set; }
     }
 }

@@ -9,10 +9,10 @@ namespace BL.DTOs
 {
     public class SubCategoryViewModel
     {
+        public int ID { get; set; }
         [Required]
         public string Name { get; set; }
         public string Image { get; set; }
         public int CategoryID { get; set; }
-        public string CategoryName { get; set; }
     }
 }

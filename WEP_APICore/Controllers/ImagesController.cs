@@ -30,7 +30,7 @@ namespace WEP_APICore.Controllers
         public ActionResult<IEnumerable<ImageViewModel>> Getimages(int productId)
         {
 
-            return _imageAppService.GetAllImages().Where(i=>i.productID==productId).ToList();
+            return _imageAppService.GetAllImages().Where(i => i.productID == productId).ToList();
         }
 
         // GET: api/Images/5

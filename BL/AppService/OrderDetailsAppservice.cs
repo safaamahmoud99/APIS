@@ -20,10 +20,10 @@ namespace BL.AppService
         }
       
 
-        public List<OrderDetailsViewModel> GetAllOrderDetails()
+        public List<OrderDetails> GetAllOrderDetailsbyOrderID()
         {
 
-            return Mapper.Map<List<OrderDetailsViewModel>>(TheUnitOfWork.Orderdetails.GetAll());
+            return Mapper.Map<List<OrderDetails>>(TheUnitOfWork.Orderdetails.GetAll());
         }
         
 

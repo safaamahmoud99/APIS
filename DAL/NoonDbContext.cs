@@ -15,8 +15,8 @@ namespace DAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-            .UseSqlServer("Data Source=.;Initial Catalog=NoonEcommerceWebsite;Integrated Security=True"
-            , options => options.EnableRetryOnFailure());
+            .UseSqlServer(@"Data Source=DESKTOP-TO7II5T\SQLEXPRESS;Initial Catalog=SmileSafy;Integrated Security=True"
+            ,options => options.EnableRetryOnFailure());
             //@"Data Source=DESKTOP-TO7II5T\SQLEXPRESS
         }
         protected override void OnModelCreating(ModelBuilder builder)

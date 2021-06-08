@@ -17,20 +17,20 @@ namespace DAL.Models
             public int ID { get; set; }
             //[ForeignKey("User")]
             public string UserID { get; set; }
-            [Column(TypeName = "date")]
-            public DateTime OrderDate { get; set; }
+            //[Column(TypeName = "date")]
+            public string OrderDate { get; set; }
             public double TotalPrice { get; set; }
-            public double CouponDiscount { get; set; }
-            [NotMapped]
-            public double? NetPrice
-            {
-                get { return TotalPrice - CouponDiscount; }
-                private set { }
-            }
-            public int ItemsCount { get; set; }
+            //public double CouponDiscount { get; set; }
+            //[NotMapped]
+            //public double? NetPrice
+            //{
+            //    get { return TotalPrice - CouponDiscount; }
+            //    private set { }
+            //}
+            //public int ItemsCount { get; set; }
 
-            //public virtual User User { get; set; }
-            //public virtual ICollection<OrderDetails> OrderDetails { get; private set; }
-        }
+        public virtual User User { get; set; }
+        public virtual ICollection<OrderDetails> OrderDetails { get; private set; }
+    }
     }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,10 +13,10 @@ namespace BL.DTOs
         public int Id { get; set; }
 
         [Required]
-        public DateTime Orderdate { get; set; }
+        public string OrderDate { get; set; }
         [Required]
         public double totalPrice { get; set; }
-        public double CouponDiscount { get; set; }
         public string UserID { get; set; }
+        public virtual ICollection<OrderDetails> OrderDetails { get;  set; }
     }    
 }

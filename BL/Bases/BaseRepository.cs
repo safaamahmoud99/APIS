@@ -50,7 +50,7 @@ namespace BL.Bases
             bool result = false;
             if (filter != null)
             {
-                result = query.Any(filter);
+                result = query.AsNoTracking().Any(filter);
             }
             return result;
         }
@@ -105,6 +105,16 @@ namespace BL.Bases
             {
                 Update(item);
             }
+        }
+        public virtual T GetById(string id)
+        {
+            return DbSet.Find(id);
+        }
+        public virtual void Delete(string id)
+        {
+            var entity = GetById(id);
+            if (entity == null) return; // not found; assume already deleted.
+            Delete(entity);
         }
         public virtual void Delete(T entity)
         {

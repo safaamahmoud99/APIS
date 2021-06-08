@@ -13,6 +13,7 @@ namespace DAL.Models
     {
         [ForeignKey("user"),Key]
         public string UserID { get; set; }
+        public double TotalPrice { get; set;}
         public virtual User user { get; set; }
         public ICollection<CartProduct> cartProducts { get; set; }
     }

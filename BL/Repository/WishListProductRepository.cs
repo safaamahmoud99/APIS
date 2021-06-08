@@ -1,4 +1,5 @@
 ﻿using BL.Bases;
+using DAL;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,14 +13,14 @@ namespace BL.Repository
    public  class WishListProductRepository:BaseRepository<WishListProduct>
     {
 
-        private DbContext EC_DbContext;
-        public WishListProductRepository(DbContext EC_DbContext) : base(EC_DbContext)
+        private ApplicationDbContext EC_DbContext;
+        public WishListProductRepository(ApplicationDbContext EC_DbContext) : base(EC_DbContext)
         {
             this.EC_DbContext = EC_DbContext;
         }
-        public List<WishListProduct> GetAllWishListProducts()
+        public List<WishListProduct> GetAllWishListProducts(string wishlistId)
         {
-            return GetAll().ToList();
+            return EC_DbContext.wishListProducts.Where(w => w.WishlistID == wishlistId).ToList();
         }
 
         public bool InsertWishListProduct(WishListProduct WishListProduct)

@@ -24,9 +24,9 @@ namespace WEP_APICore.Controllers
             _cartProductAppService = cartProductAppService;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<CartProductViewModel>> GetcartProducts()
+        public ActionResult<IEnumerable<CartProductViewModel>> GetcartProducts(string cartId)
         {
-            return _cartProductAppService.GetAllCartProducts(); ;
+            return _cartProductAppService.GetAllCartProducts(cartId); ;
         }
         [HttpGet("{id}")]
         public ActionResult<CartProductViewModel> GetCartProduct(int id)
@@ -35,7 +35,7 @@ namespace WEP_APICore.Controllers
             var cartProduct = _cartProductAppService.GetCartProduct(id);
             return cartProduct;
         }
-        [HttpPost]
+        [HttpPost] 
         public ActionResult<CartProduct> PostCartProduct(int productid)
         {
             // string username = User.Identity.Name;

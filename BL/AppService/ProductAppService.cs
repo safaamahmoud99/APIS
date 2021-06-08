@@ -126,5 +126,14 @@ namespace BL.AppService
             return products;
         }
 
+        public bool UpdateProduct(ProductViewModel productViewModel)
+        {
+            var product = Mapper.Map<Product>(productViewModel);
+            TheUnitOfWork.Product.Update(product);
+            TheUnitOfWork.Commit();
+
+            return true;
+        }
+
     }
 }

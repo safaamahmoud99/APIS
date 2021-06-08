@@ -19,9 +19,9 @@ namespace BL.AppService
 
         }
        
-        public List<WishListProductViewModel> GetAllWishListProducts()
+        public List<WishListProductViewModel> GetAllWishListProducts(string wishlistId)
         {
-            return Mapper.Map<List<WishListProductViewModel>>(TheUnitOfWork.WishListProduct.GetAll());
+            return Mapper.Map<List<WishListProductViewModel>>(TheUnitOfWork.WishListProduct.GetAllWishListProducts(wishlistId));
         }
         public WishListProductViewModel GetWishListProduct(int id)
         {
@@ -34,7 +34,7 @@ namespace BL.AppService
             bool result = false;
             var user = TheUnitOfWork.Account.FindByName(username);
             ///string userid =  user.Result.Id;
-            string userid = "244b6487-45ad-419e-9c56-711aada535c4";
+            string userid = "a03fce4b-a211-4abb-8b41-9f89a467968d";
             WishListProduct WishListProduct = new WishListProduct() {productId= id,WishlistID=userid };
             if (TheUnitOfWork.WishListProduct.InsertWishListProduct(WishListProduct))
             {

@@ -10,6 +10,7 @@ namespace BL.DTOs
 {
     public class ProductViewModel
     {
+        public int ID { get; set; }
         [Required]
         [MinLength(5)]
         public string Name { get; set; }
@@ -29,7 +30,7 @@ namespace BL.DTOs
        
         public int SubCategoryID { get; set; }
         public int BrandID { get; set; }
-       
+        public int SupplierID { get; set; }
         public double? AverageRating { get; set; }
     }
 }

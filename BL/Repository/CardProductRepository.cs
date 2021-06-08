@@ -1,4 +1,5 @@
 ﻿using BL.Bases;
+using DAL;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,14 +12,14 @@ namespace BL.Repository
 {
    public  class CardProductRepository : BaseRepository<CartProduct>
     {
-        private DbContext EC_DbContext;
-        public CardProductRepository(DbContext EC_DbContext) : base(EC_DbContext)
+        private ApplicationDbContext EC_DbContext;
+        public CardProductRepository(ApplicationDbContext EC_DbContext) : base(EC_DbContext)
         {
             this.EC_DbContext = EC_DbContext;
         }
-        public List<CartProduct> GetAllCartProducts()
+        public List<CartProduct> GetAllCartProducts(string cartId)
         {
-            return GetAll().ToList();
+            return EC_DbContext.cartProducts.Where(c => c.CartID == cartId).ToList();
         }
 
         public bool InsertCartProduct(CartProduct cartProduct)

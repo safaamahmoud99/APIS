@@ -78,7 +78,12 @@ namespace WEP_APICore
             services.AddTransient<AdvertisementAppService>();
             services.AddHttpContextAccessor();//allow me to get user information such as id
             services.AddAutoMapper(typeof(Startup));
-
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "474661260755-vl12frkpapdmj8pidlj6cvc2j7qe2f6r.apps.googleusercontent.com";
+                options.ClientSecret = "ReyHyfs8nSJVxhA3MN--Ewlt";
+            }
+            );
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(options =>
@@ -93,12 +98,10 @@ namespace WEP_APICore
                    ValidateIssuerSigningKey = true,
                    ValidIssuer = Configuration["Jwt:Issuer"],
                    ValidAudience = Configuration["Jwt:Issuer"],
-                   //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                };
            });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

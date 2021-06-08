@@ -114,7 +114,7 @@ namespace WEP_APICore.Controllers
             //var userID = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var userID = "2d30f7bf-86ce-43e6-a3cc-ae9cb4fb45c2";
             var cart = _CartAppService.GetCartByUser(userID);
-            double netPrice=0;
+            //double netPrice=0;
 
             OrderViewModel orderViewModel = new OrderViewModel
             {

@@ -23,9 +23,9 @@ namespace WEP_APICore.Controllers
             _wishListProductAppService= wishListProductAppService;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<WishListProductViewModel>> GetwishListProducts()
+        public ActionResult<IEnumerable<WishListProductViewModel>> GetwishListProducts(string wishlistId)
         {
-            return _wishListProductAppService.GetAllWishListProducts();
+            return _wishListProductAppService.GetAllWishListProducts(wishlistId);
         }
         [HttpGet("{id}")]
         public ActionResult<WishListProductViewModel> GetWishListProduct(int id)

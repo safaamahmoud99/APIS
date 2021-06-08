@@ -17,9 +17,9 @@ namespace BL.AppService
         {
 
         }
-        public List<CartProductViewModel> GetAllCartProducts()
+        public List<CartProductViewModel> GetAllCartProducts(string cartId)
         {
-            return Mapper.Map<List<CartProductViewModel>>(TheUnitOfWork.CardProduct.GetAll());
+            return Mapper.Map<List<CartProductViewModel>>(TheUnitOfWork.CardProduct.GetAllCartProducts(cartId));
         }
         public CartProductViewModel GetCartProduct(int id)
         {
@@ -32,7 +32,7 @@ namespace BL.AppService
             bool result = false;
             var user = TheUnitOfWork.Account.FindByName(username);
             //string userid = user.Result.Id;
-            string userid = "244b6487-45ad-419e-9c56-711aada535c4";
+            string userid = "a03fce4b-a211-4abb-8b41-9f89a467968d";
             CartProduct cartProduct = new CartProduct() { productId=id,CartID= userid};
             if (TheUnitOfWork.CardProduct.InsertCartProduct(cartProduct))
             {

@@ -17,9 +17,9 @@ namespace BL.AppService
         {
 
         }
-        public List<CartProductViewModel> GetAllCartProducts()
+        public List<CartProductViewModel> GetAllCartProducts(string cartId)
         {
-            return Mapper.Map<List<CartProductViewModel>>(TheUnitOfWork.CardProduct.GetAll());
+            return Mapper.Map<List<CartProductViewModel>>(TheUnitOfWork.CardProduct.GetAllCartProducts(cartId));
         }
         public CartProductViewModel GetCartProduct(int id)
         {

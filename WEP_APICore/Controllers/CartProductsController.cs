@@ -26,7 +26,7 @@ namespace WEP_APICore.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<CartProductViewModel>> GetcartProducts(string cartId)
         {
-            return _cartProductAppService.GetAllCartProducts(); ;
+            return _cartProductAppService.GetAllCartProducts(cartId); ;
         }
         [HttpGet("{id}")]
         public ActionResult<CartProductViewModel> GetCartProduct(int id)

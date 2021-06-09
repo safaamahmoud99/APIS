@@ -47,7 +47,6 @@ namespace WEP_APICore.Controllers
         {
             IActionResult response = Unauthorized();
             var user = await _accountAppservice.Find(login.Email, login.Password);
-
             if (user != null)
             {
                 var tokenString = _accountAppservice.CreateToken(user);

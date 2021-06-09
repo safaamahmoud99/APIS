@@ -17,9 +17,9 @@ namespace BL.AppService
         {
 
         }
-        public List<CartProductViewModel> GetAllCartProducts()
+        public List<CartProductViewModel> GetAllCartProducts(string cartId)
         {
-            return Mapper.Map<List<CartProductViewModel>>(TheUnitOfWork.CardProduct.GetAll());
+            return Mapper.Map<List<CartProductViewModel>>(TheUnitOfWork.CardProduct.GetAllCartProducts(cartId));
         }
         public CartProductViewModel GetCartProduct(int id)
         {
@@ -31,12 +31,20 @@ namespace BL.AppService
         {
             bool result = false;
             var user = TheUnitOfWork.Account.FindByName(username);
+            var pro = TheUnitOfWork.Product.GetProductById(id);
+
+       
             //string userid = user.Result.Id;
-            string userid = "244b6487-45ad-419e-9c56-711aada535c4";
-            CartProduct cartProduct = new CartProduct() { productId=id,CartID= userid};
+            string userid = "2044a2d1-9fb2-4fc1-8a98-b8266e72e797";
+            var cart = TheUnitOfWork.Cart.GetCartById(userid);
+           
+            CartProduct cartProduct = new CartProduct() { productId=id,CartID= userid,NetPrice=pro.Price};
+            cart.TotalPrice += cartProduct.NetPrice;
             if (TheUnitOfWork.CardProduct.InsertCartProduct(cartProduct))
             {
+                TheUnitOfWork.Cart.UpdateCart(cart);
                 result = TheUnitOfWork.Commit() > new int();
+               
             }
             return result;
         }
@@ -50,14 +58,28 @@ namespace BL.AppService
             result = TheUnitOfWork.Commit() > new int();
             return result;
         }
-        public bool CheckCartProductExists(int Prodectid)
+
+        //public double calcNetPrice()
+        //{
+
+        //}
+        public bool CheckCartProductExists(int Prodectid,string username)
         {
             var result = TheUnitOfWork.CardProduct.CheckCartProductExists(Prodectid);
-
+            var pro = TheUnitOfWork.Product.GetProductById(Prodectid);
+            string userid = "2044a2d1-9fb2-4fc1-8a98-b8266e72e797";
+            var cart = TheUnitOfWork.Cart.GetCartById(userid);
             if (result)
             {
                 CartProduct cartProductViewModel =Mapper.Map<CartProduct>( GetCartProduct(Prodectid));
                 cartProductViewModel.quintity++;
+                cartProductViewModel.NetPrice += pro.Price;
+                cart.TotalPrice += pro.Price;
+                TheUnitOfWork.Cart.UpdateCart(cart);
+
+
+
+
                 TheUnitOfWork.CardProduct.Update(cartProductViewModel);
                 TheUnitOfWork.Commit() ;
                 return true;

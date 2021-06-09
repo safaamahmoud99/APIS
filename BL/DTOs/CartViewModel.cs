@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace BL.DTOs
 {
     public class CartViewModel
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
+        public double TotalPrice {get; set;}
+          public ICollection<CartProduct> cartProducts { get; set; }
     }
 }

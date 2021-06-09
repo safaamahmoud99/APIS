@@ -28,6 +28,12 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             return Mapper.Map<CartViewModel>(TheUnitOfWork.Cart.GetById(id));
         }
+        public CartViewModel GetCartByUser(String id)
+        {
+            if (id ==null)
+                throw new ArgumentNullException();
+            return Mapper.Map<CartViewModel>(TheUnitOfWork.Cart.GetCartById(id));
+        }
         public bool CreateUserCart(string userId)
         {
             bool result = false;
@@ -45,6 +51,17 @@ namespace BL.AppService
             bool result = false;
             TheUnitOfWork.Cart.Delete(id);
             result = TheUnitOfWork.Commit() > new int();
+            return result;
+        }
+        public bool DeleteCartByUser(string id)
+        {
+            if (id == null)
+                throw new ArgumentNullException();
+            bool result = false;
+
+            TheUnitOfWork.Cart.Delete(id);
+            result = TheUnitOfWork.Commit() > new int();
+
             return result;
         }
 

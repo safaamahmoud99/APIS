@@ -26,6 +26,25 @@ namespace WEP_APICore.Controllers
         {
             return Ok(_productAppService.GetAllProduct());
         }
+
+        [HttpPut("{id}")]
+        public IActionResult PutProduct(int id, ProductViewModel productViewModel)
+        {
+
+            try
+            {
+                _productAppService.UpdateProduct(productViewModel);
+                return Ok(productViewModel);
+            }
+
+
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetProductById(int id)
         {

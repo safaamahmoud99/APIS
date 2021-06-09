@@ -37,6 +37,12 @@ namespace BL.Repository
         {
             return GetAny(l => l.UserID == cart.UserID);
         }
+        public Cart GetCartById(string id)
+        {
+            return GetWhere(l => l.UserID == id).AsNoTracking()
+                .Include(s => s.cartProducts)
+                .FirstOrDefault();
+        }
         public Cart GetOCartById(string id)
         {
             return GetFirstOrDefault(l => l.UserID == id);

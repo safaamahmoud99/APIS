@@ -44,7 +44,7 @@ namespace WEP_APICore.Controllers
 
             return advertisement;
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult PutAdvertisement(int id, AdvertisementViewModel advertisementViewModel)
         {
@@ -63,7 +63,7 @@ namespace WEP_APICore.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         // POST: api/Advertisements
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -90,7 +90,7 @@ namespace WEP_APICore.Controllers
                 }
             }
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         // DELETE: api/Advertisements/5
         [HttpDelete("{id}")]
         public IActionResult DeleteAdvertisement(int id)

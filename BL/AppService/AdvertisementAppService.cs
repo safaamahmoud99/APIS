@@ -26,14 +26,14 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             return Mapper.Map<AdvertisementViewModel>(TheUnitOfWork.Advertisement.GetAdvertisementById(id));
         }
-        public bool UpdateSupplier(SupplierViewModel supplierViewModel)
-        {
-            var supplier = Mapper.Map<Suppliers>(supplierViewModel);
-            TheUnitOfWork.Supplier.Update(supplier);
-            TheUnitOfWork.Commit();
+        //public bool UpdateSupplier(SupplierViewModel supplierViewModel)
+        //{
+        //    var supplier = Mapper.Map<Suppliers>(supplierViewModel);
+        //    TheUnitOfWork.Supplier.Update(supplier);
+        //    TheUnitOfWork.Commit();
 
-            return true;
-        }
+        //    return true;
+        //}
         public bool UpdateAdvertisement(AdvertisementViewModel newadvertisement)
         {
             var advertisement = Mapper.Map<Advertisement>(newadvertisement);

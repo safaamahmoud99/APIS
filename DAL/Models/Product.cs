@@ -31,9 +31,12 @@ namespace DAL.Models
                 return null;
             }
         }
+        public int SupplierID { get; set; }
         public int BrandID { get; set; }
         [ForeignKey("BrandID")]
         public virtual Brands Brands { get; set; }
+        [ForeignKey("SupplierID")]
+        public virtual Suppliers Supplier { get; set; }
         public List<Offer> Offers {get;set;}
         public List<Review> Reviews { get; set; } = new List<Review>();
         public List<CartProduct> Carts { get; set; } = new List<CartProduct>();

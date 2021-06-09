@@ -25,10 +25,10 @@ namespace WEP_APICore.Controllers
 
         // GET: api/OrderDetails
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OrderDetailsViewModel>>> GetOrderDetails()
-        {
-            return _OrderDetailsAppService.GetAllOrderDetails();
-        }
+        //public async Task<ActionResult<IEnumerable<OrderDetailsViewModel>>> GetOrderDetails()
+        //{
+        //    return _OrderDetailsAppService.GetAllOrderDetailsbyOrderID()
+        //}
 
         // GET: api/OrderDetails/2
         [HttpGet("{id}")]

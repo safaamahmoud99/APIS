@@ -41,7 +41,7 @@ namespace WEP_APICore.Controllers
             // string username = User.Identity.Name;
 
             string username = "Asd";
-            bool found = _cartProductAppService.CheckCartProductExists(productid);
+            bool found = _cartProductAppService.CheckCartProductExists(productid,username);
 
             try
             {
@@ -70,7 +70,10 @@ namespace WEP_APICore.Controllers
 
         private bool CartProductExists(int id)
         {
-            return _cartProductAppService.CheckCartProductExists(id);
+            // string username = User.Identity.Name;
+
+            string username = "Asd";
+            return _cartProductAppService.CheckCartProductExists(id, username);
         }
     }
 }

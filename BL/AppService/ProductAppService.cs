@@ -71,7 +71,13 @@ namespace BL.AppService
         {
             return Mapper.Map<ProductViewModel>(TheUnitOfWork.Product.GetProductById(id));
         }
-
+        public bool UpdateProduct(ProductViewModel productViewModel)
+        {
+            var pro = Mapper.Map<Product>(productViewModel);
+            TheUnitOfWork.Product.Update(pro);
+            TheUnitOfWork.Commit();
+            return true;
+        }
 
 
         public bool AddNewProduct(ProductViewModel productViewModel)
@@ -120,14 +126,6 @@ namespace BL.AppService
             return products;
         }
 
-        public bool UpdateProduct(ProductViewModel productViewModel)
-        {
-            var product = Mapper.Map<Product>(productViewModel);
-            TheUnitOfWork.Product.Update(product);
-            TheUnitOfWork.Commit();
-
-            return true;
-        }
-
+       
     }
 }

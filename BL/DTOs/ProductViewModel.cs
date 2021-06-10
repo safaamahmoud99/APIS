@@ -22,7 +22,7 @@ namespace BL.DTOs
         [Required]
         [MinLength(10)]
         public string Description { get; set; }
-        public string MainImage { get; set; }
+        //public string MainImage { get; set; }
         public string Color { get; set; }
         public string Size { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "Quantity Must be more than 1")]

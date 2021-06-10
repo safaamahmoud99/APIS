@@ -35,7 +35,7 @@ namespace BL.AppService
 
        
             //string userid = user.Result.Id;
-            string userid = "2044a2d1-9fb2-4fc1-8a98-b8266e72e797";
+            string userid = "2351d86a-abfd-4e12-ae04-efcc5c0e729a";
             var cart = TheUnitOfWork.Cart.GetCartById(userid);
            
             CartProduct cartProduct = new CartProduct() { productId=id,CartID= userid,NetPrice=pro.Price};
@@ -48,6 +48,7 @@ namespace BL.AppService
             }
             return result;
         }
+        //e5d7af35-3ef6-4099-a6a4-979a050eef9e
         public bool DeletCartProduct(int id)
         {
             if (id < 0)
@@ -67,7 +68,7 @@ namespace BL.AppService
         {
             var result = TheUnitOfWork.CardProduct.CheckCartProductExists(Prodectid);
             var pro = TheUnitOfWork.Product.GetProductById(Prodectid);
-            string userid = "2044a2d1-9fb2-4fc1-8a98-b8266e72e797";
+            string userid = "2351d86a-abfd-4e12-ae04-efcc5c0e729a";
             var cart = TheUnitOfWork.Cart.GetCartById(userid);
             if (result)
             {

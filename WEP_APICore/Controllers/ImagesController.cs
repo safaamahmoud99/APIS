@@ -17,8 +17,7 @@ namespace WEP_APICore.Controllers
     public class ImagesController : ControllerBase
     {
         private readonly ImageAppService _imageAppService;
-       
-
+      
         public ImagesController(ImageAppService imageAppService)
         {
             _imageAppService = imageAppService;

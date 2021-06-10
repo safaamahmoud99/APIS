@@ -112,15 +112,15 @@ namespace WEP_APICore.Controllers
             //var currentUser = _AccountappService.FindByName(User.Identity.Name);
             ////get cart id of current logged user
             //var userID = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var userID = "2d30f7bf-86ce-43e6-a3cc-ae9cb4fb45c2";
+            var userID = "2351d86a-abfd-4e12-ae04-efcc5c0e729a";
             var cart = _CartAppService.GetCartByUser(userID);
             //double netPrice=0;
 
             OrderViewModel orderViewModel = new OrderViewModel
             {
                 OrderDate = DateTime.Now.ToString(),
-                totalPrice = /*cart.TotalPrice*/100,
-                UserID = /*cart.ID*/"2d30f7bf-86ce-43e6-a3cc-ae9cb4fb45c2",
+                totalPrice = cart.TotalPrice,
+                UserID = /*cart.ID*/"2351d86a-abfd-4e12-ae04-efcc5c0e729a",
                 OrderDetails = new List<OrderDetails>()
             };
             foreach (var item in cart.cartProducts)
@@ -134,8 +134,8 @@ namespace WEP_APICore.Controllers
 
                 var product = _productAppService.GetProduct(item.productId);
                 //netPrice += item.quintity * product.Price;
-                product.Quantity -= item.quintity;
-                _productAppService.UpdateProduct(product);
+                //product.Quantity -= item.quintity;
+                //_productAppService.UpdateProduct(product);
                 orderViewModel.OrderDetails.Add(orderdetail);
             }
             //_CartAppService.DeleteCartByUser(userID);
@@ -144,10 +144,10 @@ namespace WEP_APICore.Controllers
         }
 
         [HttpGet("GetOrderDetails")]
-        public ActionResult<IEnumerable<OrderDetails>> GetOrderDetails(int OrderID)
+        public ActionResult<IEnumerable<OrderDetails>> GetOrderDetails(int id)
         {
 
-            return _OrderDetailsAppService.GetAllOrderDetailsbyOrderID().Where(i => i.OrderID == OrderID).ToList();
+            return _OrderDetailsAppService.GetAllOrderDetailsbyOrderID().Where(i => i.OrderID == id).ToList();
         }
         
         [HttpDelete("{id}")]

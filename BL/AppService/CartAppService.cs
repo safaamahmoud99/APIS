@@ -28,11 +28,11 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             return Mapper.Map<CartViewModel>(TheUnitOfWork.Cart.GetById(id));
         }
-        public CartViewModel GetCartByUser(String id)
+        public Cart GetCartByUser(String id)
         {
             if (id ==null)
                 throw new ArgumentNullException();
-            return Mapper.Map<CartViewModel>(TheUnitOfWork.Cart.GetCartById(id));
+            return TheUnitOfWork.Cart.GetCartById(id);
         }
         public bool CreateUserCart(string userId)
         {

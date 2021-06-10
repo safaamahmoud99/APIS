@@ -59,7 +59,7 @@ namespace WEP_APICore.Controllers
 
             }
         }
-
+        //2044a2d1-9fb2-4fc1-8a98-b8266e72e797
         [HttpDelete("{id}")]
         public IActionResult DeleteCartProduct(int id)
         {

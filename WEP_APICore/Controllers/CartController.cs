@@ -1,4 +1,5 @@
 ﻿using BL.AppService;
+using BL.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,20 +14,22 @@ namespace WEP_APICore.Controllers
     [ApiController]
     public class CartController : ControllerBase
     {
-        //CartProductAppService _productCartAppService;
-        //ProductAppService _productAppService;
-        //CartAppService _cartAppService;
-        //IHttpContextAccessor _httpContextAccessor;
-        //public CartController(CartProductAppService productCartAppService,
-        //    //ProductAppService productAppService,
-        //    CartAppService cartAppService,
-        //    IHttpContextAccessor httpContextAccessor)
-        //{
-        //    this._productCartAppService = productCartAppService;
-        //    this._productAppService = productAppService;
-        //    this._cartAppService = cartAppService;
-        //    this._httpContextAccessor = httpContextAccessor;
-        //}
-       
+
+
+        private readonly CartAppService _cartAppService;
+
+
+        public CartController(CartAppService cartAppService)
+        {
+            _cartAppService = cartAppService;
+        }
+
+        [HttpGet]
+        public ActionResult<CartViewModel> GetCart(string cartID)
+        {
+
+            var cart = _cartAppService.GetCart(cartID);
+            return cart;
+        }
     }
 }

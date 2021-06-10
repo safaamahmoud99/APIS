@@ -111,14 +111,8 @@ namespace BL.AppService
                 {
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.NameIdentifier, user.Id),
-                    //new Claim("role",userRoles.FirstOrDefault()),
                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
-
-            //foreach (var userRole in userRoles)
-            //{
-            //    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-            //}
 
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 

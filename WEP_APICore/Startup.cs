@@ -78,12 +78,15 @@ namespace WEP_APICore
             services.AddTransient<AdvertisementAppService>();
             services.AddHttpContextAccessor();//allow me to get user information such as id
             services.AddAutoMapper(typeof(Startup));
-            services.AddAuthentication().AddGoogle(options =>
+            services.AddAuthentication()
+            .AddGoogle("google", opt =>
             {
-                options.ClientId = "474661260755-vl12frkpapdmj8pidlj6cvc2j7qe2f6r.apps.googleusercontent.com";
-                options.ClientSecret = "ReyHyfs8nSJVxhA3MN--Ewlt";
-            }
-            );
+                var googleAuth = Configuration.GetSection("Authentication:Google");
+
+                opt.ClientId = googleAuth["ClientId"];
+                opt.ClientSecret = googleAuth["ClientSecret"];
+                opt.SignInScheme = IdentityConstants.ExternalScheme;
+            });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(options =>

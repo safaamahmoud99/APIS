@@ -65,7 +65,7 @@ namespace BL.Repository
         }
         public Product GetProductById(int id)
         {
-            var product = DbSet
+            var product = DbSet.AsNoTracking()
                 .Include(p => p.subCategory)
                 .Include(p => p.Reviews)
                 .FirstOrDefault(p => p.ID == id);

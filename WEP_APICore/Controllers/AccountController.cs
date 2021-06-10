@@ -27,8 +27,10 @@ namespace WEP_APICore.Controllers
         //RoleAppService _roleAppService;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public AccountController(IConfiguration config,
-            AccountAppService accountAppservice,
+        public AccountController
+            (
+              IConfiguration config,
+              AccountAppService accountAppservice,
               IHttpContextAccessor httpContextAccessor,
               //RoleAppService roleAppService,
                UserManager<User> userManager,
@@ -42,6 +44,7 @@ namespace WEP_APICore.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
+
         [HttpPost("/login")]
         public async Task<IActionResult> Login(LoginViewModel login)
         {

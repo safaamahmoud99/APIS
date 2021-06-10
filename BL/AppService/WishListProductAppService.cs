@@ -34,7 +34,7 @@ namespace BL.AppService
             bool result = false;
             var user = TheUnitOfWork.Account.FindByName(username);
             ///string userid =  user.Result.Id;
-            string userid = "a03fce4b-a211-4abb-8b41-9f89a467968d";
+            string userid = "e2622172-be88-4483-8585-6649a8f956c2";
             WishListProduct WishListProduct = new WishListProduct() {productId= id,WishlistID=userid };
             if (TheUnitOfWork.WishListProduct.InsertWishListProduct(WishListProduct))
             {

@@ -35,7 +35,7 @@ namespace BL.AppService
 
        
             //string userid = user.Result.Id;
-            string userid = "2044a2d1-9fb2-4fc1-8a98-b8266e72e797";
+            string userid = "e2622172-be88-4483-8585-6649a8f956c2";
             var cart = TheUnitOfWork.Cart.GetCartById(userid);
            
             CartProduct cartProduct = new CartProduct() { productId=id,CartID= userid,NetPrice=pro.Price};
@@ -67,7 +67,7 @@ namespace BL.AppService
         {
             var result = TheUnitOfWork.CardProduct.CheckCartProductExists(Prodectid);
             var pro = TheUnitOfWork.Product.GetProductById(Prodectid);
-            string userid = "2044a2d1-9fb2-4fc1-8a98-b8266e72e797";
+            string userid = "e2622172-be88-4483-8585-6649a8f956c2";
             var cart = TheUnitOfWork.Cart.GetCartById(userid);
             if (result)
             {

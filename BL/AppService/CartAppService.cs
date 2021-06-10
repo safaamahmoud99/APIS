@@ -22,17 +22,17 @@ namespace BL.AppService
         {
             return Mapper.Map<List<CartViewModel>>(TheUnitOfWork.Cart.GetAllCart());
         }
-        public CartViewModel GetCart(int id)
+        public CartViewModel GetCart(string cartid)
         {
-            if (id < 0)
-                throw new ArgumentNullException();
-            return Mapper.Map<CartViewModel>(TheUnitOfWork.Cart.GetById(id));
+            
+            return Mapper.Map<CartViewModel>(TheUnitOfWork.Cart.GetCartById(cartid));
         }
-        public CartViewModel GetCartByUser(String id)
+        
+        public Cart GetCartByUser(String id)
         {
-            if (id ==null)
+            if (id == null)
                 throw new ArgumentNullException();
-            return Mapper.Map<CartViewModel>(TheUnitOfWork.Cart.GetCartById(id));
+            return TheUnitOfWork.Cart.GetCartById(id);
         }
         public bool CreateUserCart(string userId)
         {

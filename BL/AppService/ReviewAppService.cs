@@ -35,6 +35,7 @@ namespace BL.AppService
             review.Rating = newreview.Rating;
 
             TheUnitOfWork.Review.UpdateReview(review);
+            TheUnitOfWork.Commit();
 
         }
         public bool CreateReview(ReviewViewModel reviewViewModel)

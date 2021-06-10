@@ -9,8 +9,8 @@ namespace BL.DTOs
 {
     public class CartViewModel
     {
-        public string ID { get; set; }
+        public string UserID { get; set; }
         public double TotalPrice {get; set;}
-          public ICollection<CartProduct> cartProducts { get; set; }
+       
     }
 }

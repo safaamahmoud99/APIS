@@ -46,7 +46,7 @@ namespace WEP_APICore.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetProductById(int id)
+        public ActionResult<ProductViewModel> GetProductById(int id)
         {
 
             var res = _productAppService.GetProduct(id);

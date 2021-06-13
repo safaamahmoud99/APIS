@@ -38,9 +38,9 @@ namespace WEP_APICore.Controllers
         [HttpPost] 
         public ActionResult<CartProduct> PostCartProduct(int productid)
         {
-            // string username = User.Identity.Name;
+             string username = User.Identity.Name;
 
-            string username = "Asd";
+            //string username = "Asd";
             bool found = _cartProductAppService.CheckCartProductExists(productid,username);
 
             try

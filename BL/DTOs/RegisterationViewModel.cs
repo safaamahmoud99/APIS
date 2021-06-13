@@ -20,6 +20,7 @@ namespace BL.DTOs
         [Required]
         [Compare("Password")]
         public string confirmPassword { get; set; }
+        public string Role { get; set; }
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
     }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210609014352_init")]
+    [Migration("20210610175150_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -267,7 +267,7 @@ namespace DAL.Migrations
                     b.Property<int>("SubCategoryID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SuppliersID")
+                    b.Property<int>("SupplierID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -276,7 +276,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("SubCategoryID");
 
-                    b.HasIndex("SuppliersID");
+                    b.HasIndex("SupplierID");
 
                     b.ToTable("Product");
                 });
@@ -686,13 +686,17 @@ namespace DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DAL.Models.Suppliers", null)
+                    b.HasOne("DAL.Models.Suppliers", "Supplier")
                         .WithMany("Products")
-                        .HasForeignKey("SuppliersID");
+                        .HasForeignKey("SupplierID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Brands");
 
                     b.Navigation("subCategory");
+
+                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("DAL.Models.Review", b =>

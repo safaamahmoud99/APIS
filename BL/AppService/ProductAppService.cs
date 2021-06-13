@@ -22,6 +22,20 @@ namespace BL.AppService
             IEnumerable<Product> allProducts = TheUnitOfWork.Product.GetAllProduct();
             return Mapper.Map<IEnumerable<ProductViewModel>>(allProducts);
         }
+        public IEnumerable<ProductViewModel> GetAllProductDevices()
+        {
+            IEnumerable<Product> allProducts =
+                 TheUnitOfWork.Product.GetAllProductDevices();
+            return Mapper.Map<IEnumerable<ProductViewModel>>(allProducts);
+
+        }
+        public IEnumerable<ProductViewModel> GetAllProductInASpecificSubCategory(int id)
+        {
+            IEnumerable<Product> allProducts =
+                 TheUnitOfWork.Product.GetAllProductInAspecificSubCategory(id);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(allProducts);
+
+        }
         public IEnumerable<ProductViewModel> GetLatestProduct(int numberOfProducts = 0)
         {
             IEnumerable<Product> allProducts =

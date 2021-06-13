@@ -27,6 +27,14 @@ namespace BL.Repository
                 .Include(p => p.Reviews)
                 .ToList();
         }
+        public IEnumerable<Product> GetAllProductDevices()
+        {
+            return GetAll().Where(p => (p.subCategory.Category.mainCategory.Name) == "Electronics").ToList();
+        }
+        public IEnumerable<Product> GetAllProductInAspecificSubCategory(int id)
+        {
+            return GetAll().Where(p => p.SubCategoryID == id).ToList();
+        }
         public IEnumerable<Product> GetNewArrivalsProduct(int numberOfProducts = 0)
         {
             IEnumerable<Product> newArivailsProducts;
@@ -104,5 +112,6 @@ namespace BL.Repository
             }
             return DbSet.Count();
         }
+
     }
 }

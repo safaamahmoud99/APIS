@@ -26,7 +26,11 @@ namespace WEP_APICore.Controllers
         {
             return Ok(_productAppService.GetAllProduct());
         }
-
+        [HttpGet("AllProductDevices")]
+        public IActionResult GetAllProductDevices()
+        {
+            return Ok(_productAppService.GetAllProductDevices());
+        }
         [HttpPut("{id}")]
         public IActionResult PutProduct(int id, ProductViewModel productViewModel)
         {
@@ -51,6 +55,11 @@ namespace WEP_APICore.Controllers
 
             var res = _productAppService.GetProduct(id);
             return Ok(_productAppService.GetProduct(id));
+        }
+        [HttpGet("AllProductBySubCategoryId")]
+        public ActionResult<ProductViewModel> GetProductBySubCategoryId(int id)
+        {
+            return Ok(_productAppService.GetAllProductInASpecificSubCategory(id));
         }
         [HttpGet("LatestArrivals/{numOfProducts}")]
         public IActionResult GetNewLatestProducts(int numOfProducts)

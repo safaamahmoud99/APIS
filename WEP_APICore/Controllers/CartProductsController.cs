@@ -9,19 +9,24 @@ using DAL;
 using DAL.Models;
 using BL.AppService;
 using BL.DTOs;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WEP_APICore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CartProductsController : ControllerBase
     {
         private readonly CartProductAppService _cartProductAppService;
-
-       
-        public CartProductsController(CartProductAppService cartProductAppService)
+        IHttpContextAccessor _httpContextAccessor;
+        private AccountAppService _accountAppservice;
+        public CartProductsController(AccountAppService accountAppservice, CartProductAppService cartProductAppService, IHttpContextAccessor httpContextAccessor)
         {
             _cartProductAppService = cartProductAppService;
+            _httpContextAccessor = httpContextAccessor;
+            _accountAppservice = accountAppservice;
         }
         [HttpGet]
         public ActionResult<IEnumerable<CartProductViewModel>> GetcartProducts(string cartId)
@@ -35,14 +40,11 @@ namespace WEP_APICore.Controllers
             var cartProduct = _cartProductAppService.GetCartProduct(id);
             return cartProduct;
         }
-        [HttpPost] 
+        [HttpPost]
         public ActionResult<CartProduct> PostCartProduct(int productid)
         {
-            // string username = User.Identity.Name;
-
-            string username = "Asd";
-            bool found = _cartProductAppService.CheckCartProductExists(productid,username);
-
+            string username = User.Identity.Name;
+            bool found = _cartProductAppService.CheckCartProductExists(productid, username);
             try
             {
                 if(found==false)

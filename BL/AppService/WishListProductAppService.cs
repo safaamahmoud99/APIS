@@ -17,8 +17,7 @@ namespace BL.AppService
         public WishListProductAppService(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
         {
 
-        }
-       
+        }    
         public List<WishListProductViewModel> GetAllWishListProducts(string wishlistId)
         {
             return Mapper.Map<List<WishListProductViewModel>>(TheUnitOfWork.WishListProduct.GetAllWishListProducts(wishlistId));
@@ -33,8 +32,7 @@ namespace BL.AppService
         {
             bool result = false;
             var user = TheUnitOfWork.Account.FindByName(username);
-            ///string userid =  user.Result.Id;
-            string userid = "e2622172-be88-4483-8585-6649a8f956c2";
+            string userid =  user.Result.Id;
             WishListProduct WishListProduct = new WishListProduct() {productId= id,WishlistID=userid };
             if (TheUnitOfWork.WishListProduct.InsertWishListProduct(WishListProduct))
             {

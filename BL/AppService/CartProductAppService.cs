@@ -31,11 +31,7 @@ namespace BL.AppService
         {
             bool result = false;
             var user = TheUnitOfWork.Account.FindByName(username);
-            var pro = TheUnitOfWork.Product.GetProductById(id);
-
-       
-            string userid = user.Result.Id;
-            //string userid = "e2622172-be88-4483-8585-6649a8f956c2";
+           
             var pro = TheUnitOfWork.Product.GetProductById(id);      
             string userid = user.Result.Id;
             var cart = TheUnitOfWork.Cart.GetCartById(userid);
@@ -64,11 +60,11 @@ namespace BL.AppService
         {
             var result = TheUnitOfWork.CardProduct.CheckCartProductExists(Prodectid);
             var pro = TheUnitOfWork.Product.GetProductById(Prodectid);
-            var user = TheUnitOfWork.Account.FindByName(username);
+           
             
 
 
-            string userid = user.Result.Id;
+            
             //string userid = "e2622172-be88-4483-8585-6649a8f956c2";
             var user = TheUnitOfWork.Account.FindByName(username);
             string userid = user.Result.Id;

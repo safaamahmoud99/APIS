@@ -103,22 +103,16 @@ namespace BL.AppService
         {
             return await TheUnitOfWork.Account.GetUserRoles(user);
         }
-        public async Task<dynamic> CreateToken(User user)
+        public  dynamic CreateToken(User user)
         {
             //var userRoles = await GetUserRoles(user);
-
             var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.NameIdentifier, user.Id),
-                    //new Claim("role",userRoles.FirstOrDefault()),
+                    new Claim(ClaimTypes.Name,user.UserName),
                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
-
-            //foreach (var userRole in userRoles)
-            //{
-            //    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-            //}
 
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 

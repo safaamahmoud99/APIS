@@ -9,11 +9,13 @@ using DAL;
 using DAL.Models;
 using BL.AppService;
 using BL.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WEP_APICore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class WishListProductsController : ControllerBase
     {
         private readonly WishListProductAppService _wishListProductAppService;
@@ -38,9 +40,7 @@ namespace WEP_APICore.Controllers
          [HttpPost]
         public ActionResult<WishListProductViewModel> PostWishListProduct(int id)
         {
-            //string username = User.Identity.Name;
-
-            string username = "Asd";
+            string username = User.Identity.Name;
             bool found = _wishListProductAppService.CheckWishListProductExists(id);
             try
             {

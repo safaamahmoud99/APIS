@@ -59,6 +59,12 @@ namespace BL.AppService
         {
             var result = TheUnitOfWork.CardProduct.CheckCartProductExists(Prodectid);
             var pro = TheUnitOfWork.Product.GetProductById(Prodectid);
+           
+            
+
+
+            
+            //string userid = "e2622172-be88-4483-8585-6649a8f956c2";
             var user = TheUnitOfWork.Account.FindByName(username);
             string userid = user.Result.Id;
             var cart = TheUnitOfWork.Cart.GetCartById(userid);

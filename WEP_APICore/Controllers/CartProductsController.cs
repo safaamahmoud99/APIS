@@ -49,7 +49,7 @@ namespace WEP_APICore.Controllers
             {
                 if(found==false)
                 {
-                    _cartProductAppService.CreateCartProduct(username, productid);
+                    _cartProductAppService.CreateCartProduct(username, productid).Wait();
                     return Ok();
                 }
                 return Ok();

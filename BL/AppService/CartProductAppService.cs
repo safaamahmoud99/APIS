@@ -52,6 +52,7 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             CartProduct cartProductViewModel =Mapper.Map<CartProduct>( GetCartProduct(id));
             bool result = false;
+           
             TheUnitOfWork.CardProduct.DeleteCartProduct(cartProductViewModel.ID);
             result = TheUnitOfWork.Commit() > new int();
             return result;
@@ -65,7 +66,7 @@ namespace BL.AppService
 
 
             
-            //string userid = "e2622172-be88-4483-8585-6649a8f956c2";
+           
             var user = TheUnitOfWork.Account.FindByName(username);
             string userid = user.Result.Id;
             var cart = TheUnitOfWork.Cart.GetCartById(userid);

@@ -27,12 +27,12 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             return Mapper.Map<CartProductViewModel>(TheUnitOfWork.CardProduct.GetCartProductById(id));
         }
-        public bool CreateCartProduct(string username, int id)
+        public async Task<bool> CreateCartProduct(string username, int id)
         {
             bool result = false;
-            var user = TheUnitOfWork.Account.FindByName(username);
+            var user =await TheUnitOfWork.Account.FindByName(username);
             var pro = TheUnitOfWork.Product.GetProductById(id);      
-            string userid = user.Result.Id;
+            string userid = user.Id;
             var cart = TheUnitOfWork.Cart.GetCartById(userid);
            
             CartProduct cartProduct = new CartProduct() { productId=id,CartID= userid,NetPrice=pro.Price};
@@ -43,7 +43,7 @@ namespace BL.AppService
                 result = TheUnitOfWork.Commit() > new int();
                
             }
-            return result;
+            return  result;
         }
         public bool DeletCartProduct(int id)
         {

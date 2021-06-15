@@ -132,8 +132,8 @@ namespace WEP_APICore.Controllers
 
                 };
 
-                var product = _productAppService.GetProduct(item.productId);
-                //netPrice += item.quintity * product.Price;
+                //var product = _productAppService.GetProduct(item.productId);
+                ////netPrice += item.quintity * product.Price;
                 //product.Quantity -= item.quintity;
                 //_productAppService.UpdateProduct(product);
                 orderViewModel.OrderDetails.Add(orderdetail);

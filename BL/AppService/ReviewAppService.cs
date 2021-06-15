@@ -57,5 +57,13 @@ namespace BL.AppService
             result = TheUnitOfWork.Commit() > new int();
             return result;
         }
+        public int CountEntity()
+        {
+            return TheUnitOfWork.Review.CountEntity();
+        }
+        public IEnumerable<ReviewViewModel> GetPageRecords(int pageSize, int pageNumber)
+        {
+            return Mapper.Map<List<ReviewViewModel>>(TheUnitOfWork.Review.GetPageRecords(pageSize, pageNumber));
+        }
     }
 }

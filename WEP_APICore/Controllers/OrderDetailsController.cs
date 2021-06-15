@@ -97,6 +97,5 @@ namespace WEP_APICore.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
     }
 }

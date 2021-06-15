@@ -118,9 +118,9 @@ namespace WEP_APICore.Controllers
         }
 
         [HttpGet("count")]
-        public IActionResult ProductsCount(int categoryId = 0, int colorId = 0)
+        public IActionResult ProductsCount()
         {
-            return Ok(_productAppService.CountEntity(categoryId, colorId));
+            return Ok(_productAppService.CountEntity());
         }
         [HttpGet("{pageSize}/{pageNumber}")]
         public IActionResult GetProductsByPage(int pageSize, int pageNumber)

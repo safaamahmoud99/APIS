@@ -62,5 +62,13 @@ namespace BL.AppService
             result = TheUnitOfWork.Commit() > new int();
             return result;
         }
+        public int CountEntity()
+        {
+            return TheUnitOfWork.Advertisement.CountEntity();
+        }
+        public IEnumerable<AdvertisementViewModel> GetPageRecords(int pageSize, int pageNumber)
+        {
+            return Mapper.Map<List<AdvertisementViewModel>>(TheUnitOfWork.Advertisement.GetPageRecords(pageSize, pageNumber));
+        }
     }
 }

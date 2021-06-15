@@ -99,7 +99,15 @@ namespace WEP_APICore.Controllers
 
             return NoContent();
         }
-
-        
+        [HttpGet("count")]
+        public IActionResult AdvertisementCount()
+        {
+            return Ok(_advertisementApp.CountEntity());
+        }
+        [HttpGet("{pageSize}/{pageNumber}")]
+        public IActionResult GetAdvertisementByPage(int pageSize, int pageNumber)
+        {
+            return Ok(_advertisementApp.GetPageRecords(pageSize, pageNumber));
+        }
     }
 }

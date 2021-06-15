@@ -89,5 +89,15 @@ namespace WEP_APICore.Controllers
         {
             return _supplierAppService.CheckSupplierExists(id); 
         }
+        [HttpGet("count")]
+        public IActionResult SuppliersCount()
+        {
+            return Ok(_supplierAppService.CountEntity());
+        }
+        [HttpGet("{pageSize}/{pageNumber}")]
+        public IActionResult GetSupplierByPage(int pageSize, int pageNumber)
+        {
+            return Ok(_supplierAppService.GetPageRecords(pageSize, pageNumber));
+        }
     }
 }

@@ -91,5 +91,15 @@ namespace WEP_APICore.Controllers
             return _brandAppService.CheckBrandExists(id);
            
         }
+        [HttpGet("count")]
+        public IActionResult BrandsCount()
+        {
+            return Ok(_brandAppService.CountEntity());
+        }
+        [HttpGet("{pageSize}/{pageNumber}")]
+        public IActionResult GetBrandsByPage(int pageSize, int pageNumber)
+        {
+            return Ok(_brandAppService.GetPageRecords(pageSize, pageNumber));
+        }
     }
 }

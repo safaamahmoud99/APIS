@@ -27,13 +27,12 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             return Mapper.Map<CartProductViewModel>(TheUnitOfWork.CardProduct.GetCartProductById(id));
         }
-        public bool CreateCartProduct(string username, int id)
+        public async Task<bool> CreateCartProduct(string username, int id)
         {
             bool result = false;
-            var user = TheUnitOfWork.Account.FindByName(username);
-           
+            var user =await TheUnitOfWork.Account.FindByName(username);
             var pro = TheUnitOfWork.Product.GetProductById(id);      
-            string userid = user.Result.Id;
+            string userid = user.Id;
             var cart = TheUnitOfWork.Cart.GetCartById(userid);
            
             CartProduct cartProduct = new CartProduct() { productId=id,CartID= userid,NetPrice=pro.Price};
@@ -44,7 +43,7 @@ namespace BL.AppService
                 result = TheUnitOfWork.Commit() > new int();
                
             }
-            return result;
+            return  result;
         }
         public bool DeletCartProduct(int id)
         {
@@ -52,6 +51,7 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             CartProduct cartProductViewModel =Mapper.Map<CartProduct>( GetCartProduct(id));
             bool result = false;
+           
             TheUnitOfWork.CardProduct.DeleteCartProduct(cartProductViewModel.ID);
             result = TheUnitOfWork.Commit() > new int();
             return result;
@@ -65,7 +65,7 @@ namespace BL.AppService
 
 
             
-            //string userid = "e2622172-be88-4483-8585-6649a8f956c2";
+           
             var user = TheUnitOfWork.Account.FindByName(username);
             string userid = user.Result.Id;
             var cart = TheUnitOfWork.Cart.GetCartById(userid);

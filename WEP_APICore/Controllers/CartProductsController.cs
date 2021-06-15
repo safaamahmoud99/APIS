@@ -49,7 +49,7 @@ namespace WEP_APICore.Controllers
             {
                 if(found==false)
                 {
-                    _cartProductAppService.CreateCartProduct(username, productid);
+                    _cartProductAppService.CreateCartProduct(username, productid).Wait();
                     return Ok();
                 }
                 return Ok();
@@ -72,9 +72,9 @@ namespace WEP_APICore.Controllers
 
         private bool CartProductExists(int id)
         {
-            // string username = User.Identity.Name;
+            string username = User.Identity.Name;
 
-            string username = "Asd";
+            
             return _cartProductAppService.CheckCartProductExists(id, username);
         }
     }

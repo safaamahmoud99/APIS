@@ -27,15 +27,12 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             return Mapper.Map<CartProductViewModel>(TheUnitOfWork.CardProduct.GetCartProductById(id));
         }
-        public bool CreateCartProduct(string username, int id)
+        public async Task<bool> CreateCartProduct(string username, int id)
         {
             bool result = false;
-            var user = TheUnitOfWork.Account.FindByName(username);
-            var pro = TheUnitOfWork.Product.GetProductById(id);
-
-       
-            //string userid = user.Result.Id;
-            string userid = "2351d86a-abfd-4e12-ae04-efcc5c0e729a";
+            var user =await TheUnitOfWork.Account.FindByName(username);
+            var pro = TheUnitOfWork.Product.GetProductById(id);      
+            string userid = user.Id;
             var cart = TheUnitOfWork.Cart.GetCartById(userid);
            
             CartProduct cartProduct = new CartProduct() { productId=id,CartID= userid,NetPrice=pro.Price};
@@ -46,28 +43,38 @@ namespace BL.AppService
                 result = TheUnitOfWork.Commit() > new int();
                
             }
-            return result;
+            return  result;
         }
-        public bool DeletCartProduct(int id)
+        public async Task<bool> DeletCartProduct(int id,string username)
         {
             if (id < 0)
                 throw new ArgumentNullException();
+
+            var user = await TheUnitOfWork.Account.FindByName(username);
+            string userid = user.Id;
+            var cart = TheUnitOfWork.Cart.GetCartById(userid);
+           
             CartProduct cartProductViewModel =Mapper.Map<CartProduct>( GetCartProduct(id));
-            bool result = false;
+            cart.TotalPrice -= cartProductViewModel.NetPrice;
+           bool result = false;
+           
             TheUnitOfWork.CardProduct.DeleteCartProduct(cartProductViewModel.ID);
+            TheUnitOfWork.Cart.UpdateCart(cart);
             result = TheUnitOfWork.Commit() > new int();
             return result;
         }
-
-        //public double calcNetPrice()
-        //{
-
-        //}
         public bool CheckCartProductExists(int Prodectid,string username)
         {
             var result = TheUnitOfWork.CardProduct.CheckCartProductExists(Prodectid);
             var pro = TheUnitOfWork.Product.GetProductById(Prodectid);
-            string userid = "2351d86a-abfd-4e12-ae04-efcc5c0e729a";
+           
+            
+
+
+            
+           
+            var user = TheUnitOfWork.Account.FindByName(username);
+            string userid = user.Result.Id;
             var cart = TheUnitOfWork.Cart.GetCartById(userid);
             if (result)
             {
@@ -76,10 +83,6 @@ namespace BL.AppService
                 cartProductViewModel.NetPrice += pro.Price;
                 cart.TotalPrice += pro.Price;
                 TheUnitOfWork.Cart.UpdateCart(cart);
-
-
-
-
                 TheUnitOfWork.CardProduct.Update(cartProductViewModel);
                 TheUnitOfWork.Commit() ;
                 return true;
@@ -90,5 +93,37 @@ namespace BL.AppService
                 return false;
             }
         }
+
+
+        public async Task<bool> UpdateCartProduct( CartProductViewModel newcartProduct, string username)
+        {
+            
+            bool result = false;
+            var user = await TheUnitOfWork.Account.FindByName(username);
+            string userid = user.Id;
+            var cart = TheUnitOfWork.Cart.GetCartById(userid);
+
+            var pro = TheUnitOfWork.Product.GetProductById(newcartProduct.productId);
+            var cartProduct = TheUnitOfWork.CardProduct.GetCartProductByCartProductId(newcartProduct.ID);
+
+            cart.TotalPrice -= cartProduct.NetPrice;
+            
+
+            cartProduct.quintity = newcartProduct.quintity;
+            cartProduct.NetPrice = cartProduct.quintity * pro.Price;
+            cart.TotalPrice += cartProduct.NetPrice;
+            TheUnitOfWork.Cart.UpdateCart(cart);
+            TheUnitOfWork.CardProduct.UpdateCartProduct(cartProduct);
+
+            result = TheUnitOfWork.Commit() > new int();
+
+            
+            return result;
+
+
+
+            
+        }
+
     }
 }

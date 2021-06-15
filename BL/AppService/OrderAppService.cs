@@ -85,10 +85,17 @@ namespace BL.AppService
             Order order = Mapper.Map<Order>(orderViewModel);
             return TheUnitOfWork.Order.CheckOrderExists(order);
         }
-      
-        
-        
-        
+        public int CountEntity()
+        {
+            return TheUnitOfWork.Order.CountEntity();
+        }
+        public IEnumerable<OrderViewModel> GetPageRecords(int pageSize, int pageNumber)
+        {
+            return Mapper.Map<List<OrderViewModel>>(TheUnitOfWork.Order.GetPageRecords(pageSize, pageNumber));
+        }
+
+
+
 
     }
      

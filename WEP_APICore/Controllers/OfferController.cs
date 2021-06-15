@@ -79,6 +79,16 @@ namespace WEP_APICore.Controllers
         _OfferAppService.DeleteOffer(id);
         return NoContent();
     }
+        [HttpGet("count")]
+        public IActionResult OfferCount()
+        {
+            return Ok(_OfferAppService.CountEntity());
+        }
+        [HttpGet("{pageSize}/{pageNumber}")]
+        public IActionResult GetOfferByPage(int pageSize, int pageNumber)
+        {
+            return Ok(_OfferAppService.GetPageRecords(pageSize, pageNumber));
+        }
 
     }
 }

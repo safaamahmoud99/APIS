@@ -58,29 +58,44 @@ namespace WEP_APICore.Controllers
             return response;
         }
         [HttpPost("/Register")]
-        public async Task<IActionResult> Register(RegisterationViewModel User)
+        public async Task<IActionResult> Register(RegisterationViewModel userAccount)
         {
+            //IdentityRole role = new IdentityRole("User");   //To create frist role User  شيلوا الكومنت اول مرة علشان الrole  يتكريت وبعدين اعملوه كومنت تانى 
+            //var roles = await _roleManager.CreateAsync(role);
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var user = await _accountAppservice.Register(User);
+
+            userAccount.Role = "User";
+            var user = await _accountAppservice.Register(userAccount);
+
             if (user.Succeeded)
             {
+              
+                var currentUser = _accountAppservice.FindByName(userAccount.UserName);
+                var userId = currentUser.Result.Id;
+                await _accountAppservice.AssignToRole(userId, "User");
                 return Ok();
             }
             else
                 return BadRequest(user.Errors.ToList()[0]);
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost("AdminRegister")]
         public async Task<IActionResult> RegisterAdmin(RegisterationViewModel userAccount)
         {
+            //IdentityRole role = new IdentityRole("Admin");    //To create frist role Admin   شيلوا الكومنت اول مرة علشان الrole  يتكريت وبعدين اعملوه كومنت تانى 
+            //var roles = await _roleManager.CreateAsync(role);
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            userAccount.Role = "Admin";
             var user = await _accountAppservice.Register(userAccount);
             if (user.Succeeded)
             {
-                var userName = "Ahmed";//= User.Identity.Name;
-                var currentUser= _accountAppservice.FindByName(userName);
+               
+
+                var currentUser= _accountAppservice.FindByName(userAccount.UserName);
                 var userId = currentUser.Result.Id;
                 await _accountAppservice.AssignToRole(userId, "Admin");
                 return Ok();

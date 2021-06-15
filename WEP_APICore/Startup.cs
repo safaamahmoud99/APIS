@@ -78,29 +78,36 @@ namespace WEP_APICore
             services.AddTransient<AdvertisementAppService>();
             services.AddHttpContextAccessor();//allow me to get user information such as id
             services.AddAutoMapper(typeof(Startup));
-            services.AddAuthentication()
-            .AddGoogle("google", opt =>
+            //services.AddAuthentication()
+            //.AddGoogle("google", opt =>
+            //{
+            //    var googleAuth = Configuration.GetSection("Authentication:Google");
+
+            //    opt.ClientId = googleAuth["ClientId"];
+            //    opt.ClientSecret = googleAuth["ClientSecret"];
+            //    opt.SignInScheme = IdentityConstants.ExternalScheme;
+            //});
+
+            services.AddAuthentication(options =>
             {
-                var googleAuth = Configuration.GetSection("Authentication:Google");
-
-                opt.ClientId = googleAuth["ClientId"];
-                opt.ClientSecret = googleAuth["ClientSecret"];
-                opt.SignInScheme = IdentityConstants.ExternalScheme;
-            });
-
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-           .AddJwtBearer(options =>
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                //options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
            {
                options.SaveToken = true;
                options.RequireHttpsMetadata = false;
+               options.Audience = Configuration["Jwt:Audience"];
+               //options.Authority=Configuration[]
                options.TokenValidationParameters = new TokenValidationParameters
                {
                    ValidateIssuer = true,
                    ValidateAudience = true,
                    ValidateLifetime = true,
                    ValidateIssuerSigningKey = true,
-                   ValidIssuer = Configuration["Jwt:Issuer"],
-                   ValidAudience = Configuration["Jwt:Issuer"],
+                   ValidIssuer = Configuration["Jwt:ValidIssuer"],
+                   ValidAudience = Configuration["Jwt:ValidAudience"],
+                   IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
                };
            });
         }
@@ -113,8 +120,6 @@ namespace WEP_APICore
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WEP_APICore v1"));
             }
-            app.UseAuthentication();
-            app.UseAuthorization();
             app.UseCors(
                 options => options
                 .AllowAnyMethod()
@@ -122,6 +127,7 @@ namespace WEP_APICore
                 .SetIsOriginAllowed(origin => true) // allow any origin
                 .AllowCredentials());
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()

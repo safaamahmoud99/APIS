@@ -9,19 +9,24 @@ using DAL;
 using DAL.Models;
 using BL.AppService;
 using BL.DTOs;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WEP_APICore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class CartProductsController : ControllerBase
     {
         private readonly CartProductAppService _cartProductAppService;
-
-       
-        public CartProductsController(CartProductAppService cartProductAppService)
+        IHttpContextAccessor _httpContextAccessor;
+        private AccountAppService _accountAppservice;
+        public CartProductsController(AccountAppService accountAppservice, CartProductAppService cartProductAppService, IHttpContextAccessor httpContextAccessor)
         {
             _cartProductAppService = cartProductAppService;
+            _httpContextAccessor = httpContextAccessor;
+            _accountAppservice = accountAppservice;
         }
         [HttpGet]
         public ActionResult<IEnumerable<CartProductViewModel>> GetcartProducts(string cartId)
@@ -35,19 +40,16 @@ namespace WEP_APICore.Controllers
             var cartProduct = _cartProductAppService.GetCartProduct(id);
             return cartProduct;
         }
-        [HttpPost] 
+        [HttpPost]
         public ActionResult<CartProduct> PostCartProduct(int productid)
         {
-            // string username = User.Identity.Name;
-
-            string username = "Asd";
-            bool found = _cartProductAppService.CheckCartProductExists(productid,username);
-
+            string username = User.Identity.Name;
+            bool found = _cartProductAppService.CheckCartProductExists(productid, username);
             try
             {
                 if(found==false)
                 {
-                    _cartProductAppService.CreateCartProduct(username, productid);
+                    _cartProductAppService.CreateCartProduct(username, productid).Wait();
                     return Ok();
                 }
                 return Ok();
@@ -61,18 +63,28 @@ namespace WEP_APICore.Controllers
         }
         //2044a2d1-9fb2-4fc1-8a98-b8266e72e797
         [HttpDelete("{id}")]
-        public IActionResult DeleteCartProduct(int id)
+        public async Task<IActionResult> DeleteCartProductAsync(int id)
         {
-            _cartProductAppService.DeletCartProduct(id);
+            string username = User.Identity.Name;
+           await _cartProductAppService.DeletCartProduct(id,username);
 
             return NoContent();
         }
 
-        private bool CartProductExists(int id)
+        [HttpPut]
+        public async Task<IActionResult> UpdateCartProductAsync(CartProductViewModel cartProduct)
         {
             // string username = User.Identity.Name;
+            string username = "Safaa";
+            await _cartProductAppService.UpdateCartProduct(cartProduct, username);
 
-            string username = "Asd";
+            return NoContent();
+        }
+        private bool CartProductExists(int id)
+        {
+            string username = User.Identity.Name;
+
+            
             return _cartProductAppService.CheckCartProductExists(id, username);
         }
     }

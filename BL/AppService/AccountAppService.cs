@@ -103,14 +103,15 @@ namespace BL.AppService
         {
             return await TheUnitOfWork.Account.GetUserRoles(user);
         }
-        public async Task<dynamic> CreateToken(User user)
+        public  dynamic CreateToken(User user)
         {
             //var userRoles = await GetUserRoles(user);
-
             var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.NameIdentifier, user.Id),
+                    new Claim(ClaimTypes.Name,user.UserName),
+                    new Claim(ClaimTypes.Role,user.Role),
                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 

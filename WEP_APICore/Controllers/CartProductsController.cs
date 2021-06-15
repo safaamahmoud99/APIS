@@ -16,7 +16,7 @@ namespace WEP_APICore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class CartProductsController : ControllerBase
     {
         private readonly CartProductAppService _cartProductAppService;
@@ -63,13 +63,23 @@ namespace WEP_APICore.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteCartProduct(int id)
+        public async Task<IActionResult> DeleteCartProductAsync(int id)
         {
-            _cartProductAppService.DeletCartProduct(id);
+            string username = User.Identity.Name;
+           await _cartProductAppService.DeletCartProduct(id,username);
 
             return NoContent();
         }
 
+        [HttpPut]
+        public async Task<IActionResult> UpdateCartProductAsync(CartProductViewModel cartProduct)
+        {
+            // string username = User.Identity.Name;
+            string username = "Safaa";
+            await _cartProductAppService.UpdateCartProduct(cartProduct, username);
+
+            return NoContent();
+        }
         private bool CartProductExists(int id)
         {
             string username = User.Identity.Name;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿ 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ namespace WEP_APICore.Controllers
             bool found = _cartProductAppService.CheckCartProductExists(productid, username);
             try
             {
-                if(found==false)
+                if (found == false)
                 {
                     _cartProductAppService.CreateCartProduct(username, productid).Wait();
                     return Ok();
@@ -66,7 +67,7 @@ namespace WEP_APICore.Controllers
         public async Task<IActionResult> DeleteCartProductAsync(int id)
         {
             string username = User.Identity.Name;
-           await _cartProductAppService.DeletCartProduct(id,username);
+            await _cartProductAppService.DeletCartProduct(id, username);
 
             return NoContent();
         }
@@ -93,8 +94,9 @@ namespace WEP_APICore.Controllers
         {
             string username = User.Identity.Name;
 
-            
+
             return _cartProductAppService.CheckCartProductExists(id, username);
         }
     }
 }
+ 

@@ -70,6 +70,15 @@ namespace WEP_APICore.Controllers
 
             return NoContent();
         }
+        [HttpDelete("ClearCart")]
+        public async Task<IActionResult> DeleteAllCartProductAsync(string ccartID)
+        {
+           
+            await _cartProductAppService.DeletAllCartProduct(ccartID);
+
+            return NoContent();
+        }
+
 
         [HttpPut]
         public async Task<IActionResult> UpdateCartProductAsync(CartProductViewModel cartProduct)

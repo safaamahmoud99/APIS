@@ -63,6 +63,23 @@ namespace BL.AppService
             result = TheUnitOfWork.Commit() > new int();
             return result;
         }
+        public async Task<bool> DeletAllCartProduct(string cartID)
+        {
+            var user = await TheUnitOfWork.Account.FindById(cartID);
+
+            var cart = TheUnitOfWork.Cart.GetCartById(cartID);
+            bool result = false;
+            foreach(var cartproduct in cart.cartProducts)
+            {
+                TheUnitOfWork.CardProduct.DeleteCartProduct(cartproduct.ID);
+            }
+            
+            cart.TotalPrice = 0;
+            cart.cartProducts.Clear();
+            TheUnitOfWork.Cart.UpdateCart(cart);
+            result = TheUnitOfWork.Commit() > new int();
+            return result;
+        }
         public bool CheckCartProductExists(int Prodectid,string username)
         {
             var result = TheUnitOfWork.CardProduct.CheckCartProductExists(Prodectid);

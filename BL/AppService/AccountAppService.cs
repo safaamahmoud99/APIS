@@ -59,9 +59,9 @@ namespace BL.AppService
 
             return result;
         }
-        public async Task<User> Find(string email, string password)
+        public async Task<User> Find(string username, string password)
         {
-           User user = await TheUnitOfWork.Account.Find(email, password);
+           User user = await TheUnitOfWork.Account.Find(username, password);
            if (user != null )
                return user;
            return null;
@@ -105,7 +105,6 @@ namespace BL.AppService
         }
         public  dynamic CreateToken(User user)
         {
-            //var userRoles = await GetUserRoles(user);
             var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, user.Email),

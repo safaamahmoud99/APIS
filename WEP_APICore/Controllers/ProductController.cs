@@ -61,6 +61,11 @@ namespace WEP_APICore.Controllers
         {
             return Ok(_productAppService.GetAllProductInASpecificSubCategory(id));
         }
+        [HttpGet("AllProductsBetweenTwoPrice")]
+        public ActionResult<ProductViewModel> GetAllProductBetweenTwoPrice(int id,double min_price, double max_price)
+        {
+            return Ok(_productAppService.GetAllProductBetweenTwoPrice(id,min_price, max_price));
+        }
         [HttpGet("LatestArrivals/{numOfProducts}")]
         public IActionResult GetNewLatestProducts(int numOfProducts)
         {

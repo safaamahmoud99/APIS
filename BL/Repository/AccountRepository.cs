@@ -46,7 +46,6 @@ namespace BL.Repository
         }
         public async Task<User> Find(string email, string password)
         {
-
             var user = await manager.FindByEmailAsync(email);
             if (user != null && await manager.CheckPasswordAsync(user, password))
             {

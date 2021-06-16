@@ -160,6 +160,16 @@ namespace WEP_APICore.Controllers
         {
             return _OrderAppService.CheckOrderExists(orderViewModel);
         }
+        [HttpGet("count")]
+        public IActionResult OrdersCount()
+        {
+            return Ok(_OrderAppService.CountEntity());
+        }
+        [HttpGet("{pageSize}/{pageNumber}")]
+        public IActionResult GetOrderByPage(int pageSize, int pageNumber)
+        {
+            return Ok(_OrderAppService.GetPageRecords(pageSize, pageNumber));
+        }
 
     }
 }

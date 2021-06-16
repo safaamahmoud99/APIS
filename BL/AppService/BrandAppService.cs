@@ -72,5 +72,13 @@ namespace BL.AppService
 
             return true;
         }
+        public int CountEntity()
+        {
+            return TheUnitOfWork.Brand.CountEntity();
+        }
+        public IEnumerable<BrandViewModel> GetPageRecords(int pageSize, int pageNumber)
+        {
+            return Mapper.Map<List<BrandViewModel>>(TheUnitOfWork.Brand.GetPageRecords(pageSize, pageNumber));
+        }
     }
 }

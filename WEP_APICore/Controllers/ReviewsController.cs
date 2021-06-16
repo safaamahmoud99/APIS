@@ -86,7 +86,16 @@ namespace WEP_APICore.Controllers
            _reviewAppService.DeletReview(id);
             return NoContent();
         }
+        [HttpGet("count")]
+        public IActionResult ReviewCount()
+        {
+            return Ok(_reviewAppService.CountEntity());
+        }
+        [HttpGet("{pageSize}/{pageNumber}")]
+        public IActionResult GetReviewByPage(int pageSize, int pageNumber)
+        {
+            return Ok(_reviewAppService.GetPageRecords(pageSize, pageNumber));
+        }
 
-       
     }
 }

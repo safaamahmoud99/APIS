@@ -94,5 +94,15 @@ namespace WEP_APICore.Controllers
         {
             return _imageAppService.CheckImageExists(id);
         }
+        [HttpGet("count")]
+        public IActionResult ImagesCount()
+        {
+            return Ok(_imageAppService.CountEntity());
+        }
+        [HttpGet("{pageSize}/{pageNumber}")]
+        public IActionResult GetImagesByPage(int pageSize, int pageNumber)
+        {
+            return Ok(_imageAppService.GetPageRecords(pageSize, pageNumber));
+        }
     }
 }

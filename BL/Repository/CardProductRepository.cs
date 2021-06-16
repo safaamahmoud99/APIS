@@ -42,5 +42,9 @@ namespace BL.Repository
         {
             return GetFirstOrDefault(b => b.productId == id);
         }
+        public CartProduct GetCartProductByCartProductId(int id)
+        {
+            return GetFirstOrDefault(b => b.ID == id);
+        }
     }
 }

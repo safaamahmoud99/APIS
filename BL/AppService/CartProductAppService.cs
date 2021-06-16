@@ -45,13 +45,21 @@ namespace BL.AppService
             }
             return  result;
         }
-        public bool DeletCartProduct(int id)
+        public async Task<bool> DeletCartProduct(int id,string username)
         {
             if (id < 0)
                 throw new ArgumentNullException();
+
+            var user = await TheUnitOfWork.Account.FindByName(username);
+            string userid = user.Id;
+            var cart = TheUnitOfWork.Cart.GetCartById(userid);
+           
             CartProduct cartProductViewModel =Mapper.Map<CartProduct>( GetCartProduct(id));
-            bool result = false;
+            cart.TotalPrice -= cartProductViewModel.NetPrice;
+           bool result = false;
+           
             TheUnitOfWork.CardProduct.DeleteCartProduct(cartProductViewModel.ID);
+            TheUnitOfWork.Cart.UpdateCart(cart);
             result = TheUnitOfWork.Commit() > new int();
             return result;
         }
@@ -64,7 +72,7 @@ namespace BL.AppService
 
 
             
-            //string userid = "e2622172-be88-4483-8585-6649a8f956c2";
+           
             var user = TheUnitOfWork.Account.FindByName(username);
             string userid = user.Result.Id;
             var cart = TheUnitOfWork.Cart.GetCartById(userid);
@@ -85,5 +93,37 @@ namespace BL.AppService
                 return false;
             }
         }
+
+
+        public async Task<bool> UpdateCartProduct( CartProductViewModel newcartProduct, string username)
+        {
+            
+            bool result = false;
+            var user = await TheUnitOfWork.Account.FindByName(username);
+            string userid = user.Id;
+            var cart = TheUnitOfWork.Cart.GetCartById(userid);
+
+            var pro = TheUnitOfWork.Product.GetProductById(newcartProduct.productId);
+            var cartProduct = TheUnitOfWork.CardProduct.GetCartProductByCartProductId(newcartProduct.ID);
+
+            cart.TotalPrice -= cartProduct.NetPrice;
+            
+
+            cartProduct.quintity = newcartProduct.quintity;
+            cartProduct.NetPrice = cartProduct.quintity * pro.Price;
+            cart.TotalPrice += cartProduct.NetPrice;
+            TheUnitOfWork.Cart.UpdateCart(cart);
+            TheUnitOfWork.CardProduct.UpdateCartProduct(cartProduct);
+
+            result = TheUnitOfWork.Commit() > new int();
+
+            
+            return result;
+
+
+
+            
+        }
+
     }
 }

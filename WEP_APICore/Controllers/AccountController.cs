@@ -104,7 +104,7 @@ namespace WEP_APICore.Controllers
                 return BadRequest(user.Errors.ToList()[0]);
         }
         [HttpGet]
-        [Authorize(Roles="Admin")]
+        //[Authorize(Roles="Admin")]
         public IActionResult GetAll()
         {
             var res = _accountAppservice.GetAllAccounts();

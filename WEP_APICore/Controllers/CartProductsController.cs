@@ -85,9 +85,8 @@ namespace WEP_APICore.Controllers
         public async Task<IActionResult> UpdateCartProductAsync(CartProductViewModel cartProduct)
         {
             // string username = User.Identity.Name;
-            string username = "Safaa";
+            string username = User.Identity.Name;
             await _cartProductAppService.UpdateCartProduct(cartProduct, username);
-
             return NoContent();
         }
         private bool CartProductExists(int id)

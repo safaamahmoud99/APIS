@@ -137,9 +137,16 @@ namespace WEP_APICore.Controllers
                 var product = _productAppService.GetProduct(item.productId);
                  
                 product.Quantity -= item.quintity;
-                _productAppService.UpdateProduct(product);
+                if(product.Quantity==0)
+                {
+                    _productAppService.DeleteProduct(product.ID);
+                }
+                else
+                {
+                    _productAppService.UpdateProduct(product);
+                }
                 orderViewModel.OrderDetails.Add(orderdetail);
-               //await _CartProductsAppService.DeletCartProduct(item.productId,currentUser.UserName);
+                await _CartProductsAppService.DeletAllCartProduct(cart.UserID);
 
             }
              

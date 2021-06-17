@@ -81,13 +81,13 @@ namespace WEP_APICore.Controllers
             else
                 return BadRequest(user.Errors.ToList()[0]);
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost("AdminRegister")]
         public async Task<IActionResult> RegisterAdmin(RegisterationViewModel userAccount)
         {
             //To create frist role User  شيلوا الكومنت اول مرة علشان الrole  يتكريت وبعدين اعملوه كومنت تانى 
-            //IdentityRole role = new IdentityRole("Admin");    
-            //var roles = await _roleManager.CreateAsync(role);
+            IdentityRole role = new IdentityRole("Admin");
+            var roles = await _roleManager.CreateAsync(role);
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -104,7 +104,7 @@ namespace WEP_APICore.Controllers
                 return BadRequest(user.Errors.ToList()[0]);
         }
         [HttpGet]
-        [Authorize(Roles="Admin")]
+        //[Authorize(Roles="Admin")]
         public IActionResult GetAll()
         {
             var res = _accountAppservice.GetAllAccounts();

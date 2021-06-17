@@ -64,9 +64,14 @@ namespace WEP_APICore.Controllers
             return Ok(_productAppService.GetAllProductBetweenTwoPrice(id,min_price, max_price));
         }
         [HttpGet("AllProductsInAspecificBrand")]
-        public ActionResult<ProductViewModel> AllProductsInAspecificBrand(int id)
+        public ActionResult<ProductViewModel> AllProductsInAspecificBrand(int subcategoryid,int brandid)
         {
-            return Ok(_productAppService.GetAllProductInAspecificBrands(id));
+            return Ok(_productAppService.GetAllProductInAspecificBrands(subcategoryid,brandid));
+        }
+        [HttpGet("GetAllProductfilteredBySize")]
+        public ActionResult<ProductViewModel> GetAllProductfilteredBySize(int subcategoryid, string size)
+        {
+            return Ok(_productAppService.GetAllProductfilteredBySize(subcategoryid, size));
         }
         [HttpGet("LatestArrivals/{numOfProducts}")]
         public IActionResult GetNewLatestProducts(int numOfProducts)

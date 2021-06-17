@@ -79,8 +79,6 @@ namespace WEP_APICore.Controllers
 
             return NoContent();
         }
-
-
         [HttpPut]
         public async Task<IActionResult> UpdateCartProductAsync(CartProductViewModel cartProduct)
         {

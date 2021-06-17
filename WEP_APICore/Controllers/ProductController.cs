@@ -34,7 +34,6 @@ namespace WEP_APICore.Controllers
         [HttpPut("{id}")]
         public IActionResult PutProduct(int id, ProductViewModel productViewModel)
         {
-
             try
             {
                 _productAppService.UpdateProduct(productViewModel);
@@ -46,9 +45,7 @@ namespace WEP_APICore.Controllers
             {
                 return BadRequest(ex.Message);
             }
-
         }
-
         [HttpGet("{id}")]
         public ActionResult<ProductViewModel> GetProductById(int id)
         {
@@ -65,6 +62,11 @@ namespace WEP_APICore.Controllers
         public ActionResult<ProductViewModel> GetAllProductBetweenTwoPrice(int id,double min_price, double max_price)
         {
             return Ok(_productAppService.GetAllProductBetweenTwoPrice(id,min_price, max_price));
+        }
+        [HttpGet("AllProductsInAspecificBrand")]
+        public ActionResult<ProductViewModel> AllProductsInAspecificBrand(int id)
+        {
+            return Ok(_productAppService.GetAllProductInAspecificBrands(id));
         }
         [HttpGet("LatestArrivals/{numOfProducts}")]
         public IActionResult GetNewLatestProducts(int numOfProducts)

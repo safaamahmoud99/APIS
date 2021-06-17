@@ -42,6 +42,12 @@ namespace BL.AppService
                  TheUnitOfWork.Product.GetAllProductBetweenTwoPrice(id,min_price, max_price);
             return Mapper.Map<IEnumerable<ProductViewModel>>(products);
         }
+        public IEnumerable<ProductViewModel> GetAllProductInAspecificBrands(int id)
+        {
+            IEnumerable<Product> products =
+                 TheUnitOfWork.Product.GetAllProductInAspecificBrand(id);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
         public IEnumerable<ProductViewModel> GetLatestProduct(int numberOfProducts = 0)
         {
             IEnumerable<Product> allProducts =

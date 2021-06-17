@@ -39,6 +39,10 @@ namespace BL.Repository
         {
             return GetAll().Where(p=>p.Price>=min_price && p.Price<=max_price &&p.SubCategoryID==id).ToList();
         }
+        public IEnumerable<Product> GetAllProductInAspecificBrand(int id)
+        {
+            return GetAll().Where(p => p.BrandID == id).ToList();
+        }
         public IEnumerable<Product> GetNewArrivalsProduct(int numberOfProducts = 0)
         {
             IEnumerable<Product> newArivailsProducts;

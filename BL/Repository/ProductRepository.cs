@@ -47,6 +47,26 @@ namespace BL.Repository
         {
             return GetAll().Where(p => p.SubCategoryID == subcategoryid && p.Size == size);
         }
+        public IEnumerable<Product> GetAllProductFilteredByCategoryID(int id)
+        {
+            return GetAll().Where(p => p.subCategory.Category.ID == id).ToList();
+        }
+        public IEnumerable<Product> GetAllProductFilteredByBrandID(int id)
+        {
+            return GetAll().Where(p => p.BrandID == id).ToList();
+        }
+        public IEnumerable<Product> GetAllProductFilteredBySizeonly(string size)
+        {
+            return GetAll().Where(p => p.Size == size).ToList();
+        }
+        public IEnumerable<Product> GetAllProductFilteredByColor(string color)
+        {
+            return GetAll().Where(p => p.Color ==color).ToList();
+        }
+        public IEnumerable<Product> GetAllProductFilteredByMainCategory(int id)
+        {
+            return GetAll().Where(p => p.subCategory.Category.mainCategory.ID == id).ToList();
+        }
         public IEnumerable<Product> GetNewArrivalsProduct(int numberOfProducts = 0)
         {
             IEnumerable<Product> newArivailsProducts;

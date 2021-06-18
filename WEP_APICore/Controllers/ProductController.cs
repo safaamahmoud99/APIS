@@ -139,6 +139,31 @@ namespace WEP_APICore.Controllers
         {
             return Ok(_productAppService.GetPageRecords(pageSize, pageNumber));
         }
+        [HttpGet("GetAllProductfilteredByCategoryID")]
+        public ActionResult<ProductViewModel> GetAllProductfilteredByCategoryID(int id)
+        {
+            return Ok(_productAppService.GetAllProductfilteredByCategoryID(id));
+        }
+        [HttpGet("GetAllProductFilteredByBrandID")]
+        public ActionResult<ProductViewModel> GetAllProductFilteredByBrandID(int id)
+        {
+            return Ok(_productAppService.GetAllProductFilteredByBrandID(id));
+        }
+        [HttpGet("GetAllProductFilteredBySizeonly")]
+        public ActionResult<ProductViewModel> GetAllProductFilteredBySizeonly(string size)
+        {
+            return Ok(_productAppService.GetAllProductFilteredBySizeonly(size));
+        }
+        [HttpGet("GetAllProductFilteredByColor")]
+        public ActionResult<ProductViewModel> GetAllProductFilteredByColor(string color)
+        {
+            return Ok(_productAppService.GetAllProductFilteredBySizeonly(color));
+        }
+        [HttpGet("GetAllProductFilteredByMainCategory")]
+        public ActionResult<ProductViewModel> GetAllProductFilteredByMainCategory(int id)
+        {
+            return Ok(_productAppService.GetAllProductFilteredByMainCategory(id));
+        }
 
     }
 }

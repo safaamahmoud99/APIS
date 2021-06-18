@@ -54,6 +54,36 @@ namespace BL.AppService
               TheUnitOfWork.Product.GetAllProductfilteredBySize(subcategoryid, size);
             return Mapper.Map<IEnumerable<ProductViewModel>>(products);
         }
+        public IEnumerable<ProductViewModel> GetAllProductfilteredByCategoryID(int id)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredByCategoryID(id);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductFilteredByBrandID(int id)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredByBrandID(id);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductFilteredBySizeonly(string size)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredBySizeonly(size);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductFilteredByColor(string color)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredByColor(color);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductFilteredByMainCategory(int id)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredByMainCategory(id);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
         public IEnumerable<ProductViewModel> GetLatestProduct(int numberOfProducts = 0)
         {
             IEnumerable<Product> allProducts =

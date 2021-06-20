@@ -164,6 +164,10 @@ namespace WEP_APICore.Controllers
         {
             return Ok(_productAppService.GetAllProductFilteredByMainCategory(id));
         }
-
+        [HttpGet("GetAllProductCountinCategory")]
+        public int GetAllProductCountinCategory(int id)
+        {
+            return _productAppService.GetAllProductCountinCategory(id);
+        }
     }
 }

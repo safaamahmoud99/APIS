@@ -67,6 +67,10 @@ namespace BL.Repository
         {
             return GetAll().Where(p => p.subCategory.Category.mainCategory.ID == id).ToList();
         }
+        public int GetAllProductCountinCategory(int id)
+        {
+            return GetAll().Where(p => p.subCategory.Category.mainCategory.ID == id).Count();
+        }
         public IEnumerable<Product> GetNewArrivalsProduct(int numberOfProducts = 0)
         {
             IEnumerable<Product> newArivailsProducts;

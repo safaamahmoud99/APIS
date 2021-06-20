@@ -61,8 +61,8 @@ namespace WEP_APICore.Controllers
         public async Task<IActionResult> Register(RegisterationViewModel userAccount)
         {
             //To create frist role User  شيلوا الكومنت اول مرة علشان الrole  يتكريت وبعدين اعملوه كومنت تانى 
-            //IdentityRole role = new IdentityRole("User");   
-            //var roles = await _roleManager.CreateAsync(role);
+            IdentityRole role = new IdentityRole("User");
+            var roles = await _roleManager.CreateAsync(role);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

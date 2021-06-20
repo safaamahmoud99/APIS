@@ -84,6 +84,12 @@ namespace BL.AppService
               TheUnitOfWork.Product.GetAllProductFilteredByMainCategory(id);
             return Mapper.Map<IEnumerable<ProductViewModel>>(products);
         }
+        public int GetAllProductCountinCategory(int id)
+        {
+            int products =
+              TheUnitOfWork.Product.GetAllProductCountinCategory(id);
+            return products;
+        }
         public IEnumerable<ProductViewModel> GetLatestProduct(int numberOfProducts = 0)
         {
             IEnumerable<Product> allProducts =

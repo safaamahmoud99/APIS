@@ -24,6 +24,7 @@ using System.Text;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using BL.Hubs;
 
 namespace WEP_APICore
 {
@@ -51,6 +52,7 @@ namespace WEP_APICore
                 option.UseSqlServer(Configuration.GetConnectionString("CS"),
                     options => options.EnableRetryOnFailure());
             });
+            services.AddSignalR();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WEP_APICore", Version = "v1" });
@@ -92,13 +94,11 @@ namespace WEP_APICore
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                //options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options =>
            {
                options.SaveToken = true;
                options.RequireHttpsMetadata = false;
                options.Audience = Configuration["Jwt:Audience"];
-               //options.Authority=Configuration[]
                options.TokenValidationParameters = new TokenValidationParameters
                {
                    ValidateIssuer = true,
@@ -138,6 +138,11 @@ namespace WEP_APICore
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SoppingCartWishListHub>("/notify");
+                endpoints.MapHub<WishListHub>("/wishList");
+                endpoints.MapHub<ReviewHub>("/review");
+                endpoints.MapHub<DeleteCartProductHub>("deletecartproduct");
+                endpoints.MapHub<DeleteWishListHub>("deletewishList");
             });
         }
     }

@@ -12,6 +12,8 @@ using BL.AppService;
 using BL.DTOs;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
+using BL.Hubs;
 
 namespace WEP_APICore.Controllers
 {
@@ -21,13 +23,21 @@ namespace WEP_APICore.Controllers
     public class CartProductsController : ControllerBase
     {
         private readonly CartProductAppService _cartProductAppService;
+        private IHubContext<SoppingCartWishListHub, ITypedHubClient> _hubContext;
         IHttpContextAccessor _httpContextAccessor;
         private AccountAppService _accountAppservice;
-        public CartProductsController(AccountAppService accountAppservice, CartProductAppService cartProductAppService, IHttpContextAccessor httpContextAccessor)
+        public CartProductsController
+         (
+            AccountAppService accountAppservice, 
+            CartProductAppService cartProductAppService,
+            IHttpContextAccessor httpContextAccessor,
+            IHubContext<SoppingCartWishListHub, ITypedHubClient> hubContext
+         )
         {
             _cartProductAppService = cartProductAppService;
             _httpContextAccessor = httpContextAccessor;
             _accountAppservice = accountAppservice;
+            _hubContext = hubContext;
         }
         [HttpGet]
         public ActionResult<IEnumerable<CartProductViewModel>> GetcartProducts(string cartId)
@@ -42,10 +52,10 @@ namespace WEP_APICore.Controllers
             return cartProduct;
         }
         [HttpPost]
-        public ActionResult<CartProduct> PostCartProduct(int productid)
+        public async Task<ActionResult<CartProduct>> PostCartProduct(int productid)
         {
             string username = User.Identity.Name;
-            bool found = _cartProductAppService.CheckCartProductExists(productid, username);
+            bool found =await _cartProductAppService.CheckCartProductExists(productid, username);
             try
             {
                 if (found == false)
@@ -86,12 +96,12 @@ namespace WEP_APICore.Controllers
             await _cartProductAppService.UpdateCartProduct(cartProduct, username);
             return NoContent();
         }
-        private bool CartProductExists(int id)
+        private async Task<bool> CartProductExists(int id)
         {
             string username = User.Identity.Name;
 
 
-            return _cartProductAppService.CheckCartProductExists(id, username);
+            return await _cartProductAppService.CheckCartProductExists(id, username);
         }
     }
 }

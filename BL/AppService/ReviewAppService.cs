@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using BL.Bases;
 using BL.DTOs;
+using BL.Hubs;
 using BL.interfaces;
 using DAL.Models;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +15,10 @@ namespace BL.AppService
 {
    public  class ReviewAppService : BaseAppService
     {
-        public ReviewAppService(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
+        private IHubContext<ReviewHub, ITypedClientReview> _hubContext;
+        public ReviewAppService(IUnitOfWork theUnitOfWork, IHubContext<ReviewHub, ITypedClientReview> hubContext) : base(theUnitOfWork)
         {
-
+            this._hubContext = hubContext;
         }
         public List<ReviewViewModel> GetAllReviews(int productid)
         {
@@ -42,6 +45,7 @@ namespace BL.AppService
         {
             bool result=false;
             Review review = Mapper.Map<Review>(reviewViewModel);
+            _hubContext.Clients.All.BroadcastMessage(reviewViewModel).Wait();
             if (TheUnitOfWork.Review.InsertReview(review))
             {
                 result = TheUnitOfWork.Commit() > new int();

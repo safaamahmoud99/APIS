@@ -8,7 +8,6 @@ using DAL;
 using DAL.Models;
 using BL.AppService;
 using BL.DTOs;
-using BL.AppService;
 using System;
 using Microsoft.AspNetCore.Authorization;
 
@@ -28,7 +27,7 @@ namespace WEP_APICore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OfferViewModel>>> GetOffers()
         {
-            return _OfferAppService.GetAllOffers();
+            return  _OfferAppService.GetAllOffers();
         }
 
 

@@ -107,20 +107,22 @@ namespace WEP_APICore.Controllers
 
         //[Authorize]
         [HttpGet("Checkout")]
-        public IActionResult Checkout()
+        public async Task<IActionResult> CheckoutAsync()
         {
-            //var currentUser = _AccountappService.FindByName(User.Identity.Name);
+            var currentUser =await _AccountappService.FindByName(User.Identity.Name);
             ////get cart id of current logged user
             //var userID = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var userID = "2d30f7bf-86ce-43e6-a3cc-ae9cb4fb45c2";
-            var cart = _CartAppService.GetCartByUser(userID);
+            //var userid = "d4a62c76-1ca4-41e7-ba6a-65af5a84d1fb";
+            var userid = currentUser.Id;
+
+            var cart = _CartAppService.GetCartByUser(userid);
             //double netPrice=0;
 
             OrderViewModel orderViewModel = new OrderViewModel
             {
                 OrderDate = DateTime.Now.ToString(),
-                totalPrice = /*cart.TotalPrice*/100,
-                UserID = /*cart.ID*/"2d30f7bf-86ce-43e6-a3cc-ae9cb4fb45c2",
+                totalPrice = cart.TotalPrice,
+                UserID = cart.UserID,
                 OrderDetails = new List<OrderDetails>()
             };
             foreach (var item in cart.cartProducts)
@@ -133,21 +135,31 @@ namespace WEP_APICore.Controllers
                 };
 
                 var product = _productAppService.GetProduct(item.productId);
-                //netPrice += item.quintity * product.Price;
+                 
                 product.Quantity -= item.quintity;
-                _productAppService.UpdateProduct(product);
+                if(product.Quantity==0)
+                {
+                    _productAppService.DeleteProduct(product.ID);
+                }
+                else
+                {
+                    _productAppService.UpdateProduct(product);
+                }
                 orderViewModel.OrderDetails.Add(orderdetail);
+                await _CartProductsAppService.DeletAllCartProduct(cart.UserID);
+
             }
-            //_CartAppService.DeleteCartByUser(userID);
+             
             _OrderAppService.SaveNewOrder(orderViewModel);
+
             return Ok();
         }
 
         [HttpGet("GetOrderDetails")]
-        public ActionResult<IEnumerable<OrderDetails>> GetOrderDetails(int OrderID)
+        public ActionResult<IEnumerable<OrderDetails>> GetOrderDetails(int id)
         {
 
-            return _OrderDetailsAppService.GetAllOrderDetailsbyOrderID().Where(i => i.OrderID == OrderID).ToList();
+            return _OrderDetailsAppService.GetAllOrderDetailsbyOrderID().Where(i => i.OrderID == id).ToList();
         }
         
         [HttpDelete("{id}")]

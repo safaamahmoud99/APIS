@@ -35,6 +35,38 @@ namespace BL.Repository
         {
             return GetAll().Where(p => p.SubCategoryID == id).ToList();
         }
+        public IEnumerable<Product> GetAllProductBetweenTwoPrice(int id,double min_price,double max_price)
+        {
+            return GetAll().Where(p=>p.Price>=min_price && p.Price<=max_price &&p.SubCategoryID==id).ToList();
+        }
+        public IEnumerable<Product> GetAllProductInAspecificBrand(int subcategoryid,int brandid)
+        {
+            return GetAll().Where(p => p.BrandID == brandid&&p.SubCategoryID==subcategoryid).ToList();
+        }
+        public IEnumerable<Product> GetAllProductfilteredBySize(int subcategoryid, string size)
+        {
+            return GetAll().Where(p => p.SubCategoryID == subcategoryid && p.Size == size);
+        }
+        public IEnumerable<Product> GetAllProductFilteredByCategoryID(int id)
+        {
+            return GetAll().Where(p => p.subCategory.Category.ID == id).ToList();
+        }
+        public IEnumerable<Product> GetAllProductFilteredByBrandID(int id)
+        {
+            return GetAll().Where(p => p.BrandID == id).ToList();
+        }
+        public IEnumerable<Product> GetAllProductFilteredBySizeonly(string size)
+        {
+            return GetAll().Where(p => p.Size == size).ToList();
+        }
+        public IEnumerable<Product> GetAllProductFilteredByColor(string color)
+        {
+            return GetAll().Where(p => p.Color ==color).ToList();
+        }
+        public IEnumerable<Product> GetAllProductFilteredByMainCategory(int id)
+        {
+            return GetAll().Where(p => p.subCategory.Category.mainCategory.ID == id).ToList();
+        }
         public IEnumerable<Product> GetNewArrivalsProduct(int numberOfProducts = 0)
         {
             IEnumerable<Product> newArivailsProducts;

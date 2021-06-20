@@ -17,9 +17,6 @@ namespace DAL
             optionsBuilder
             .UseSqlServer(@"Data Source=.;Initial Catalog=NoonEcommerceWebsite;Integrated Security=True"
             , options => options.EnableRetryOnFailure());
-            //@"Data Source=DESKTOP-TO7II5T\SQLEXPRESS
-            //NoonEcommerceWebsite
-            //SmileSafy
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {

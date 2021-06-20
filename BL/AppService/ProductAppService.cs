@@ -36,6 +36,54 @@ namespace BL.AppService
             return Mapper.Map<IEnumerable<ProductViewModel>>(allProducts);
 
         }
+        public IEnumerable<ProductViewModel> GetAllProductBetweenTwoPrice(int id,double min_price, double max_price)
+        {
+            IEnumerable<Product> products =
+                 TheUnitOfWork.Product.GetAllProductBetweenTwoPrice(id,min_price, max_price);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductInAspecificBrands(int subcategoryid,int brandid)
+        {
+            IEnumerable<Product> products =
+                 TheUnitOfWork.Product.GetAllProductInAspecificBrand(subcategoryid,brandid);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductfilteredBySize(int subcategoryid, string size)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductfilteredBySize(subcategoryid, size);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductfilteredByCategoryID(int id)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredByCategoryID(id);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductFilteredByBrandID(int id)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredByBrandID(id);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductFilteredBySizeonly(string size)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredBySizeonly(size);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductFilteredByColor(string color)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredByColor(color);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductFilteredByMainCategory(int id)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredByMainCategory(id);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
         public IEnumerable<ProductViewModel> GetLatestProduct(int numberOfProducts = 0)
         {
             IEnumerable<Product> allProducts =
@@ -92,8 +140,6 @@ namespace BL.AppService
             TheUnitOfWork.Commit();
             return true;
         }
-
-
         public bool AddNewProduct(ProductViewModel productViewModel)
         {
             if (productViewModel == null)
@@ -106,8 +152,6 @@ namespace BL.AppService
             }
             return result;
         }
-
-
         public bool DecreaseQuantity(int prodID, int decresedQuantity)
         {
             var product = TheUnitOfWork.Product.GetById(prodID);

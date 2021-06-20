@@ -1,4 +1,5 @@
-﻿using System;
+﻿ 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace WEP_APICore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class CartProductsController : ControllerBase
     {
         private readonly CartProductAppService _cartProductAppService;
@@ -47,7 +48,7 @@ namespace WEP_APICore.Controllers
             bool found = _cartProductAppService.CheckCartProductExists(productid, username);
             try
             {
-                if(found==false)
+                if (found == false)
                 {
                     _cartProductAppService.CreateCartProduct(username, productid).Wait();
                     return Ok();
@@ -63,19 +64,35 @@ namespace WEP_APICore.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteCartProduct(int id)
+        public async Task<IActionResult> DeleteCartProductAsync(int id)
         {
-            _cartProductAppService.DeletCartProduct(id);
+            string username = User.Identity.Name;
+            await _cartProductAppService.DeletCartProduct(id, username);
 
             return NoContent();
         }
+        [HttpDelete("ClearCart")]
+        public async Task<IActionResult> DeleteAllCartProductAsync(string ccartID)
+        {
+           
+            await _cartProductAppService.DeletAllCartProduct(ccartID);
 
+            return NoContent();
+        }
+        [HttpPut]
+        public async Task<IActionResult> UpdateCartProductAsync(CartProductViewModel cartProduct)
+        {
+            string username = User.Identity.Name;
+            await _cartProductAppService.UpdateCartProduct(cartProduct, username);
+            return NoContent();
+        }
         private bool CartProductExists(int id)
         {
             string username = User.Identity.Name;
 
-            
+
             return _cartProductAppService.CheckCartProductExists(id, username);
         }
     }
 }
+ 

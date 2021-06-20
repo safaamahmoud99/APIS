@@ -34,7 +34,6 @@ namespace WEP_APICore.Controllers
         [HttpPut("{id}")]
         public IActionResult PutProduct(int id, ProductViewModel productViewModel)
         {
-
             try
             {
                 _productAppService.UpdateProduct(productViewModel);
@@ -46,9 +45,7 @@ namespace WEP_APICore.Controllers
             {
                 return BadRequest(ex.Message);
             }
-
         }
-
         [HttpGet("{id}")]
         public ActionResult<ProductViewModel> GetProductById(int id)
         {
@@ -60,6 +57,21 @@ namespace WEP_APICore.Controllers
         public ActionResult<ProductViewModel> GetProductBySubCategoryId(int id)
         {
             return Ok(_productAppService.GetAllProductInASpecificSubCategory(id));
+        }
+        [HttpGet("AllProductsBetweenTwoPrice")]
+        public ActionResult<ProductViewModel> GetAllProductBetweenTwoPrice(int id,double min_price, double max_price)
+        {
+            return Ok(_productAppService.GetAllProductBetweenTwoPrice(id,min_price, max_price));
+        }
+        [HttpGet("AllProductsInAspecificBrand")]
+        public ActionResult<ProductViewModel> AllProductsInAspecificBrand(int subcategoryid,int brandid)
+        {
+            return Ok(_productAppService.GetAllProductInAspecificBrands(subcategoryid,brandid));
+        }
+        [HttpGet("GetAllProductfilteredBySize")]
+        public ActionResult<ProductViewModel> GetAllProductfilteredBySize(int subcategoryid, string size)
+        {
+            return Ok(_productAppService.GetAllProductfilteredBySize(subcategoryid, size));
         }
         [HttpGet("LatestArrivals/{numOfProducts}")]
         public IActionResult GetNewLatestProducts(int numOfProducts)
@@ -126,6 +138,31 @@ namespace WEP_APICore.Controllers
         public IActionResult GetProductsByPage(int pageSize, int pageNumber)
         {
             return Ok(_productAppService.GetPageRecords(pageSize, pageNumber));
+        }
+        [HttpGet("GetAllProductfilteredByCategoryID")]
+        public ActionResult<ProductViewModel> GetAllProductfilteredByCategoryID(int id)
+        {
+            return Ok(_productAppService.GetAllProductfilteredByCategoryID(id));
+        }
+        [HttpGet("GetAllProductFilteredByBrandID")]
+        public ActionResult<ProductViewModel> GetAllProductFilteredByBrandID(int id)
+        {
+            return Ok(_productAppService.GetAllProductFilteredByBrandID(id));
+        }
+        [HttpGet("GetAllProductFilteredBySizeonly")]
+        public ActionResult<ProductViewModel> GetAllProductFilteredBySizeonly(string size)
+        {
+            return Ok(_productAppService.GetAllProductFilteredBySizeonly(size));
+        }
+        [HttpGet("GetAllProductFilteredByColor")]
+        public ActionResult<ProductViewModel> GetAllProductFilteredByColor(string color)
+        {
+            return Ok(_productAppService.GetAllProductFilteredBySizeonly(color));
+        }
+        [HttpGet("GetAllProductFilteredByMainCategory")]
+        public ActionResult<ProductViewModel> GetAllProductFilteredByMainCategory(int id)
+        {
+            return Ok(_productAppService.GetAllProductFilteredByMainCategory(id));
         }
 
     }

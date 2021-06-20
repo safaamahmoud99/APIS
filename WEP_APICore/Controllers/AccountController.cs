@@ -60,7 +60,8 @@ namespace WEP_APICore.Controllers
         [HttpPost("/Register")]
         public async Task<IActionResult> Register(RegisterationViewModel userAccount)
         {
-            //IdentityRole role = new IdentityRole("User");   //To create frist role User  شيلوا الكومنت اول مرة علشان الrole  يتكريت وبعدين اعملوه كومنت تانى 
+            //To create frist role User  شيلوا الكومنت اول مرة علشان الrole  يتكريت وبعدين اعملوه كومنت تانى 
+            //IdentityRole role = new IdentityRole("User");   
             //var roles = await _roleManager.CreateAsync(role);
 
             if (!ModelState.IsValid)
@@ -84,8 +85,9 @@ namespace WEP_APICore.Controllers
         [HttpPost("AdminRegister")]
         public async Task<IActionResult> RegisterAdmin(RegisterationViewModel userAccount)
         {
-            //IdentityRole role = new IdentityRole("Admin");    //To create frist role Admin   شيلوا الكومنت اول مرة علشان الrole  يتكريت وبعدين اعملوه كومنت تانى 
-            //var roles = await _roleManager.CreateAsync(role);
+            //To create frist role User  شيلوا الكومنت اول مرة علشان الrole  يتكريت وبعدين اعملوه كومنت تانى 
+            IdentityRole role = new IdentityRole("Admin");
+            var roles = await _roleManager.CreateAsync(role);
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -93,8 +95,6 @@ namespace WEP_APICore.Controllers
             var user = await _accountAppservice.Register(userAccount);
             if (user.Succeeded)
             {
-               
-
                 var currentUser= _accountAppservice.FindByName(userAccount.UserName);
                 var userId = currentUser.Result.Id;
                 await _accountAppservice.AssignToRole(userId, "Admin");
@@ -104,7 +104,7 @@ namespace WEP_APICore.Controllers
                 return BadRequest(user.Errors.ToList()[0]);
         }
         [HttpGet]
-        [Authorize(Roles="Admin")]
+        //[Authorize(Roles="Admin")]
         public IActionResult GetAll()
         {
             var res = _accountAppservice.GetAllAccounts();

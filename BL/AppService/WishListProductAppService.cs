@@ -28,11 +28,11 @@ namespace BL.AppService
                 throw new ArgumentNullException();
             return Mapper.Map<WishListProductViewModel>(TheUnitOfWork.WishListProduct.GetWishListProductById(id));
         }
-        public bool CreateWishListProduct(string username,int id)
+        public async Task<bool> CreateWishListProduct(string username,int id)
         {
             bool result = false;
-            var user = TheUnitOfWork.Account.FindByName(username);
-            string userid =  user.Result.Id;
+            var user = await TheUnitOfWork.Account.FindByName(username);
+            string userid =  user.Id;
             WishListProduct WishListProduct = new WishListProduct() {productId= id,WishlistID=userid };
             if (TheUnitOfWork.WishListProduct.InsertWishListProduct(WishListProduct))
             {

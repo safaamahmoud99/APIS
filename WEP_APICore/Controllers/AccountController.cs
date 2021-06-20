@@ -161,6 +161,24 @@ namespace WEP_APICore.Controllers
         {
             return Ok(_accountAppservice.GetPageRecords(pageSize, pageNumber));
         }
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ChangePasswordAsync(ResetPasswordDto model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userManager.FindByIdAsync(userId);
+            var result = await _userManager.ChangePasswordAsync(user, model.currentPassword, model.newPassword);
+
+            if (!result.Succeeded)
+            {
+                return Ok("Password cant change");
+            }
+            return Ok(result);
+        }
 
     }
 }

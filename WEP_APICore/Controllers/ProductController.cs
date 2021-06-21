@@ -157,7 +157,7 @@ namespace WEP_APICore.Controllers
         [HttpGet("GetAllProductFilteredByColor")]
         public ActionResult<ProductViewModel> GetAllProductFilteredByColor(string color)
         {
-            return Ok(_productAppService.GetAllProductFilteredBySizeonly(color));
+            return Ok(_productAppService.GetAllProductFilteredByColor(color));
         }
         [HttpGet("GetAllProductFilteredByMainCategory")]
         public ActionResult<ProductViewModel> GetAllProductFilteredByMainCategory(int id)

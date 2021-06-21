@@ -169,5 +169,10 @@ namespace WEP_APICore.Controllers
         {
             return _productAppService.GetAllProductCountinCategory(id);
         }
+        [HttpGet("GetAllProductFilteredByPrice")]
+        public IActionResult GetAllProductFilteredByPrice(double min_price,double max_price)
+        {
+            return Ok(_productAppService.GetAllProductFilteredByPrice(min_price,max_price));
+        }
     }
 }

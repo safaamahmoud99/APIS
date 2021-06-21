@@ -67,6 +67,10 @@ namespace BL.Repository
         {
             return GetAll().Where(p => p.subCategory.Category.mainCategory.ID == id).ToList();
         }
+        public IEnumerable<Product> GetAllProductFilteredByPrice(double min_price,double max_price)
+        {
+            return GetAll().Where(p => p.Price >= min_price && p.Price <= max_price).ToList();
+        }
         public int GetAllProductCountinCategory(int id)
         {
             return GetAll().Where(p => p.subCategory.Category.mainCategory.ID == id).Count();

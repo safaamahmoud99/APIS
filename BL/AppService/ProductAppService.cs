@@ -105,7 +105,13 @@ namespace BL.AppService
             return Mapper.Map<IEnumerable<ProductViewModel>>(relatedProducts);
 
         }
+        public IEnumerable<ProductViewModel> GetAllProductFilteredByPrice(double min_price, double max_price)
+        {
+            IEnumerable<Product> relatedProducts = TheUnitOfWork.Product
+                .GetAllProductFilteredByPrice(min_price, max_price);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(relatedProducts);
 
+        }
         public IEnumerable<ProductViewModel> GetProductsByCategoryIdPagination(int catId, int pageSize, int pageNumber)
         {
             pageSize = (pageSize <= 0) ? 10 : pageSize;

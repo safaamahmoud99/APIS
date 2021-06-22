@@ -158,22 +158,28 @@ namespace WEP_APICore.Controllers
         [HttpGet("GetAllProductFilteredByColor")]
         public ActionResult<ProductViewModel> GetAllProductFilteredByColor(string color)
         {
-            return Ok(_productAppService.GetAllProductFilteredBySizeonly(color));
+            return Ok(_productAppService.GetAllProductFilteredByColor(color));
         }
         [HttpGet("GetAllProductFilteredByMainCategory")]
         public ActionResult<ProductViewModel> GetAllProductFilteredByMainCategory(int id)
         {
             return Ok(_productAppService.GetAllProductFilteredByMainCategory(id));
         }
-        [HttpGet("GetAllProductCountinCategory")]
-        public int GetAllProductCountinCategory(int id)
+        [HttpGet("GetAllProductCountinSubCategory")]
+        public int GetAllProductCountinSubCategory(int id)
         {
-            return _productAppService.GetAllProductCountinCategory(id);
+            return _productAppService.GetAllProductCountinSubCategory(id);
         }
         [HttpGet("GetAllProductFilteredByPrice")]
         public IActionResult GetAllProductFilteredByPrice(double min_price,double max_price)
         {
             return Ok(_productAppService.GetAllProductFilteredByPrice(min_price,max_price));
+        }
+
+        [HttpGet("GetAllProductFilteredBySupplier")]
+        public IActionResult GetAllProductFilteredBysupplier(int supplierId)
+        {
+            return Ok(_productAppService.GetAllProductFilteredBysupplier(supplierId));
         }
     }
 }

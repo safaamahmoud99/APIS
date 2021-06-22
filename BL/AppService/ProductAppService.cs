@@ -66,6 +66,13 @@ namespace BL.AppService
               TheUnitOfWork.Product.GetAllProductFilteredByBrandID(id);
             return Mapper.Map<IEnumerable<ProductViewModel>>(products);
         }
+
+        public IEnumerable<ProductViewModel> GetAllProductFilteredBysupplier(int supplierid)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredBysupplier(supplierid);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
         public IEnumerable<ProductViewModel> GetAllProductFilteredBySizeonly(string size)
         {
             IEnumerable<Product> products =
@@ -84,10 +91,10 @@ namespace BL.AppService
               TheUnitOfWork.Product.GetAllProductFilteredByMainCategory(id);
             return Mapper.Map<IEnumerable<ProductViewModel>>(products);
         }
-        public int GetAllProductCountinCategory(int id)
+        public int GetAllProductCountinSubCategory(int id)
         {
             int products =
-              TheUnitOfWork.Product.GetAllProductCountinCategory(id);
+              TheUnitOfWork.Product.GetAllProductCountinSubCategory(id);
             return products;
         }
         public IEnumerable<ProductViewModel> GetLatestProduct(int numberOfProducts = 0)
@@ -112,6 +119,8 @@ namespace BL.AppService
             return Mapper.Map<IEnumerable<ProductViewModel>>(relatedProducts);
 
         }
+
+
         public IEnumerable<ProductViewModel> GetProductsByCategoryIdPagination(int catId, int pageSize, int pageNumber)
         {
             pageSize = (pageSize <= 0) ? 10 : pageSize;

@@ -55,6 +55,11 @@ namespace BL.Repository
         {
             return GetAll().Where(p => p.BrandID == id).ToList();
         }
+
+        public IEnumerable<Product> GetAllProductFilteredBysupplier(int supplierid)
+        {
+            return GetAll().Where(p => p.SupplierID == supplierid).ToList();
+        }
         public IEnumerable<Product> GetAllProductFilteredBySizeonly(string size)
         {
             return GetAll().Where(p => p.Size == size).ToList();
@@ -71,9 +76,9 @@ namespace BL.Repository
         {
             return GetAll().Where(p => p.Price >= min_price && p.Price <= max_price).ToList();
         }
-        public int GetAllProductCountinCategory(int id)
+        public int GetAllProductCountinSubCategory(int id)
         {
-            return GetAll().Where(p => p.subCategory.Category.mainCategory.ID == id).Count();
+            return GetAll().Where(p => p.subCategory.ID == id).Count();
         }
         public IEnumerable<Product> GetNewArrivalsProduct(int numberOfProducts = 0)
         {

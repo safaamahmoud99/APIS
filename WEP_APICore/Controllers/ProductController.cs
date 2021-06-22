@@ -164,15 +164,21 @@ namespace WEP_APICore.Controllers
         {
             return Ok(_productAppService.GetAllProductFilteredByMainCategory(id));
         }
-        [HttpGet("GetAllProductCountinCategory")]
-        public int GetAllProductCountinCategory(int id)
+        [HttpGet("GetAllProductCountinSubCategory")]
+        public int GetAllProductCountinSubCategory(int id)
         {
-            return _productAppService.GetAllProductCountinCategory(id);
+            return _productAppService.GetAllProductCountinSubCategory(id);
         }
         [HttpGet("GetAllProductFilteredByPrice")]
         public IActionResult GetAllProductFilteredByPrice(double min_price,double max_price)
         {
             return Ok(_productAppService.GetAllProductFilteredByPrice(min_price,max_price));
+        }
+
+        [HttpGet("GetAllProductFilteredBySupplier")]
+        public IActionResult GetAllProductFilteredBysupplier(int supplierId)
+        {
+            return Ok(_productAppService.GetAllProductFilteredBysupplier(supplierId));
         }
     }
 }

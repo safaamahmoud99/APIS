@@ -65,7 +65,6 @@ namespace WEP_APICore.Controllers
 
             return NoContent();
         }
-
        private bool WishListProductExists(int id)
         {
             return _wishListProductAppService.CheckWishListProductExists(id);

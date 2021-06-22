@@ -19,7 +19,7 @@ namespace WEP_APICore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class CartProductsController : ControllerBase
     {
         private readonly CartProductAppService _cartProductAppService;

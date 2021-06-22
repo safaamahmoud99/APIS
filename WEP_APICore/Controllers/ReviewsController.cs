@@ -23,15 +23,11 @@ namespace WEP_APICore.Controllers
         {
             _reviewAppService = reviewAppService;
         }
-
-        // GET: api/Reviews
         [HttpGet]
         public ActionResult<IEnumerable<ReviewViewModel>> Getreviews(int productid)
         {
             return _reviewAppService.GetAllReviews(productid);
         }
-
-        // GET: api/Reviews/5
         [HttpGet("{id}")]
         public ActionResult<ReviewViewModel> GetReview(int id)
         {
@@ -44,18 +40,14 @@ namespace WEP_APICore.Controllers
 
             return review;
         }
-      //  [Authorize]
-        // PUT: api/Reviews/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{id}")]
         public  IActionResult PutReview(int id , ReviewViewModel newreview)
         {
             _reviewAppService.UpdateReview(id, newreview);
             return Ok();
         }
-     //   [Authorize]
-        // POST: api/Reviews
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
         public ActionResult<ReviewViewModel> PostReview(ReviewViewModel review)
         {
@@ -78,8 +70,7 @@ namespace WEP_APICore.Controllers
                 }
             }
         }
-      //  [Authorize]
-        // DELETE: api/Reviews/5
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult DeleteReview(int id)
         {

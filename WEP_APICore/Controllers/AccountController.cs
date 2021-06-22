@@ -24,7 +24,6 @@ namespace WEP_APICore.Controllers
         private IConfiguration _config;
         private AccountAppService _accountAppservice;
         IHttpContextAccessor _httpContextAccessor;
-        //RoleAppService _roleAppService;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         public AccountController
@@ -32,7 +31,6 @@ namespace WEP_APICore.Controllers
               IConfiguration config,
               AccountAppService accountAppservice,
               IHttpContextAccessor httpContextAccessor,
-              //RoleAppService roleAppService,
                UserManager<User> userManager,
                RoleManager<IdentityRole> roleManager
             )
@@ -40,7 +38,6 @@ namespace WEP_APICore.Controllers
             _config = config;
             _accountAppservice = accountAppservice;
             _httpContextAccessor = httpContextAccessor;
-            //_roleAppService = roleAppService;
             _userManager = userManager;
             _roleManager = roleManager;
         }
@@ -60,37 +57,31 @@ namespace WEP_APICore.Controllers
         [HttpPost("/Register")]
         public async Task<IActionResult> Register(RegisterationViewModel userAccount)
         {
-            //To create frist role User  شيلوا الكومنت اول مرة علشان الrole  يتكريت وبعدين اعملوه كومنت تانى 
             IdentityRole role = new IdentityRole("User");
             var roles = await _roleManager.CreateAsync(role);
-
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-
             userAccount.Role = "User";
             var user = await _accountAppservice.Register(userAccount);
 
             if (user.Succeeded)
-            {
-              
-                var currentUser = _accountAppservice.FindByName(userAccount.UserName);
-                var userId = currentUser.Result.Id;
+            {              
+                var currentUser =await _accountAppservice.FindByName(userAccount.UserName);
+                var userId = currentUser.Id;
                 await _accountAppservice.AssignToRole(userId, "User");
                 return Ok();
             }
             else
                 return BadRequest(user.Errors.ToList()[0]);
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("AdminRegister")]
         public async Task<IActionResult> RegisterAdmin(RegisterationViewModel userAccount)
         {
-            //To create frist role User  شيلوا الكومنت اول مرة علشان الrole  يتكريت وبعدين اعملوه كومنت تانى 
             IdentityRole role = new IdentityRole("Admin");
             var roles = await _roleManager.CreateAsync(role);
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-
             userAccount.Role = "Admin";
             var user = await _accountAppservice.Register(userAccount);
             if (user.Succeeded)
@@ -104,7 +95,7 @@ namespace WEP_APICore.Controllers
                 return BadRequest(user.Errors.ToList()[0]);
         }
         [HttpGet]
-        //[Authorize(Roles="Admin")]
+        [Authorize(Roles="Admin")]
         public IActionResult GetAll()
         {
             var res = _accountAppservice.GetAllAccounts();

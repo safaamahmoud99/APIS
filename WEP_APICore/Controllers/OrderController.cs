@@ -42,19 +42,15 @@ namespace WEP_APICore.Controllers
         public async Task<ActionResult<IEnumerable<OrderViewModel>>> GetOrders()
         {
             return _OrderAppService.GetAllOrder();
-        }
-
-         
+        }        
         [HttpGet("{id}")]
         public ActionResult<OrderViewModel> GetOrderByID(int id)
         {
             var Order = _OrderAppService.GetOrder(id);
-
             if (Order == null)
             {
                 return NotFound();
             }
-
             return Order;
         }
 
@@ -65,23 +61,13 @@ namespace WEP_APICore.Controllers
             try
             {
                 _OrderAppService.UpdateOrder(orderViewModel);
-
                 return Ok(orderViewModel);
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-        //// GET: api/Orders for one User
-        //[HttpGet]
-        //public ActionResult<IEnumerable<OrderViewModel>> GetOrders(String UserID)
-        //{
-
-        //    return _OrderAppService.GetAllOrder().Where(i => i.UserID == UserID).ToList();
-        //}
-
         [HttpPost]
         public ActionResult<OrderViewModel> PostOrder(OrderViewModel order)
         {
@@ -105,7 +91,7 @@ namespace WEP_APICore.Controllers
 
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet("Checkout")]
         public async Task<IActionResult> CheckoutAsync()
         {

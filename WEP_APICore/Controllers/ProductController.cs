@@ -32,6 +32,7 @@ namespace WEP_APICore.Controllers
             return Ok(_productAppService.GetAllProductDevices());
         }
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult PutProduct(int id, ProductViewModel productViewModel)
         {
             try
@@ -93,7 +94,7 @@ namespace WEP_APICore.Controllers
         {
             return Ok(_productAppService.GetProductsBySearch(searchKeyWord));
         }
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("CreateProduct")]
         public IActionResult Create(ProductViewModel productViewModel)
         {
@@ -114,7 +115,7 @@ namespace WEP_APICore.Controllers
 
             }
         }
-      //  [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

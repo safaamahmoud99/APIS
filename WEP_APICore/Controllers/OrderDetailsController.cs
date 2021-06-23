@@ -17,7 +17,6 @@ namespace WEP_APICore.Controllers
     public class OrderDetailsController : ControllerBase
     {
         private readonly OrderDetailsAppservice _OrderDetailsAppService;
-
         public OrderDetailsController(OrderDetailsAppservice OrderDetailAppservice)
         {
             _OrderDetailsAppService = OrderDetailAppservice;

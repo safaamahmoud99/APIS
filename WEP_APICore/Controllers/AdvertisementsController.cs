@@ -24,14 +24,12 @@ namespace WEP_APICore.Controllers
             _advertisementApp = advertisementApp;
         }
         [AllowAnonymous]
-        // GET: api/Advertisements
         [HttpGet]
         public ActionResult<IEnumerable<AdvertisementViewModel>>GetAdvertisements()
         {
             return _advertisementApp.GetAllAdvertisements();
         }
         [AllowAnonymous]
-        // GET: api/Advertisements/5
         [HttpGet("{id}")]
         public ActionResult<AdvertisementViewModel> GetAdvertisement(int id)
         {
@@ -44,33 +42,24 @@ namespace WEP_APICore.Controllers
 
             return advertisement;
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult PutAdvertisement(int id, AdvertisementViewModel advertisementViewModel)
-        {
-            
-
+        {          
             try
             {
                 _advertisementApp.UpdateAdvertisement(advertisementViewModel);
-
                 return Ok(advertisementViewModel);
             }
-
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-        //[Authorize(Roles = "Admin")]
-        // POST: api/Advertisements
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult<AdvertisementViewModel> PostAdvertisement(AdvertisementViewModel advertisement)
-        {
-            
-
+        {         
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -90,8 +79,6 @@ namespace WEP_APICore.Controllers
                 }
             }
         }
-        //[Authorize(Roles = "Admin")]
-        // DELETE: api/Advertisements/5
         [HttpDelete("{id}")]
         public IActionResult DeleteAdvertisement(int id)
         {

@@ -14,20 +14,14 @@ namespace WEP_APICore.Controllers
     [ApiController]
     public class CartController : ControllerBase
     {
-
-
         private readonly CartAppService _cartAppService;
-
-
         public CartController(CartAppService cartAppService)
         {
             _cartAppService = cartAppService;
         }
-
         [HttpGet]
         public ActionResult<CartViewModel> GetCart(string cartID)
         {
-
             var cart = _cartAppService.GetCart(cartID);
             return cart;
         }

@@ -43,6 +43,11 @@ namespace BL.Repository
         {
             return GetAll().Where(p => p.BrandID == brandid&&p.SubCategoryID==subcategoryid).ToList();
         }
+
+        public IEnumerable<Product> GetAllProductInAspecificSupplier(int subcategoryid, int supplierid)
+        {
+            return GetAll().Where(p => p.SupplierID==supplierid && p.SubCategoryID == subcategoryid).ToList();
+        }
         public IEnumerable<Product> GetAllProductfilteredBySize(int subcategoryid, string size)
         {
             return GetAll().Where(p => p.SubCategoryID == subcategoryid && p.Size == size);

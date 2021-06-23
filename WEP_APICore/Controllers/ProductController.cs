@@ -68,6 +68,13 @@ namespace WEP_APICore.Controllers
         {
             return Ok(_productAppService.GetAllProductInAspecificBrands(subcategoryid,brandid));
         }
+
+        [HttpGet("AllProductsInAspecificSupplier")]
+        public ActionResult<ProductViewModel> AllProductsInAspecificSupplier(int subcategoryid, int supplierid)
+        {
+            return Ok(_productAppService.GetAllProductInAspecificSupplier(subcategoryid, supplierid));
+        }
+
         [HttpGet("GetAllProductfilteredBySize")]
         public ActionResult<ProductViewModel> GetAllProductfilteredBySize(int subcategoryid, string size)
         {

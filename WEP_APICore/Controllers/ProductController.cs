@@ -67,11 +67,6 @@ namespace WEP_APICore.Controllers
         {
             return Ok(_productAppService.GetAllProductInAspecificBrands(subcategoryid,brandid));
         }
-        [HttpGet("GetAllProductInOffer")]
-        public ActionResult<ProductViewModel> GetAllProductInOffer(int subcategoryid, double discount)
-        {
-            return Ok(_productAppService.GetAllProductInOffer(subcategoryid, discount));
-        }
         [HttpGet("GetAllProductfilteredBySize")]
         public ActionResult<ProductViewModel> GetAllProductfilteredBySize(int subcategoryid, string size)
         {

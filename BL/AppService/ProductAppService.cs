@@ -48,6 +48,13 @@ namespace BL.AppService
                  TheUnitOfWork.Product.GetAllProductInAspecificBrand(subcategoryid,brandid);
             return Mapper.Map<IEnumerable<ProductViewModel>>(products);
         }
+
+        public IEnumerable<ProductViewModel> GetAllProductInAspecificSupplier(int subcategoryid, int supplierid)
+        {
+            IEnumerable<Product> products =
+                 TheUnitOfWork.Product.GetAllProductInAspecificSupplier(subcategoryid, supplierid);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
         public IEnumerable<ProductViewModel> GetAllProductfilteredBySize(int subcategoryid, string size)
         {
             IEnumerable<Product> products =

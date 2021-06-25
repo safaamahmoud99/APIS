@@ -75,10 +75,14 @@ namespace BL.Repository
         public IEnumerable<Product> GetAllProductFilteredByPrice(double min_price,double max_price)
         {
             return GetAll().Where(p => p.Price >= min_price && p.Price <= max_price).ToList();
-        }
+        }       
         public int GetAllProductCountinSubCategory(int id)
         {
             return GetAll().Where(p => p.subCategory.ID == id).Count();
+        }
+        public IEnumerable<Product> GetAllProductInOffer(int subCategoryid,double discount)
+        {
+            return GetAll().Where(p => p.SubCategoryID == subCategoryid && p.Discount == discount).ToList();
         }
         public IEnumerable<Product> GetNewArrivalsProduct(int numberOfProducts = 0)
         {
@@ -96,9 +100,6 @@ namespace BL.Repository
 
             return newArivailsProducts;
         }
-
-
-
         public bool InsertProduct(Product product)
         {
             return Insert(product);
@@ -157,6 +158,5 @@ namespace BL.Repository
             }
             return DbSet.Count();
         }
-
     }
 }

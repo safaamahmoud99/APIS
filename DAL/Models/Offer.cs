@@ -17,6 +17,5 @@ namespace DAL.Models
         [DataType(DataType.Date)]
         public DateTime EndDate {get;set;}
         public double OfferValue { get; set; }
-
     }
 }

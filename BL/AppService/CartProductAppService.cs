@@ -45,7 +45,7 @@ namespace BL.AppService
             string userid = user.Id;
             var cart = TheUnitOfWork.Cart.GetCartById(userid);
            
-            CartProduct cartProduct = new CartProduct() { productId=id,CartID= userid,NetPrice=pro.Price};
+            CartProduct cartProduct = new CartProduct() { productId=id,CartID= userid,NetPrice=pro.AfterDiscount};
             _hubContext.Clients.All.BroadcastMessage(cartProduct).Wait();
             cart.TotalPrice += cartProduct.NetPrice;
             if (TheUnitOfWork.CardProduct.InsertCartProduct(cartProduct))
@@ -120,33 +120,21 @@ namespace BL.AppService
 
 
         public async Task<bool> UpdateCartProduct( CartProductViewModel newcartProduct, string username)
-        {
-            
+        {          
             bool result = false;
             var user = await TheUnitOfWork.Account.FindByName(username);
             string userid = user.Id;
             var cart = TheUnitOfWork.Cart.GetCartById(userid);
-
             var pro = TheUnitOfWork.Product.GetProductById(newcartProduct.productId);
             var cartProduct = TheUnitOfWork.CardProduct.GetCartProductByCartProductId(newcartProduct.ID);
-
             cart.TotalPrice -= cartProduct.NetPrice;
-            
-
             cartProduct.quintity = newcartProduct.quintity;
-            cartProduct.NetPrice = cartProduct.quintity * pro.Price;
+            cartProduct.NetPrice = cartProduct.quintity * pro.AfterDiscount;
             cart.TotalPrice += cartProduct.NetPrice;
             TheUnitOfWork.Cart.UpdateCart(cart);
             TheUnitOfWork.CardProduct.UpdateCartProduct(cartProduct);
-
-            result = TheUnitOfWork.Commit() > new int();
-
-            
-            return result;
-
-
-
-            
+            result = TheUnitOfWork.Commit() > new int();          
+            return result;   
         }
 
     }

@@ -247,6 +247,9 @@ namespace DAL.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double?>("Discount")
+                        .HasColumnType("float");
+
                     b.Property<string>("MainImage")
                         .HasColumnType("nvarchar(max)");
 

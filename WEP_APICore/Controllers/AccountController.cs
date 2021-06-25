@@ -74,7 +74,7 @@ namespace WEP_APICore.Controllers
             else
                 return BadRequest(user.Errors.ToList()[0]);
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost("AdminRegister")]
         public async Task<IActionResult> RegisterAdmin(RegisterationViewModel userAccount)
         {
@@ -86,8 +86,8 @@ namespace WEP_APICore.Controllers
             var user = await _accountAppservice.Register(userAccount);
             if (user.Succeeded)
             {
-                var currentUser= _accountAppservice.FindByName(userAccount.UserName);
-                var userId = currentUser.Result.Id;
+                var currentUser=await _accountAppservice.FindByName(userAccount.UserName);
+                var userId = currentUser.Id;
                 await _accountAppservice.AssignToRole(userId, "Admin");
                 return Ok();
             }

@@ -322,6 +322,7 @@ namespace DAL.Migrations
                     Price = table.Column<double>(type: "float", nullable: false),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Discount = table.Column<double>(type: "float", nullable: true),
                     SubCategoryID = table.Column<int>(type: "int", nullable: false),
                     SupplierID = table.Column<int>(type: "int", nullable: false),
                     BrandID = table.Column<int>(type: "int", nullable: false)

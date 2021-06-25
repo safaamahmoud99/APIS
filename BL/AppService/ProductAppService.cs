@@ -204,7 +204,19 @@ namespace BL.AppService
             var products = Mapper.Map<List<ProductViewModel>>(TheUnitOfWork.Product.GetPageRecords(pageSize, pageNumber));
             return products;
         }
+        public IEnumerable<ProductViewModel> GetAllProductInOffer(int subcategoryId, double discount)
+        {
+            var products = Mapper.Map<List<ProductViewModel>>(TheUnitOfWork.Product.GetAllProductInOffer(subcategoryId, discount));
+            return products;
+        }
+        public bool UpdateDiscount(int idProduct,double discountValue)
+        {
+            var Product = TheUnitOfWork.Product.GetProductById(idProduct);
+            Product.Discount = discountValue;
+            TheUnitOfWork.Product.Update(Product);
+            TheUnitOfWork.Commit();
+            return true;
+        }
 
-       
     }
 }

@@ -143,6 +143,7 @@ namespace WEP_APICore
                 endpoints.MapHub<ReviewHub>("/review");
                 endpoints.MapHub<DeleteCartProductHub>("deletecartproduct");
                 endpoints.MapHub<DeleteWishListHub>("deletewishList");
+                endpoints.MapHub<OrderHub>("order");
             });
         }
     }

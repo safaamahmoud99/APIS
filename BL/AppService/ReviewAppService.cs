@@ -45,10 +45,10 @@ namespace BL.AppService
         {
             bool result=false;
             Review review = Mapper.Map<Review>(reviewViewModel);
-            _hubContext.Clients.All.BroadcastMessage(reviewViewModel).Wait();
             if (TheUnitOfWork.Review.InsertReview(review))
             {
                 result = TheUnitOfWork.Commit() > new int();
+                _hubContext.Clients.All.BroadcastMessage(reviewViewModel).Wait();
             }
             return result;
         }

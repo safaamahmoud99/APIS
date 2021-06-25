@@ -40,8 +40,6 @@ namespace WEP_APICore.Controllers
                 _productAppService.UpdateProduct(productViewModel);
                 return Ok(productViewModel);
             }
-
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
@@ -68,6 +66,11 @@ namespace WEP_APICore.Controllers
         public ActionResult<ProductViewModel> AllProductsInAspecificBrand(int subcategoryid,int brandid)
         {
             return Ok(_productAppService.GetAllProductInAspecificBrands(subcategoryid,brandid));
+        }
+        [HttpGet("GetAllProductInOffer")]
+        public ActionResult<ProductViewModel> GetAllProductInOffer(int subcategoryid, double discount)
+        {
+            return Ok(_productAppService.GetAllProductInOffer(subcategoryid, discount));
         }
         [HttpGet("GetAllProductfilteredBySize")]
         public ActionResult<ProductViewModel> GetAllProductfilteredBySize(int subcategoryid, string size)
@@ -180,6 +183,21 @@ namespace WEP_APICore.Controllers
         public IActionResult GetAllProductFilteredBysupplier(int supplierId)
         {
             return Ok(_productAppService.GetAllProductFilteredBysupplier(supplierId));
+        }
+        [HttpPut("PutDiscount")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult PutDiscount(int idProduct,double Discount)
+        {
+            try
+            {
+                _productAppService.UpdateDiscount(idProduct,Discount);
+                return Ok();
+            }
+
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

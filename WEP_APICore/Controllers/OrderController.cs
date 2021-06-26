@@ -109,7 +109,7 @@ namespace WEP_APICore.Controllers
         [HttpGet("Checkout")]
         public async Task<IActionResult> CheckoutAsync()
         {
-            var currentUser =await _AccountappService.FindByName(User.Identity.Name);
+            var currentUser = await _AccountappService.FindByName(User.Identity.Name);
             ////get cart id of current logged user
             //var userID = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             //var userid = "d4a62c76-1ca4-41e7-ba6a-65af5a84d1fb";
@@ -146,11 +146,12 @@ namespace WEP_APICore.Controllers
                     _productAppService.UpdateProduct(product);
                 }
                 orderViewModel.OrderDetails.Add(orderdetail);
-                await _CartProductsAppService.DeletAllCartProduct(cart.UserID);
+                
 
             }
              
             _OrderAppService.SaveNewOrder(orderViewModel);
+            await _CartProductsAppService.DeletAllCartProduct(cart.UserID);
 
             return Ok();
         }
@@ -161,7 +162,19 @@ namespace WEP_APICore.Controllers
 
             return _OrderDetailsAppService.GetAllOrderDetailsbyOrderID().Where(i => i.OrderID == id).ToList();
         }
-        
+
+        [HttpGet("GetUserOrders")]
+        public ActionResult<IEnumerable<OrderViewModel>> GetAllOrdersbyUser(string  id)
+        {
+
+            return _OrderAppService.GetAllOrder().Where(i => i.UserID == id).ToList();
+        }
+
+
+
+
+
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder(int id)
         {

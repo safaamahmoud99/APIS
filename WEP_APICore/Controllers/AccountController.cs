@@ -116,6 +116,13 @@ namespace WEP_APICore.Controllers
             var res = _accountAppservice.GetAccountById(id);
             return Ok(res);
         }
+        [HttpGet("GetUserName/{id}")]
+        public IActionResult GetUserName(string id)
+        {
+            var res = _accountAppservice.GetAccountById(id);
+            return Ok(res.UserName);
+        }
+
         [Authorize]
         [HttpGet("current")]
         public IActionResult GetCurrentUser()

@@ -23,16 +23,12 @@ namespace WEP_APICore.Controllers
         {
             _supplierAppService = supplierAppService;
         }
-
-        // GET: api/Suppliers
         [HttpGet]
         public ActionResult<IEnumerable<SupplierViewModel>> Getsuppliers()
         {
             return _supplierAppService.GetAllSuppliers();
            
         }
-
-        // GET: api/Suppliers/5
         [HttpGet("{id}")]
         public ActionResult<SupplierViewModel> GetSuppliers(int id)
         {
@@ -45,39 +41,28 @@ namespace WEP_APICore.Controllers
 
             return suppliers;
         }
-      //  [Authorize(Roles = "Admin")]
-        // PUT: api/Suppliers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult PutSuppliers(int id, SupplierViewModel supplierViewModel)
-        {
-           
+        {         
             try
             {
                 _supplierAppService.UpdateSupplier(supplierViewModel);
                 return Ok(supplierViewModel);
             }
-
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
           
         }
-       // [Authorize(Roles = "Admin")]
-        // POST: api/Suppliers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public ActionResult<SupplierViewModel> PostSuppliers(SupplierViewModel supplierViewModel)
         {
             _supplierAppService.CreateSupplier(supplierViewModel);
-           
-
             return CreatedAtAction("GetSuppliers", supplierViewModel);
         }
-      //  [Authorize(Roles = "Admin")]
-        // DELETE: api/Suppliers/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult DeleteSuppliers(int id)
         {

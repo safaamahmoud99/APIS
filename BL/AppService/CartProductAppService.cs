@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using BL.Bases;
 using BL.DTOs;
+using BL.Hubs;
 using BL.interfaces;
 using DAL.Models;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +15,17 @@ namespace BL.AppService
 {
    public  class CartProductAppService :BaseAppService
     {
-        public CartProductAppService(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
+        private IHubContext<SoppingCartWishListHub, ITypedHubClient> _hubContext;
+        private IHubContext<DeleteCartProductHub, ITypesClientDeleteCartProduct> _hubContextDelete;
+        public CartProductAppService
+            (
+            IUnitOfWork theUnitOfWork,
+            IHubContext<SoppingCartWishListHub, ITypedHubClient> hubContext,
+            IHubContext<DeleteCartProductHub, ITypesClientDeleteCartProduct> hubContextDelete
+            ) : base(theUnitOfWork)
         {
-
+            this._hubContext = hubContext;
+            this._hubContextDelete = hubContextDelete;
         }
         public List<CartProductViewModel> GetAllCartProducts(string cartId)
         {
@@ -35,7 +45,8 @@ namespace BL.AppService
             string userid = user.Id;
             var cart = TheUnitOfWork.Cart.GetCartById(userid);
            
-            CartProduct cartProduct = new CartProduct() { productId=id,CartID= userid,NetPrice=pro.Price};
+            CartProduct cartProduct = new CartProduct() { productId=id,CartID= userid,NetPrice=pro.AfterDiscount};
+            _hubContext.Clients.All.BroadcastMessage(cartProduct).Wait();
             cart.TotalPrice += cartProduct.NetPrice;
             if (TheUnitOfWork.CardProduct.InsertCartProduct(cartProduct))
             {
@@ -52,8 +63,7 @@ namespace BL.AppService
 
             var user = await TheUnitOfWork.Account.FindByName(username);
             string userid = user.Id;
-            var cart = TheUnitOfWork.Cart.GetCartById(userid);
-           
+            var cart = TheUnitOfWork.Cart.GetCartById(userid);          
             CartProduct cartProductViewModel =Mapper.Map<CartProduct>( GetCartProduct(id));
             cart.TotalPrice -= cartProductViewModel.NetPrice;
            bool result = false;
@@ -61,6 +71,7 @@ namespace BL.AppService
             TheUnitOfWork.CardProduct.DeleteCartProduct(cartProductViewModel.ID);
             TheUnitOfWork.Cart.UpdateCart(cart);
             result = TheUnitOfWork.Commit() > new int();
+            _hubContextDelete.Clients.All.BroadcastMessage(cartProductViewModel).Wait();
             return result;
         }
         public async Task<bool> DeletAllCartProduct(string cartID)
@@ -80,22 +91,18 @@ namespace BL.AppService
             result = TheUnitOfWork.Commit() > new int();
             return result;
         }
-        public bool CheckCartProductExists(int Prodectid,string username)
+        public async Task<bool> CheckCartProductExists(int Prodectid,string username)
         {
             var result = TheUnitOfWork.CardProduct.CheckCartProductExists(Prodectid);
             var pro = TheUnitOfWork.Product.GetProductById(Prodectid);
-           
-            
-
-
-            
-           
-            var user = TheUnitOfWork.Account.FindByName(username);
-            string userid = user.Result.Id;
+ 
+            var user =await TheUnitOfWork.Account.FindByName(username);
+            string userid = user.Id;
             var cart = TheUnitOfWork.Cart.GetCartById(userid);
             if (result)
             {
                 CartProduct cartProductViewModel =Mapper.Map<CartProduct>( GetCartProduct(Prodectid));
+                _hubContext.Clients.All.BroadcastMessage(cartProductViewModel).Wait();
                 cartProductViewModel.quintity++;
                 cartProductViewModel.NetPrice += pro.Price;
                 cart.TotalPrice += pro.Price;
@@ -113,33 +120,21 @@ namespace BL.AppService
 
 
         public async Task<bool> UpdateCartProduct( CartProductViewModel newcartProduct, string username)
-        {
-            
+        {          
             bool result = false;
             var user = await TheUnitOfWork.Account.FindByName(username);
             string userid = user.Id;
             var cart = TheUnitOfWork.Cart.GetCartById(userid);
-
             var pro = TheUnitOfWork.Product.GetProductById(newcartProduct.productId);
             var cartProduct = TheUnitOfWork.CardProduct.GetCartProductByCartProductId(newcartProduct.ID);
-
             cart.TotalPrice -= cartProduct.NetPrice;
-            
-
             cartProduct.quintity = newcartProduct.quintity;
-            cartProduct.NetPrice = cartProduct.quintity * pro.Price;
+            cartProduct.NetPrice = cartProduct.quintity * pro.AfterDiscount;
             cart.TotalPrice += cartProduct.NetPrice;
             TheUnitOfWork.Cart.UpdateCart(cart);
             TheUnitOfWork.CardProduct.UpdateCartProduct(cartProduct);
-
-            result = TheUnitOfWork.Commit() > new int();
-
-            
-            return result;
-
-
-
-            
+            result = TheUnitOfWork.Commit() > new int();          
+            return result;   
         }
 
     }

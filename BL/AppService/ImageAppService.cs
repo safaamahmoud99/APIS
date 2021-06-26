@@ -38,7 +38,7 @@ namespace BL.AppService
 
             bool result = false;
             var image = Mapper.Map<Images>(imageViewModel);
-            if (TheUnitOfWork.Image.Insert(image)) ;
+            if (TheUnitOfWork.Image.Insert(image))
             {
                 result = TheUnitOfWork.Commit() > new int();
             }

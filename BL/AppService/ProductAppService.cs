@@ -42,6 +42,68 @@ namespace BL.AppService
                  TheUnitOfWork.Product.GetAllProductBetweenTwoPrice(id,min_price, max_price);
             return Mapper.Map<IEnumerable<ProductViewModel>>(products);
         }
+        public IEnumerable<ProductViewModel> GetAllProductInAspecificBrands(int subcategoryid,int brandid)
+        {
+            IEnumerable<Product> products =
+                 TheUnitOfWork.Product.GetAllProductInAspecificBrand(subcategoryid,brandid);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+
+        public IEnumerable<ProductViewModel> GetAllProductInAspecificSupplier(int subcategoryid, int supplierid)
+        {
+            IEnumerable<Product> products =
+                 TheUnitOfWork.Product.GetAllProductInAspecificSupplier(subcategoryid, supplierid);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductfilteredBySize(int subcategoryid, string size)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductfilteredBySize(subcategoryid, size);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductfilteredByCategoryID(int id)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredByCategoryID(id);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductFilteredByBrandID(int id)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredByBrandID(id);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+
+        public IEnumerable<ProductViewModel> GetAllProductFilteredBysupplier(int supplierid)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredBysupplier(supplierid);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductFilteredBySizeonly(string size)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredBySizeonly(size);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductFilteredByColor(string color)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredByColor(color);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public IEnumerable<ProductViewModel> GetAllProductFilteredByMainCategory(int id)
+        {
+            IEnumerable<Product> products =
+              TheUnitOfWork.Product.GetAllProductFilteredByMainCategory(id);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(products);
+        }
+        public int GetAllProductCountinSubCategory(int id)
+        {
+            int products =
+              TheUnitOfWork.Product.GetAllProductCountinSubCategory(id);
+            return products;
+        }
         public IEnumerable<ProductViewModel> GetLatestProduct(int numberOfProducts = 0)
         {
             IEnumerable<Product> allProducts =
@@ -57,6 +119,14 @@ namespace BL.AppService
             return Mapper.Map<IEnumerable<ProductViewModel>>(relatedProducts);
 
         }
+        public IEnumerable<ProductViewModel> GetAllProductFilteredByPrice(double min_price, double max_price)
+        {
+            IEnumerable<Product> relatedProducts = TheUnitOfWork.Product
+                .GetAllProductFilteredByPrice(min_price, max_price);
+            return Mapper.Map<IEnumerable<ProductViewModel>>(relatedProducts);
+
+        }
+
 
         public IEnumerable<ProductViewModel> GetProductsByCategoryIdPagination(int catId, int pageSize, int pageNumber)
         {
@@ -141,7 +211,19 @@ namespace BL.AppService
             var products = Mapper.Map<List<ProductViewModel>>(TheUnitOfWork.Product.GetPageRecords(pageSize, pageNumber));
             return products;
         }
+        public IEnumerable<ProductViewModel> GetAllProductInOffer(int subcategoryId, double discount)
+        {
+            var products = Mapper.Map<List<ProductViewModel>>(TheUnitOfWork.Product.GetAllProductInOffer(subcategoryId, discount));
+            return products;
+        }
+        public bool UpdateDiscount(int idProduct,double discountValue)
+        {
+            var Product = TheUnitOfWork.Product.GetProductById(idProduct);
+            Product.Discount = discountValue;
+            TheUnitOfWork.Product.Update(Product);
+            TheUnitOfWork.Commit();
+            return true;
+        }
 
-       
     }
 }

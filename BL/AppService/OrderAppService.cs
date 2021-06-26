@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using BL.Bases;
 using BL.DTOs;
+using BL.Hubs;
 using BL.interfaces;
 using DAL.Models;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +15,10 @@ namespace BL.AppService
 {
     public class OrderAppService : BaseAppService
     {
-        public OrderAppService(IUnitOfWork theUnitOfWork) : base(theUnitOfWork)
+        private IHubContext<OrderHub, ITypedClientOrder> _hubContext;
+        public OrderAppService(IUnitOfWork theUnitOfWork, IHubContext<OrderHub, ITypedClientOrder> hubContext) : base(theUnitOfWork)
         {
-
+            this._hubContext = hubContext;
         }
         
 
@@ -44,6 +47,7 @@ namespace BL.AppService
             if (TheUnitOfWork.Order.InsertOrder(order))
             {
                 result = TheUnitOfWork.Commit() > new int();
+               // _hubContext.Clients.All.BroadcastMessage(orderViewModel).Wait();
             }
             return result;
         }

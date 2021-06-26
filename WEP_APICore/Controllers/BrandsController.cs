@@ -23,8 +23,6 @@ namespace WEP_APICore.Controllers
         {
             _brandAppService = brandAppService;
         }
-
-        // GET: api/Brands
         [HttpGet]
         [AllowAnonymous]
         public ActionResult<IEnumerable<BrandViewModel>> Getbrands()
@@ -32,7 +30,6 @@ namespace WEP_APICore.Controllers
             return _brandAppService.GetAllBrands();
         }
         [AllowAnonymous]
-        // GET: api/Brands/5
         [HttpGet("{id}")]
         public ActionResult<BrandViewModel> GetBrands(int id)
         {
@@ -45,9 +42,7 @@ namespace WEP_APICore.Controllers
 
             return brands;
         }
-        //[Authorize(Roles = "Admin")]
-        // PUT: api/Brands/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult PutBrands(int id, BrandViewModel brandViewModel)
         {           
@@ -62,34 +57,25 @@ namespace WEP_APICore.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        //[Authorize(Roles = "Admin")]
-        // POST: api/Brands
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult<BrandViewModel> PostBrands(BrandViewModel brandViewModel)
         {
             _brandAppService.CreateBrand(brandViewModel);
-
-
             return CreatedAtAction("GetBrands", brandViewModel);
 
         }
-        //[Authorize(Roles = "Admin")]
-        // DELETE: api/Brands/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult DeleteBrands(int id)
-        {
-         
+        {         
             _brandAppService.DeleteBrand(id);
-            
-
             return NoContent();
         }
 
         private bool BrandsExists(int id)
         {
-            return _brandAppService.CheckBrandExists(id);
-           
+            return _brandAppService.CheckBrandExists(id);          
         }
         [HttpGet("count")]
         public IActionResult BrandsCount()

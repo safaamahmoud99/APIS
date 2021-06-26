@@ -18,6 +18,22 @@ namespace DAL.Models
         public double Price { get; set; }
         public string Color { get; set; }
         public string Size { get; set; }
+        public double Discount { get; set; } = 0;
+        public double AfterDiscount 
+        {
+            get
+            {
+                if (Discount == 0)
+                {
+                    return Price;
+                }
+                else
+                {
+                    return Price - ((Discount*Price)/ 100);
+                }
+            }
+            
+        }
         public virtual ICollection<Images> Images { get; set; }
         public int SubCategoryID { get; set; }
         [ForeignKey("SubCategoryID")]

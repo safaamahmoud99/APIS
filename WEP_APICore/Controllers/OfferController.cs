@@ -8,7 +8,6 @@ using DAL;
 using DAL.Models;
 using BL.AppService;
 using BL.DTOs;
-using BL.AppService;
 using System;
 using Microsoft.AspNetCore.Authorization;
 
@@ -24,48 +23,36 @@ namespace WEP_APICore.Controllers
         {
             _OfferAppService = OfferOrderAppservice;
         }
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OfferViewModel>>> GetOffers()
         {
-            return _OfferAppService.GetAllOffers();
+            return  _OfferAppService.GetAllOffers();
         }
-
-
         [HttpGet("{id}")]
         public ActionResult<OfferViewModel> GetOfferByID(int id)
         {
             var Offer = _OfferAppService.GetOffer(id);
-
             if (Offer == null)
             {
                 return NotFound();
             }
-
             return Offer;
         }
-
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult PutOffer(int id, OfferViewModel offerviewModel)
         {
-           
-
             try
             {
                 _OfferAppService.UpdateOffer(offerviewModel);
-
                 return Ok(offerviewModel);
             }
-
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("CreateOffer")]
         public ActionResult<OfferViewModel> PostOffer(OfferViewModel offer)
         {
@@ -73,13 +60,13 @@ namespace WEP_APICore.Controllers
             return Created("GetOffer",offer);     
     }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteOffer(int id)
-    {
-        _OfferAppService.DeleteOffer(id);
-        return NoContent();
-    }
+        public async Task<IActionResult> DeleteOffer(int id)
+        {
+            _OfferAppService.DeleteOffer(id);
+            return NoContent();
+        }
         [HttpGet("count")]
         public IActionResult OfferCount()
         {

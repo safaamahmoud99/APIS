@@ -32,5 +32,7 @@ namespace BL.DTOs
         public int BrandID { get; set; }
         public int SupplierID { get; set; }
         public double? AverageRating { get; set; }
+        public double AfterDiscount { get; set; }
+        public double Discount { get; set; }
     }
 }

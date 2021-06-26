@@ -55,42 +55,6 @@ namespace WEP_APICore.Controllers
         }
 
 
-        [HttpPut("{id}")]
-        public IActionResult PutOrder(int id, OrderViewModel orderViewModel)
-        {
-            try
-            {
-                _OrderAppService.UpdateOrder(orderViewModel);
-                return Ok(orderViewModel);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-        [HttpPost]
-        public ActionResult<OrderViewModel> PostOrder(OrderViewModel order)
-        {
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-            //else
-            //{
-            //    try
-            //    {
-                    _OrderAppService.SaveNewOrder(order);
-                    return Created("GetOrder" , order);
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    return BadRequest(ex.Message);
-
-            //}
-
-        }
-
         [Authorize]
         [HttpGet("Checkout")]
         public async Task<IActionResult> CheckoutAsync()
@@ -100,6 +64,7 @@ namespace WEP_APICore.Controllers
             //var userID = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             //var userid = "d4a62c76-1ca4-41e7-ba6a-65af5a84d1fb";
             var userid = currentUser.Id;
+            int proid;
 
             var cart = _CartAppService.GetCartByUser(userid);
             //double netPrice=0;
@@ -111,6 +76,7 @@ namespace WEP_APICore.Controllers
                 UserID = cart.UserID,
                 OrderDetails = new List<OrderDetails>()
             };
+           
             foreach (var item in cart.cartProducts)
             {
                 var orderdetail = new OrderDetails
@@ -122,22 +88,24 @@ namespace WEP_APICore.Controllers
 
                 var product = _productAppService.GetProduct(item.productId);
                  
-                product.Quantity -= item.quintity;
-                if(product.Quantity==0)
-                {
-                    _productAppService.DeleteProduct(product.ID);
-                }
-                else
-                {
-                    _productAppService.UpdateProduct(product);
-                }
+
                 orderViewModel.OrderDetails.Add(orderdetail);
-                
+                product.Quantity -= item.quintity;
+                //if (product.Quantity == 0)
+                //{
+                //    //_productAppService.DeleteProduct(product.ID);
+                //    //proid = product.ID;
+                //}
+                //else
+                //{
+                    _productAppService.UpdateProduct(product);
+                //}
 
             }
-             
+
             _OrderAppService.SaveNewOrder(orderViewModel);
             await _CartProductsAppService.DeletAllCartProduct(cart.UserID);
+         
 
             return Ok();
         }

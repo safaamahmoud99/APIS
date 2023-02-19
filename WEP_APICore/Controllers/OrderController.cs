@@ -88,8 +88,6 @@ namespace WEP_APICore.Controllers
 
                 var product = _productAppService.GetProduct(item.productId);
                  
-
-                orderViewModel.OrderDetails.Add(orderdetail);
                 product.Quantity -= item.quintity;
                 //if (product.Quantity == 0)
                 //{
@@ -100,9 +98,11 @@ namespace WEP_APICore.Controllers
                 //{
                     _productAppService.UpdateProduct(product);
                 //}
+                orderViewModel.OrderDetails.Add(orderdetail);
+                
 
             }
-
+             
             _OrderAppService.SaveNewOrder(orderViewModel);
             await _CartProductsAppService.DeletAllCartProduct(cart.UserID);
          

@@ -1,0 +1,15 @@
+F:\asafaa\aagraduationproject\API\DAL\obj\Debug\net5.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+F:\asafaa\aagraduationproject\API\DAL\obj\Debug\net5.0\DAL.AssemblyInfoInputs.cache
+F:\asafaa\aagraduationproject\API\DAL\obj\Debug\net5.0\DAL.AssemblyInfo.cs
+F:\asafaa\aagraduationproject\API\DAL\obj\Debug\net5.0\DAL.csproj.CoreCompileInputs.cache
+F:\asafaa\aagraduationproject\API\DAL\bin\Debug\net5.0\DAL.deps.json
+F:\asafaa\aagraduationproject\API\DAL\bin\Debug\net5.0\DAL.runtimeconfig.json
+F:\asafaa\aagraduationproject\API\DAL\bin\Debug\net5.0\DAL.runtimeconfig.dev.json
+F:\asafaa\aagraduationproject\API\DAL\bin\Debug\net5.0\DAL.dll
+F:\asafaa\aagraduationproject\API\DAL\bin\Debug\net5.0\ref\DAL.dll
+F:\asafaa\aagraduationproject\API\DAL\bin\Debug\net5.0\DAL.pdb
+F:\asafaa\aagraduationproject\API\DAL\obj\Debug\net5.0\DAL.dll
+F:\asafaa\aagraduationproject\API\DAL\obj\Debug\net5.0\ref\DAL.dll
+F:\asafaa\aagraduationproject\API\DAL\obj\Debug\net5.0\DAL.pdb
+F:\asafaa\aagraduationproject\API\DAL\obj\Debug\net5.0\DAL.genruntimeconfig.cache
+F:\asafaa\aagraduationproject\API\DAL\obj\Debug\net5.0\DAL.csprojAssemblyReference.cache
